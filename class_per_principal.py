@@ -52,9 +52,7 @@ class Personaje_Principal:
         pantalla.blit(animacion[self.contador_pasos], self.lados["main"]) 
         self.contador_pasos += 1  
 
-        # Creo barra de vida - (proximamente seran corazones)
-        pygame.draw.rect(pantalla, (255,0,0), (1750, 20, 99, 20)) 
-        pygame.draw.rect(pantalla, (0,128,0), (1750, 20, 99 - self.daño_recivido, 20)) 
+        # Creo barra de vida - (proximamente seran corazones) 
 
     def mover(self, velocidad)->None:
         # para mover al personaje hay que mover la x del rectangulo principal
@@ -140,7 +138,7 @@ class Personaje_Principal:
             if self.lados["main"].colliderect(enemigo.lados_enemigo["main"]):
                 self.animar(pantalla, "recibo_daño")
                 self.salud -= 1
-                self.daño_recivido += 33
+                self.daño_recivido += 88
                 # luego de recivir daño vuelve a la posicion de inicio
                 self.rectangulo.x = posicion_inicial[0]
                 self.rectangulo.y = posicion_inicial[1]
@@ -169,6 +167,10 @@ class Personaje_Principal:
                 moneda.sonido_colision.play()
                 lista_monedas.remove(moneda)
                 self.mi_score += 1
+                if len(lista_monedas) == 0:
+                    self.all_collected = pygame.mixer.Sound("Recursos\\Score_Item\\All_Grabed\\yare.ogg")
+                    self.all_collected.set_volume(0.4)
+                    self.all_collected.play()
                 # print(f"monedas actuales: {len(lista_monedas)}")
 
     # def desaparecer_moneda(self, moneda)->None:

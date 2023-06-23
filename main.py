@@ -24,6 +24,15 @@ def actualizar_pantalla(pantalla, un_personaje:Personaje_Principal, fondo, lados
     un_personaje.update(pantalla, lados_piso, lista_plataformas, lista_enemigos)
     armor.update(pantalla)
     crabtank.update(pantalla)
+
+# def lista_append_monedas(largo, tamaño, animaciones, posicion_inical):
+#     lista_objetos = []
+
+#     for i in range(largo):
+#         moneda = Score_Item(tamaño, animaciones, posicion_inical)
+#         lista_objetos.append(moneda)
+
+#     return lista_objetos
 #------------------------------------------------------------#
 
 W,H = 1900,1000
@@ -43,6 +52,14 @@ pygame.init()
 RELOJ = pygame.time.Clock()
 PANTALLA = pygame.display.set_mode((W,H))
 
+#VIDA
+mi_imagen = pygame.image.load("Recursos\\923.png")
+mi_imagen = pygame.transform.scale(mi_imagen,(76,76))
+icono_pj = pygame.image.load("Recursos\\3.png")
+icono_pj = pygame.transform.scale(icono_pj,(90,90))
+fondo_vida = pygame.image.load("Recursos\\7.png")
+fondo_vida = pygame.transform.scale(fondo_vida,(275, 75))
+
 #ICONO
 icono = pygame.image.load("Recursos\\icon.png")
 pygame.display.set_icon(icono)
@@ -53,7 +70,7 @@ fondo = pygame.transform.scale(fondo,TAMAÑO_PANTALLA)
 
 #IMAGEN_TIMER
 fondo_timer = pygame.image.load("Recursos\\em_castelvania.png")
-fondo_timer = pygame.transform.scale(fondo_timer,(250, 95))
+fondo_timer = pygame.transform.scale(fondo_timer,(250, 97))
 
 #IMAGEN_SCORE
 fondo_score = pygame.image.load("Recursos\\fondo_score.png")
@@ -158,6 +175,8 @@ tamaño_moneda_8 = (40, 40)
 diccionario_animaciones_score_item = {}
 diccionario_animaciones_score_item["moneda"] = score_moneda
 
+#lista_monedas = lista_append_monedas(posicion_inicial_moneda_1, diccionario_animaciones_score_item, tamaño_moneda_1)
+
 primer_moneda = Score_Item(tamaño_moneda_1, diccionario_animaciones_score_item, posicion_inicial_moneda_1)
 segunda_moneda = Score_Item(tamaño_moneda_2, diccionario_animaciones_score_item, posicion_inicial_moneda_2)
 tercer_moneda = Score_Item(tamaño_moneda_3, diccionario_animaciones_score_item, posicion_inicial_moneda_3)
@@ -170,7 +189,6 @@ octava_moneda = Score_Item(tamaño_moneda_8, diccionario_animaciones_score_item,
 lista_plataformas = [primer_plataforma, segunda_plataforma, primer_piso, segundo_piso, rectangulo_derecha, rectangulo_izquierda, rectangulo_arriba]
 lista_enemigos = [armor, crabtank]
 lista_colision_plataformas = [segunda_plataforma, rectangulo_derecha, rectangulo_izquierda, rectangulo_arriba]
-# sacar de la lista, sacar de la pantalla y destruir el objeto
 lista_monedas = [primer_moneda, segunda_moneda, tercer_moneda, cuarta_moneda, quinta_moneda, sexta_moneda, septima_moneda, octava_moneda]
 lista_proyectiles = []
 # print(len(lista_monedas))
@@ -226,14 +244,20 @@ while running:
 
     actualizar_pantalla(PANTALLA, mi_personaje, fondo, lados_piso, lista_plataformas, lista_enemigos, armor, crabtank, lista_monedas)
 
+    PANTALLA.blit(fondo_vida, (102,15))
+    PANTALLA.blit(icono_pj, (12,8))
+    PANTALLA.blit(mi_imagen, (20,15))
+    pygame.draw.rect(PANTALLA, (255,0,0), (102,20, 264, 18)) 
+    pygame.draw.rect(PANTALLA, verde_oscuro, (102,20, 264 - mi_personaje.daño_recivido, 18))
+
     con_vida = mi_personaje.colision_enemigo(PANTALLA, lista_enemigos, posicion_inicial)
     mi_personaje.verificar_colision_monedas(lista_monedas)
     armor.colision_plataforma(segunda_plataforma, rectangulo_derecha, "right", "left")
     crabtank.colision_plataforma(segundo_piso, segundo_piso, "left", "right")
 
     texto = font_coins.render(f"Coins X {mi_personaje.mi_score}", False, "Black", verde_oscuro)
-    PANTALLA.blit(fondo_score, (10,10))
-    PANTALLA.blit(texto, (20,20)) 
+    PANTALLA.blit(fondo_score, (12,110))
+    PANTALLA.blit(texto, (22,120)) 
 
     for proyectil in lista_proyectiles:
         proyectil.lanzar_proyectil(proyectil.velocidad)
@@ -244,8 +268,8 @@ while running:
             lista_proyectiles.remove(proyectil)
 
     text_surface = font_timer.render(f"Timer: {minutes:02d}:{seconds:02d}", True, "White")
-    PANTALLA.blit(fondo_timer, (860, -5))
-    PANTALLA.blit(text_surface, (900, 20))
+    PANTALLA.blit(fondo_timer, (860, 8))
+    PANTALLA.blit(text_surface, (900, 35))
 
     if time_left == 0:
         running = False
