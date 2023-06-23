@@ -16,5 +16,5 @@ class Plataforma:
         rectangulo_plataforma.y = posicion_inicial_plataforma[1]
         self.lados_plataforma = obtener_rectangulos(rectangulo_plataforma)
 
-    def dibujar(self, pantalla)->None:
+    def draw(self, pantalla)->None:
         pantalla.blit(self.plataforma, self.lados_plataforma["main"])

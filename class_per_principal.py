@@ -3,6 +3,7 @@
 import pygame
 from configuraciones import reescalar_imagenes, obtener_rectangulos
 from class_plataforma import *
+from class_proyectil import *
 
 class Personaje_Principal:
     def __init__(self, tamaño, animaciones, posicion_inicial, velocidad) -> None:
@@ -20,20 +21,23 @@ class Personaje_Principal:
         self.animaciones = animaciones
         self.reescalar_animaciones()
         #RECTANGULOS
-        rectangulo = self.animaciones["camina_derecha"][0].get_rect()
-        rectangulo.x = posicion_inicial[0]
-        rectangulo.y = posicion_inicial[1]
-        self.lados = obtener_rectangulos(rectangulo)
+        self.rectangulo = self.animaciones["camina_derecha"][0].get_rect()
+        self.rectangulo.x = posicion_inicial[0]
+        self.rectangulo.y = posicion_inicial[1]
+        self.lados = obtener_rectangulos(self.rectangulo)
         #ACCION_PJ
         self.velocidad = velocidad
         self.desplazamiento_y = 0
         #DIRECCION
         self.direccion_derecha = True
         self.salto_derecha = True
+        #self.esta_quieto = True
         #SCORE
         self.mi_score = 0
+        #NIVEL SALUD
+        self.salud = 3
+        self.daño_recivido = 0
 
-    #quieto - saltar - caminar_derecha - caminar_izquierda
     def reescalar_animaciones(self)->None:
         for clave in self.animaciones:
             reescalar_imagenes(self.animaciones[clave], (self.ancho, self.alto))
@@ -46,14 +50,18 @@ class Personaje_Principal:
             self.contador_pasos = 0
 
         pantalla.blit(animacion[self.contador_pasos], self.lados["main"]) 
-        self.contador_pasos += 1   
+        self.contador_pasos += 1  
+
+        # Creo barra de vida - (proximamente seran corazones)
+        pygame.draw.rect(pantalla, (255,0,0), (1750, 20, 99, 20)) 
+        pygame.draw.rect(pantalla, (0,128,0), (1750, 20, 99 - self.daño_recivido, 20)) 
 
     def mover(self, velocidad)->None:
         # para mover al personaje hay que mover la x del rectangulo principal
         # movemos todos los lados del rectangulo
         for lado in self.lados:
             self.lados[lado].x += velocidad
-            
+
     def aplicar_graverdad(self, pantalla, piso, lista_plataformas)->None:
         if self.esta_saltando:
             if self.salto_derecha:
@@ -105,8 +113,12 @@ class Personaje_Principal:
                 if not self.esta_saltando:
                     if self.direccion_derecha:
                         self.animar(pantalla, "animacion_proyectil_pj")
+                        # proyectil_pj.animar_proyectil(pantalla, "proyectil_pj_derecha")
+                        # proyectil_pj.lanzar_proyectil(proyectil_pj.velocidad)
                     else:
                         self.animar(pantalla, "animacion_proyectil_pj_izquierda")
+                        # proyectil_pj.animar_proyectil(pantalla, "proyectil_pj_izquierda")
+                        # proyectil_pj.lanzar_proyectil(proyectil_pj.velocidad* -1)
             case "recibe_daño":
                 if not self.esta_saltando:
                     self.colision_enemigo(pantalla, lista_enemigos)
@@ -114,29 +126,54 @@ class Personaje_Principal:
         self.aplicar_graverdad(pantalla, piso, lista_plataformas)
 
     # revisar
-    def colision_plataforma(self, segunda_plataforma:Plataforma)->None:
-        if self.lados["right"].colliderect(segunda_plataforma.lados_plataforma["left"]):
-            self.que_hace = "quieto"
-            if self.lados["bottom"].colliderect(segunda_plataforma.lados_plataforma["top"]):
-                self.que_hace = "derecha"
+    def colision_plataforma(self, lista_colision_plataformas:list, lado_pj:str, lado_plataforma:str, direccion:str)->None:
+        for plataforma in lista_colision_plataformas:
+            if self.lados[lado_pj].colliderect(plataforma.lados_plataforma[lado_plataforma]):
+                self.que_hace = "quieto"
+                if self.lados["bottom"].colliderect(plataforma.lados_plataforma["top"]):
+                    self.que_hace = direccion
 
-    # revisar X2
-    def colision_enemigo(self, pantalla, lista_enemigos):
+    def colision_enemigo(self, pantalla, lista_enemigos, posicion_inicial)->bool:
+        con_vida = True
+
         for enemigo in lista_enemigos:
             if self.lados["main"].colliderect(enemigo.lados_enemigo["main"]):
                 self.animar(pantalla, "recibo_daño")
-                self.mover(-45)
+                self.salud -= 1
+                self.daño_recivido += 33
+                # luego de recivir daño vuelve a la posicion de inicio
+                self.rectangulo.x = posicion_inicial[0]
+                self.rectangulo.y = posicion_inicial[1]
+                self.lados = obtener_rectangulos(self.rectangulo)
+                match self.salud:
+                    case 2:
+                        self.damage = pygame.mixer.Sound("Recursos\\Daño_recibido\Sonido\\vpcn005.ogg")
+                        self.damage.set_volume(0.4)
+                        self.damage.play()
+                    case 1:
+                        self.damage = pygame.mixer.Sound("Recursos\\Daño_recibido\Sonido\\vpcn030.ogg")
+                        self.damage.set_volume(0.4)
+                        self.damage.play()
+                    case 0:
+                        self.damage = pygame.mixer.Sound("Recursos\\Daño_recibido\Sonido\\vpcn031.ogg")
+                        self.damage.set_volume(0.4)
+                        self.damage.play()
+                if self.salud < 0:
+                    con_vida = False
+
+        return con_vida    
 
     def verificar_colision_monedas(self, lista_monedas)->None:
         for moneda in lista_monedas:
             if self.lados["main"].colliderect(moneda.rectangulo):
                 moneda.sonido_colision.play()
-                self.desaparecer_moneda(moneda)
+                lista_monedas.remove(moneda)
                 self.mi_score += 1
+                # print(f"monedas actuales: {len(lista_monedas)}")
 
-    def desaparecer_moneda(self, moneda)->None:
-        moneda.rectangulo.x = -200
-        moneda.rectangulo.y = -200
+    # def desaparecer_moneda(self, moneda)->None:
+    #     moneda.rectangulo.x = -200
+    #     moneda.rectangulo.y = -200
         
     
 

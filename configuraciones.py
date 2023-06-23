@@ -19,11 +19,14 @@ def obtener_rectangulos(principal)->dict:
     diccionario = {}
     diccionario["main"] = principal
     diccionario["bottom"] = pygame.Rect(principal.left, principal.bottom -10, principal.width, 10)
-    diccionario["right"] = pygame.Rect(principal.right -4, principal.top, 4, principal.height)
-    diccionario["left"] = pygame.Rect(principal.left, principal.top, 4, principal.height)
+    diccionario["right"] = pygame.Rect(principal.right -6, principal.top, 6, principal.height)
+    diccionario["left"] = pygame.Rect(principal.left, principal.top, 6, principal.height)
     diccionario["top"] = pygame.Rect(principal.left, principal.top, principal.width, 10)
 
     return diccionario
+
+def destroy_objetct(objeto)->None:
+    del objeto
 #------------------------------------------------------------#
 
 personaje_quieto = [pygame.image.load("Recursos\\Quieto\\0.png"),
@@ -66,17 +69,7 @@ personaje_proyectil_animacion_izquierda = girar_imagenes(personaje_proyectil_ani
 personaje_daño_recibido = [pygame.image.load("Recursos\\Daño_recibido\\852.png"),
                            pygame.image.load("Recursos\\Daño_recibido\\853.png"),
                            pygame.image.load("Recursos\\Daño_recibido\\854.png"),
-                           pygame.image.load("Recursos\\Daño_recibido\\855.png"),
-                           pygame.image.load("Recursos\\Daño_recibido\\856.png"),
-                           pygame.image.load("Recursos\\Daño_recibido\\857.png"),
-                           pygame.image.load("Recursos\\Daño_recibido\\858.png"),
-                           pygame.image.load("Recursos\\Daño_recibido\\859.png"),
-                           pygame.image.load("Recursos\\Daño_recibido\\860.png"),
-                           pygame.image.load("Recursos\\Daño_recibido\\861.png"),
-                           pygame.image.load("Recursos\\Daño_recibido\\862.png"),
-                           pygame.image.load("Recursos\\Daño_recibido\\863.png"),
-                           pygame.image.load("Recursos\\Daño_recibido\\864.png"),
-                           pygame.image.load("Recursos\\Daño_recibido\\865.png")
+                           pygame.image.load("Recursos\\Daño_recibido\\855.png")
                            ]
 
 #------------------------------------------------------------#
@@ -122,21 +115,29 @@ crabtank_camina_derecha = girar_imagenes(crabtank_camina, True, False)
 #------------------------------------------------------------#
 
 score_moneda = [pygame.image.load("Recursos\\Score_Item\\22.png"),
-              pygame.image.load("Recursos\\Score_Item\\23.png"),
-              pygame.image.load("Recursos\\Score_Item\\24.png"),
-              pygame.image.load("Recursos\\Score_Item\\25.png"),
-              pygame.image.load("Recursos\\Score_Item\\26.png"),
-              pygame.image.load("Recursos\\Score_Item\\27.png"),
-              pygame.image.load("Recursos\\Score_Item\\28.png"),
-              pygame.image.load("Recursos\\Score_Item\\29.png"),
-              pygame.image.load("Recursos\\Score_Item\\30.png"),
-              pygame.image.load("Recursos\\Score_Item\\31.png"),
-              pygame.image.load("Recursos\\Score_Item\\32.png"),
-              pygame.image.load("Recursos\\Score_Item\\33.png"),
-              pygame.image.load("Recursos\\Score_Item\\34.png"),
-              pygame.image.load("Recursos\\Score_Item\\35.png"),
-              pygame.image.load("Recursos\\Score_Item\\36.png"),
-              pygame.image.load("Recursos\\Score_Item\\37.png")
-              ]
+                pygame.image.load("Recursos\\Score_Item\\23.png"),
+                pygame.image.load("Recursos\\Score_Item\\24.png"),
+                pygame.image.load("Recursos\\Score_Item\\25.png"),
+                pygame.image.load("Recursos\\Score_Item\\26.png"),
+                pygame.image.load("Recursos\\Score_Item\\27.png"),
+                pygame.image.load("Recursos\\Score_Item\\28.png"),
+                pygame.image.load("Recursos\\Score_Item\\29.png"),
+                pygame.image.load("Recursos\\Score_Item\\30.png"),
+                pygame.image.load("Recursos\\Score_Item\\31.png"),
+                pygame.image.load("Recursos\\Score_Item\\32.png"),
+                pygame.image.load("Recursos\\Score_Item\\33.png"),
+                pygame.image.load("Recursos\\Score_Item\\34.png"),
+                pygame.image.load("Recursos\\Score_Item\\35.png"),
+                pygame.image.load("Recursos\\Score_Item\\36.png"),
+                pygame.image.load("Recursos\\Score_Item\\37.png")
+                ]
+
+#------------------------------------------------------------#
+
+proyectil_personaje = [pygame.image.load("Recursos\\Proyerctil_pj\\631.png"),
+                       pygame.image.load("Recursos\\Proyerctil_pj\\633.png")
+                       ]
+
+proyectil_personaje_izquierda = girar_imagenes(proyectil_personaje, True, False)
 
 #------------------------------------------------------------#
