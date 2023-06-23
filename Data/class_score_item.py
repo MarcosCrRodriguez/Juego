@@ -4,7 +4,7 @@ import pygame
 from configuraciones import reescalar_imagenes
 
 class Score_Item:
-    def __init__(self, tamaño, animaciones, posicion_inicial) -> None:
+    def __init__(self, tamaño, animaciones, posicion_inicial, clave) -> None:
         #CONFECCION
         self.ancho = tamaño[0]
         self.alto = tamaño[1]
@@ -13,7 +13,7 @@ class Score_Item:
         self.animaciones_item = animaciones
         self.reescalar_animaciones()
         #RECTANGULOS
-        self.rectangulo = self.animaciones_item["moneda"][0].get_rect()
+        self.rectangulo = self.animaciones_item[clave][0].get_rect()
         self.rectangulo.x = posicion_inicial[0]
         self.rectangulo.y = posicion_inicial[1]
         #SONIDO

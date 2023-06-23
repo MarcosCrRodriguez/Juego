@@ -3,6 +3,8 @@
 import pygame
 from configuraciones import reescalar_imagenes, obtener_rectangulos, destroy_objetct
 from class_plataforma import *
+from class_enemigo import *
+# import os
 
 class Proyectil:
     def __init__(self, tamaño, animaciones, posicion_actual, velocidad) -> None:
@@ -42,8 +44,18 @@ class Proyectil:
         pantalla.blit(animacion[self.contador_pasos], self.lados_proyectil["main"]) 
         self.contador_pasos += 1 
 
-    def colision_proyectil(self, lista_plataformas):
+    def colision_proyectil(self, lista_plataformas, lista_enemigo, lista_proyectiles):
         for lado in lista_plataformas:
             if self.lados_proyectil["main"].colliderect(lado.lados_plataforma["main"]):
                 self.sonido_colision.play()
-                destroy_objetct(self) 
+                self.remove_objeto(lista_proyectiles)
+
+        for enemigo in lista_enemigo:
+            if self.lados_proyectil["main"].colliderect(enemigo.lados_enemigo["main"]):
+                self.sonido_colision.play()
+                del enemigo
+                self.remove_objeto(lista_proyectiles)
+            
+    def remove_objeto(self, lista_objeto):
+        for objeto in lista_objeto:
+                lista_objeto.remove(objeto)

@@ -123,7 +123,6 @@ class Personaje_Principal:
 
         self.aplicar_graverdad(pantalla, piso, lista_plataformas)
 
-    # revisar
     def colision_plataforma(self, lista_colision_plataformas:list, lado_pj:str, lado_plataforma:str, direccion:str)->None:
         for plataforma in lista_colision_plataformas:
             if self.lados[lado_pj].colliderect(plataforma.lados_plataforma[lado_plataforma]):
@@ -161,17 +160,19 @@ class Personaje_Principal:
 
         return con_vida    
 
-    def verificar_colision_monedas(self, lista_monedas)->None:
-        for moneda in lista_monedas:
-            if self.lados["main"].colliderect(moneda.rectangulo):
-                moneda.sonido_colision.play()
-                lista_monedas.remove(moneda)
+    # revisar
+    def verificar_colision_monedas(self, lista_monedas:list)->None:
+        for moneda in range(len(lista_monedas)):
+            if self.lados["main"].colliderect(lista_monedas[moneda].rectangulo):
+                lista_monedas[moneda].sonido_colision.play()
+                lista_monedas.remove(lista_monedas[moneda])
+                #del lista_monedas[moneda]
                 self.mi_score += 1
                 if len(lista_monedas) == 0:
                     self.all_collected = pygame.mixer.Sound("Recursos\\Score_Item\\All_Grabed\\yare.ogg")
                     self.all_collected.set_volume(0.4)
                     self.all_collected.play()
-                # print(f"monedas actuales: {len(lista_monedas)}")
+                break
 
     # def desaparecer_moneda(self, moneda)->None:
     #     moneda.rectangulo.x = -200
