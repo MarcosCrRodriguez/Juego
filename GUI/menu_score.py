@@ -13,9 +13,9 @@ class Form_Menu_Score(Form):
         aux_imagen = pygame.transform.scale(aux_imagen,(w,h))
 
         self._slave = aux_imagen
-        self.score = score
+        self._score = score
 
-        self.margen_y = margen_y
+        self._margen_y = margen_y
 
         label_jugador = Label(self._slave, x=margen_x +10, y=20, w=w/2 -margen_x-10, h=50, text="Jugador", 
                         font="Verdana", font_size=30, font_color="White", path_image="GUI\\bar.png")
@@ -27,14 +27,14 @@ class Form_Menu_Score(Form):
 
         pos_inicial_y = margen_y
 
-        for j in self.score:
+        for j in self._score:
             pos_inicial_x = margen_x
             for n,s in j.items():
                 cadena = ""
                 cadena = f"{s}"
-                jugador = Label(self._slave, pos_inicial_x, pos_inicial_y, w/2-margen_x, 100, cadena,
+                nivel = Label(self._slave, pos_inicial_x, pos_inicial_y, w/2-margen_x, 100, cadena,
                                 "Verdana", 30, "White","GUI\Table.png")
-                self.lista_widgets.append(jugador)
+                self.lista_widgets.append(nivel)
                 pos_inicial_x += w/2 - margen_x
             pos_inicial_y += 100 + espacio
 

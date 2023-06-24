@@ -85,14 +85,17 @@ class Form_Prueba(Form):
                      ]
         
         form_puntaje = Form_Menu_Score(self._master, 250, 25, 500, 550, (220,0,220), "White", True, "GUI\Window.png",
-                                       score_dict, 100, 10, 10)
+                                       score_dict, 100, 100, 10)
         
         self.show_dialog(form_puntaje)
 
     def btn_niveles_click(self, texto):
-        niveles_dict = [{"Nivel":1},
-                        {"Nivel":2},
-                        {"Nivel":3}
+        niveles_dict = [{"Nivel":1, "Dificultad":"Easy"},
+                        {"Nivel":2, "Dificultad":"Normal"},
+                        {"Nivel":3, "Dificultad":"Hard"}
                         ]
         
-        form_niveles = Form_Menu_Niveles()
+        form_niveles = Form_Menu_Niveles(self._master, 250, 25, 500, 550, (220,0,220), "White", True, "GUI\Window.png",
+                                       niveles_dict, 100, 100, 10)
+
+        self.show_dialog(form_niveles)

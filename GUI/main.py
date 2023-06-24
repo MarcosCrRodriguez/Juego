@@ -2,7 +2,7 @@ import pygame
 import sys
 from pygame.locals import *
 from mi_formulario import *
- 
+
 pygame.init()
 WIDHT = 1200
 HEIGT = 600
