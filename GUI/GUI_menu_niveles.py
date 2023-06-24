@@ -4,15 +4,26 @@ from pygame.locals import *
 from GUI_label import *
 from GUI_form import *
 from GUI_button_image import *
+# from Niveles.manejador_niveles import *
 
 class Form_Menu_Niveles(Form):
     def __init__(self, screen, x, y, w, h, color_background, color_border, active, path_imagen, niveles_dict, margen_x, margen_y, espacio):
         super().__init__(screen, x, y, w, h, color_background, color_border, active)
 
+        # self.manejador_niveles = Manejador_Niveles(self._master)
+
         aux_imagen = pygame.image.load(path_imagen)
         aux_imagen = pygame.transform.scale(aux_imagen,(w,h))
 
         self._slave = aux_imagen
+
+        #(360, 129)
+        #(488, 215) -lvl_1
+        #(362, 240)
+        #(488, 319) -lvl_2
+        #(358, 350)
+        #(491, 435) -lvl_3
+
         self._niveles_dict = niveles_dict
 
         self._margen_y = margen_y
@@ -43,6 +54,20 @@ class Form_Menu_Niveles(Form):
                                      onclick_param="", text="", font="Verdana", font_size=15, font_color=(0,255,0), path_image="GUI\home.png")
         
         self.lista_widgets.append(self._btn_home)
+
+    # def on(self, parametro):
+    #     print("hola", parametro)
+
+    # def update(self, lista_eventos):
+    #     if self.verificar_dialog_result():                  
+    #         for widget in self.lista_widgets:
+    #             widget.update(lista_eventos)
+    #         self.draw()
+    #     else:
+    #         self.hijo.update(lista_eventos)
+
+    # def entrar_nivel(self, nombre_nivel):
+    #     pass
 
     def btn_home_click(self, param):
         self.end_dialog()

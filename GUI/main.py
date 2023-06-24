@@ -20,6 +20,8 @@ while True:
         if event.type == QUIT:
             pygame.quit()
             sys.exit()
+        if event.type == pygame.MOUSEBUTTONDOWN:
+                print(event.pos)
 
     pantalla.fill("Black")
 

@@ -8,8 +8,8 @@ from GUI_label import *
 from GUI_form import *
 from GUI_button import *
 from GUI_button_image import *
-from menu_score import *
-from menu_niveles import *
+from GUI_menu_score import *
+from GUI_menu_niveles import *
 
 class Form_Prueba(Form):
     def __init__(self, screen, x, y, w, h, color_background, color_border="Black", border_size=-1, active=True):
@@ -25,7 +25,7 @@ class Form_Prueba(Form):
         self.btn_play = Button(self._slave, x, y, 100, 100, 100, 50, "Red", "Blue", self.btn_play_click, "Nombre", "Pause", font="Verdana", font_size=15, font_color="White")
         self.label_volume = Label(self._slave, 650, 190, 100, 50, "20%", font="Comic Sans", font_size=15, font_color="White", path_image="GUI\Table.png")
         self.slider_volumen = Slider(self._slave, x, y, 100, 200, 500, 15, self.volumen, "Blue", "White")
-        self.btn_tabla = Button_Image(self._slave, x, y, 255, 100, 50, 50, "GUI\Menu_BTN.png", self.btn_tabla_click, "Any") 
+        self.btn_tabla = Button_Image(self._slave, x, y, 255, 100, 50, 50, "GUI\menu_image.png", self.btn_tabla_click, "Any") 
         self.btn_niveles = Button_Image(self._slave, x, y, 355, 100, 50, 50, "GUI\start.png", self.btn_niveles_click, "Any")
         #---------------------------------------------------------------------------#
 
@@ -69,7 +69,7 @@ class Form_Prueba(Form):
             pygame.mixer.music.unpause()
             self.btn_play._color_background = "Red"
             self.btn_play._font_color = "White"
-            self.btn_play.set_text("Play")
+            self.btn_play.set_text("Pause")
 
         self.flag_play = not self.flag_play
 
