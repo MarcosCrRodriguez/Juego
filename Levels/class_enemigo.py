@@ -1,8 +1,8 @@
 #--------------------clase_enemigo--------------------#
 
 import pygame
-from configuraciones import reescalar_imagenes, obtener_rectangulos
-from class_plataforma import *
+from Levels.configuraciones import reescalar_imagenes, obtener_rectangulos
+from Levels.class_plataforma import *
 
 class Enemigo:
     def __init__(self, tamaño, animaciones, posicion_inicial, velocidad_enemigo) -> None:
@@ -21,6 +21,10 @@ class Enemigo:
         self.lados_enemigo = obtener_rectangulos(rectangulo)
         #ACCION_ENEMIGO
         self.velocidad_enemigo = velocidad_enemigo
+        #DIRECCION
+        self.direccion_derecha = True
+
+        self.velocidad_proyectil = 12
         
     def reescalar_animaciones(self)->None:
         for clave in self.animaciones_enemigo:
@@ -45,9 +49,23 @@ class Enemigo:
             case "e_izquierda":
                 self.animar_enemigo(pantalla, "enemigo_izquierda")
                 self.realizar_comportamiento(self.velocidad_enemigo* -1)
+                self.direccion_derecha = False
             case "e_derecha":
                 self.animar_enemigo(pantalla, "enemigo_derecha")
                 self.realizar_comportamiento(self.velocidad_enemigo)
+                self.direccion_derecha = True
+            case "lanzar_proyectil":
+                if self.direccion_derecha:
+                    self.animar_enemigo(pantalla, "proyectil_derecha")
+                    self.enemigo_dispara(self.velocidad_proyectil)
+                else:
+                    self.animar_enemigo(pantalla, "proyectil_izquierda")
+                    self.enemigo_dispara(self.velocidad_proyectil* -1)
+
+
+
+    def enemigo_dispara(self, velocidad):
+        pass
 
     def colision_plataforma(self, plataforma_izquierda:Plataforma, plataforma_derecha:Plataforma, primer_clave:str, segunda_clave:str)->None:
         if self.lados_enemigo["left"].colliderect(plataforma_izquierda.lados_plataforma[primer_clave]):

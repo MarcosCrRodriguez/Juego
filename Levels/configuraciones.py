@@ -112,6 +112,22 @@ crabtank_camina = [pygame.image.load("Recursos\\Crabtank_Camina\\14.png"),
 
 crabtank_camina_derecha = girar_imagenes(crabtank_camina, True, False) 
 
+crabtank_proyectil = [pygame.image.load("Recursos\Crabtank_Ataca\\48.png"),
+                      pygame.image.load("Recursos\Crabtank_Ataca\\49.png"),
+                      pygame.image.load("Recursos\Crabtank_Ataca\\50.png"),
+                      pygame.image.load("Recursos\Crabtank_Ataca\\51.png"),
+                      pygame.image.load("Recursos\Crabtank_Ataca\\52.png"),
+                      pygame.image.load("Recursos\Crabtank_Ataca\\53.png"),
+                      pygame.image.load("Recursos\Crabtank_Ataca\\54.png"),
+                      pygame.image.load("Recursos\Crabtank_Ataca\\55.png"),
+                      pygame.image.load("Recursos\Crabtank_Ataca\\56.png"),
+                      pygame.image.load("Recursos\Crabtank_Ataca\\57.png"),
+                      pygame.image.load("Recursos\Crabtank_Ataca\\58.png"),
+                      pygame.image.load("Recursos\Crabtank_Ataca\\59.png")
+                      ]
+
+crabtank_proyectil_izquierda = girar_imagenes(crabtank_proyectil, True, False) 
+
 #------------------------------------------------------------#
 
 score_moneda = [pygame.image.load("Recursos\\Score_Item\\22.png"),

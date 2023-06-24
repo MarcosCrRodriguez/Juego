@@ -1,9 +1,9 @@
 #--------------------clase_per_principal--------------------#
 
 import pygame
-from configuraciones import reescalar_imagenes, obtener_rectangulos
-from class_plataforma import *
-from class_proyectil import *
+from Levels.configuraciones import reescalar_imagenes, obtener_rectangulos
+from Levels.class_plataforma import *
+from Levels.class_proyectil import *
 
 class Personaje_Principal:
     def __init__(self, tamaño, animaciones, posicion_inicial, velocidad) -> None:
@@ -162,6 +162,16 @@ class Personaje_Principal:
 
         return con_vida    
 
+    # revisar.....
+    def enemigo_dispara(self, segundo_piso, enemigo):
+        if self.lados["bottom"].colliderect(segundo_piso.lados_plataforma["top"]):
+            enemigo.comportamiento = "lanzar_proyectil"
+        else:
+            if enemigo.direccion_derecha:
+                enemigo.comportamiento = "e_derecha"
+            else:
+                enemigo.comportamiento = "e_izquierda"
+            
     def verificar_colision_item(self, lista_item:list, sound:str)->None:
         for item in range(len(lista_item)):
             if self.lados["main"].colliderect(lista_item[item].rectangulo):
@@ -174,7 +184,7 @@ class Personaje_Principal:
                     self.all_collected.play()
                 break
 
-    def verificar_colision_vida(self, lista_item:list, sound_1:str, sound_2:str)->None:
+    def verificar_colision_vida(self, lista_item:list, sound_1:str, sound_2:str)->bool:
         for item in range(len(lista_item)):
             if self.lados["main"].colliderect(lista_item[item].rectangulo):
                 lista_item[item].sonido_colision.play()

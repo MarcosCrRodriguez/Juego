@@ -1,15 +1,15 @@
 import pygame
 from pygame.locals import *
 
-from GUI_widget import *
-from GUI_textbox import *
-from GUI_slider import *
-from GUI_label import *
-from GUI_form import *
-from GUI_button import *
-from GUI_button_image import *
-from GUI_menu_score import *
-from GUI_menu_niveles import *
+from GUI.GUI_widget import *
+from GUI.GUI_textbox import *
+from GUI.GUI_slider import *
+from GUI.GUI_label import *
+from GUI.GUI_form import *
+from GUI.GUI_button import *
+from GUI.GUI_button_image import *
+from GUI.GUI_menu_score import *
+from GUI.GUI_menu_niveles import *
 
 class Form_Prueba(Form):
     def __init__(self, screen, x, y, w, h, color_background, color_border="Black", border_size=-1, active=True):

@@ -1,6 +1,6 @@
 import pygame
 from pygame.locals import *
-from GUI_widget import *
+from GUI.GUI_widget import *
 
 FPS = 18
     

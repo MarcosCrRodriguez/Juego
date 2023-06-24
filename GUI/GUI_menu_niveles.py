@@ -1,28 +1,22 @@
 import pygame
 from pygame.locals import *
 
-from GUI_label import *
-from GUI_form import *
-from GUI_button_image import *
-# from Niveles.manejador_niveles import *
+from GUI.GUI_label import *
+from GUI.GUI_form import *
+from GUI.GUI_button_image import *
+from GUI.GUI_contenedor_niveles import *
+from Levels.manejador_niveles import Manejador_Niveles
 
 class Form_Menu_Niveles(Form):
     def __init__(self, screen, x, y, w, h, color_background, color_border, active, path_imagen, niveles_dict, margen_x, margen_y, espacio):
         super().__init__(screen, x, y, w, h, color_background, color_border, active)
 
-        # self.manejador_niveles = Manejador_Niveles(self._master)
+        self.manejador_niveles = Manejador_Niveles(self._master)
 
         aux_imagen = pygame.image.load(path_imagen)
         aux_imagen = pygame.transform.scale(aux_imagen,(w,h))
 
         self._slave = aux_imagen
-
-        #(360, 129)
-        #(488, 215) -lvl_1
-        #(362, 240)
-        #(488, 319) -lvl_2
-        #(358, 350)
-        #(491, 435) -lvl_3
 
         self._niveles_dict = niveles_dict
 
@@ -52,25 +46,43 @@ class Form_Menu_Niveles(Form):
         self._btn_home = Button_Image(screen=self._slave, x=w-70, y=h-70, master_x=x, master_y=y, w=50, h=50,
                                      color_background=(255,0,0), color_border=(255,0,255), onclick=self.btn_home_click,
                                      onclick_param="", text="", font="Verdana", font_size=15, font_color=(0,255,0), path_image="GUI\home.png")
-        
+        self._btn_level_1 = Button_Image(screen=self._slave, x=w-356, y=h-441, master_x=x, master_y=y, w=70, h=70,
+                                         color_background=(255,0,0), color_border=(0,0,255), onclick=self.entrar_nivel,
+                                         onclick_param="nivel_uno", text="", font="Verdana", font_size=15, font_color=(0,255,0), path_image="GUI\\1st_lvl.png")
+        self._btn_level_2 = Button_Image(screen=self._slave, x=w-356, y=h-331, master_x=x, master_y=y, w=70, h=70,
+                                         color_background=(255,0,0), color_border=(0,0,255), onclick=self.entrar_nivel,
+                                         onclick_param="nivel_dos", text="", font="Verdana", font_size=15, font_color=(0,255,0), path_image="GUI\\2nd_lvl.png")
+        # self._btn_level_3 = Button_Image(screen=self._slave, x=w-356, y=h-221, master_x=x, master_y=y, w=70, h=70,
+        #                                  color_background=(255,0,0), color_border=(0,0,255), onclick=self.entrar_nivel,
+        #                                  onclick_param="nivel_tres", text="", font="Verdana", font_size=15, font_color=(0,255,0), path_image="GUI\\3rd_lvl.png")
+
         self.lista_widgets.append(self._btn_home)
+        self.lista_widgets.append(self._btn_level_1)
+        self.lista_widgets.append(self._btn_level_2)
+        # self.lista_widgets.append(self._btn_level_3)
 
-    # def on(self, parametro):
-    #     print("hola", parametro)
-
-    # def update(self, lista_eventos):
-    #     if self.verificar_dialog_result():                  
-    #         for widget in self.lista_widgets:
-    #             widget.update(lista_eventos)
-    #         self.draw()
-    #     else:
-    #         self.hijo.update(lista_eventos)
-
-    # def entrar_nivel(self, nombre_nivel):
-    #     pass
+    def on(self, parametro):
+        print("hola", parametro)
+ 
+    def update_level(self, lista_eventos):
+        if self.verificar_dialog_result():                  
+            for widget in self.lista_widgets:
+                widget.update(lista_eventos)
+            self.draw()
+        else:
+            self.hijo.update(lista_eventos)
 
     def btn_home_click(self, param):
         self.end_dialog()
+        print("home")
+
+    def entrar_nivel(self, nombre_nivel):
+        nivel = self.manejador_niveles.get_nivel(nombre_nivel)
+        print(nombre_nivel)
+
+        frm_contenedor_nivel = Form_Contenedor_Niveles(self._master, nivel)
+
+        self.show_dialog(frm_contenedor_nivel)
 
     def update(self, lista_eventos):
         if self.active:

@@ -2,13 +2,14 @@
 
 import pygame
 from pygame.locals import *
-from configuraciones import *
-from class_per_principal import *
-from class_enemigo import *
-from class_plataforma import *
-from class_score_item import *
-from modo import *
-from nivel import *
+from Levels.configuraciones import *
+from Levels.class_per_principal import *
+from Levels.class_enemigo import *
+from Levels.class_proyectil import *
+from Levels.class_plataforma import *
+from Levels.class_score_item import *
+from Levels.modo import *
+from Levels.nivel import *
 
 class Nivel_Uno(Nivel):
     def __init__(self, pantalla:pygame.Surface) -> None:
@@ -78,6 +79,8 @@ class Nivel_Uno(Nivel):
         diccionario_animaciones_crabtank = {}
         diccionario_animaciones_crabtank["enemigo_izquierda"] = crabtank_camina
         diccionario_animaciones_crabtank["enemigo_derecha"] = crabtank_camina_derecha
+        diccionario_animaciones_crabtank["proyectil_derecha"] = crabtank_proyectil
+        diccionario_animaciones_crabtank["proyectil_izquierda"] = crabtank_proyectil_izquierda
 
         crabtank = Enemigo(tamaño_crabtank, diccionario_animaciones_crabtank, posicion_inicial_crabtank, 2)
 
@@ -161,4 +164,4 @@ class Nivel_Uno(Nivel):
 
         super().__init__(pantalla, mi_personaje, armor, crabtank, lista_plataformas, lista_colision_plataformas, lista_enemigos,
                          lista_monedas, lados_piso, mi_imagen, icono_pj, fondo_vida, fondo, font_timer, fondo_timer, fondo_score, font_coins, 
-                         (1680,740), 60, corazones)
+                         (1680,740), 60, corazones, segundo_piso)

@@ -1,7 +1,7 @@
 from pygame.locals import *
 
-from nivel_uno import Nivel_Uno
-from nivel_dos import Nivel_Dos
+from Levels.nivel_uno import Nivel_Uno
+from Levels.nivel_dos import Nivel_Dos
 
 class Manejador_Niveles:
     def __init__(self, pantalla) -> None:

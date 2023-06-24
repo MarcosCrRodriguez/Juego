@@ -1,5 +1,5 @@
 import pygame
-from GUI_widget import Widget
+from GUI.GUI_widget import Widget
 import math
 class Slider(Widget):
     def __init__(self,screen, master_x, master_y, x,y,w,h, value,color_background,  color_circulo):

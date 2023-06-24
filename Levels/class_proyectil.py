@@ -1,9 +1,9 @@
 #--------------------clase_proyectil--------------------#
 
 import pygame
-from configuraciones import reescalar_imagenes, obtener_rectangulos, destroy_objetct
-from class_plataforma import *
-from class_enemigo import *
+from Levels.configuraciones import reescalar_imagenes, obtener_rectangulos, destroy_objetct
+from Levels.class_plataforma import *
+from Levels.class_enemigo import *
 # import os
 
 class Proyectil:
@@ -54,6 +54,7 @@ class Proyectil:
             if self.lados_proyectil["main"].colliderect(enemigo.lados_enemigo["main"]):
                 self.sonido_colision.play()
                 self.remove_objeto(lista_proyectiles)
+                lista_enemigo.remove(enemigo)
                 # lista_enemigo.remove(lista_enemigo[enemigo])
             
     def remove_objeto(self, lista_objeto):

@@ -3,9 +3,9 @@
 import pygame
 import sys
 
-from nivel_uno import Nivel_Uno
-from nivel_dos import Nivel_Dos
-# from GUI.mi_formulario import *
+from Levels.nivel_uno import Nivel_Uno
+from Levels.nivel_dos import Nivel_Dos
+from GUI.mi_formulario import *
 
 W,H = 1900,1000
 FPS = 25
@@ -15,8 +15,8 @@ pygame.init()
 RELOJ = pygame.time.Clock()
 PANTALLA = pygame.display.set_mode((TAMAÑO_PANTALLA))
 
-nivel_actual = Nivel_Dos(PANTALLA)
-# form_prueba = Form_Prueba(PANTALLA, 200, 100, 900, 350, "gold", "Magenta", 5, True)
+# nivel_actual = Nivel_Uno(PANTALLA)
+form_prueba = Form_Prueba(PANTALLA, 200, 100, 900, 350, "gold", "Magenta", 5, True)
 
 running = True
 
@@ -27,13 +27,14 @@ while running:
         if evento.type == pygame.QUIT:
             running = False
 
-    # form_prueba.update(eventos)
-    finish = nivel_actual.update(eventos) 
+    PANTALLA.fill("Black")
+    form_prueba.update(eventos)
+    # finish = nivel_actual.update(eventos) 
 
-    if finish == False:
-        break   
+    # if finish == False:
+    #     break   
 
-    pygame.display.update()
+    pygame.display.flip()
 
 pygame.quit()
 sys.exit()

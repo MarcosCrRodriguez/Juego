@@ -3,16 +3,18 @@
 import pygame
 import time
 from pygame.locals import *
-from configuraciones import *
-from class_per_principal import *
-from class_enemigo import *
-from class_plataforma import *
-from class_score_item import *
-from modo import *
+from Levels.configuraciones import *
+from Levels.class_per_principal import *
+from Levels.class_enemigo import *
+from Levels.class_proyectil import *
+from Levels.class_plataforma import *
+from Levels.class_score_item import *
+from Levels.modo import *
+from Levels.nivel import *
 
 class Nivel:
     def __init__(self, pantalla, personaje_principal, primer_enemigo, segundo_enemigo, lista_plataformas, lista_colision_plataformas, lista_enemigos, 
-                 lista_items, lados_piso, mi_imagen, icono_pj, fondo_vida, fondo, font_timer, fondo_timer, fondo_score, font_coins, final_tuple, timer, corazones) -> None:
+                 lista_items, lados_piso, mi_imagen, icono_pj, fondo_vida, fondo, font_timer, fondo_timer, fondo_score, font_coins, final_tuple, timer, corazones, segundo_piso) -> None:
         self._slave = pantalla
         self.jugador = personaje_principal
         self.primer_enemigo = primer_enemigo
@@ -27,6 +29,8 @@ class Nivel:
         self.plataformas_colision = lista_colision_plataformas
         self.lista_items = lista_items
         self.lista_proyectiles = []
+
+        self.segundo_piso = segundo_piso
 
         #PROYECTIL
         self.tamaño_proyectil = (35, 50)
@@ -67,8 +71,8 @@ class Nivel:
         self.start_time = time.time()
         self.duration = timer
 
-    def update(self, lista_eventos)->bool:
-        finish = True
+    def update(self, lista_eventos)->None:
+        # self.finish = True
 
         for evento in lista_eventos:
             if evento.type == pygame.KEYDOWN and evento.key == pygame.K_F12:
@@ -103,12 +107,13 @@ class Nivel:
         self.jugador.verificar_colision_item(self.lista_items, "Recursos\\Score_Item\\All_Grabed\\yare.ogg")
         if self.hay_corazones:
             self.jugador.verificar_colision_vida(self.lista_corazones, "Recursos\\Corazon\\Sound\\vpcn120.ogg", "Recursos\\Corazon\\Sound\\vpcn118.ogg") 
-
+        
+        self.jugador.enemigo_dispara(self.segundo_piso, self.segundo_enemigo)
         self.primer_enemigo.colision_plataforma(self.plataformas[1], self.plataformas[4], "right", "left")
         self.segundo_enemigo.colision_plataforma(self.plataformas[3], self.plataformas[3], "left", "right")
         if len(self.lista_enemigos) == 3:
-            self.tercer_enemigo.colision_plataforma(self.plataformas[1], self.plataformas[7], "left", "right")
-
+            self.item_recover = self.tercer_enemigo.colision_plataforma(self.plataformas[1], self.plataformas[7], "left", "right")
+        
         texto = self.font_coins.render(f"Coins X {self.jugador.mi_score}", False, "Black", self.verde_oscuro)
         self._slave.blit(self.fondo_score, (12,110))
         self._slave.blit(texto, (22,120)) 
@@ -117,14 +122,14 @@ class Nivel:
         self._slave.blit(self.fondo_timer, (860, 8))
         self._slave.blit(text_surface, (900, 35))
 
-        if time_left == 0:
-            finish = False
-        elif con_vida == False:
-            finish = False
+        # if time_left == 0:
+        #     self.finish = False
+        # elif con_vida == False:
+        #     self.finish = False 
 
         self.dibujar_rectangulos()
 
-        return finish
+        # return self.finish 
     
     def leer_inputs(self):
         keys = pygame.key.get_pressed()
@@ -173,18 +178,18 @@ class Nivel:
 
         if len(self.lista_items) == 0:
             self.obtener_next_lvl()
-
+            
         self.jugador.update(self._slave, self.lados_piso, self.plataformas, self.lista_enemigos)
-        self.primer_enemigo.update(self._slave)
-        self.segundo_enemigo.update(self._slave)
+        for enemigo in self.lista_enemigos:
+            enemigo.update(self._slave)
+        # self.primer_enemigo.update(self._slave)
+        # self.segundo_enemigo.update(self._slave)
         if len(self.lista_enemigos) == 3:
             self.lista_enemigos[2].update(self._slave)
 
     def dibujar_rectangulos(self):
         if get_modo():
             for lado in self.jugador.lados:
-                # pygame.draw.rect(self._slave, "Red", self.primer_enemigo.lados_enemigo[lado], 2)
-                # pygame.draw.rect(self._slave, "Red", self.segundo_enemigo.lados_enemigo[lado], 2)
                 pygame.draw.rect(self._slave, "Blue", self.jugador.lados[lado], 2)
                 pygame.draw.rect(self._slave, "Orange", self.lados_piso[lado], 2)
                 for enemigo in self.lista_enemigos:
@@ -205,8 +210,7 @@ class Nivel:
                 for next_lvl in self.lista_next_lvl:
                         pygame.draw.rect(self._slave, "Blue", next_lvl.rectangulo, 2)
             
-
-    def obtener_next_lvl(self)->list:
+    def obtener_next_lvl(self)->None:
         #NEXT_LVL
         tamaño_next_lvl = (105, 105)
         diccionario_animaciones_next_lvl = {} 
@@ -214,10 +218,7 @@ class Nivel:
 
         self.next_lvl = Score_Item(tamaño_next_lvl, diccionario_animaciones_next_lvl, self.final_tuple, "next_lvl")
     
-        
         self.next_lvl.animar_item(self._slave, "next_lvl")
 
         self.lista_next_lvl.append(self.next_lvl)
-
-        return self.lista_next_lvl
         

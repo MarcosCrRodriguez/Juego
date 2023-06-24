@@ -1,7 +1,7 @@
 #--------------------clase_score_item--------------------#
 
 import pygame
-from configuraciones import reescalar_imagenes
+from Levels.configuraciones import reescalar_imagenes
 
 class Score_Item:
     def __init__(self, tamaño, animaciones, posicion_inicial, clave) -> None:

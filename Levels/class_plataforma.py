@@ -1,7 +1,7 @@
 #--------------------clase_plataforma--------------------#
 
 import pygame
-from configuraciones import obtener_rectangulos
+from Levels.configuraciones import obtener_rectangulos
 
 class Plataforma:
     def __init__(self, tamaño, posicion_inicial_plataforma, path_imagen) -> None:
