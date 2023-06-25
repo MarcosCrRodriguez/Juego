@@ -71,6 +71,8 @@ class Nivel_Dos(Nivel):
         diccionario_animaciones_armor = {}
         diccionario_animaciones_armor["enemigo_izquierda"] = armor_camina
         diccionario_animaciones_armor["enemigo_derecha"] = armor_camina_derecha
+        diccionario_animaciones_armor["destroyed_derecha"] = armor_destroyed
+        diccionario_animaciones_armor["destroyed_izquierda"] = armor_destroyed_izquierda
 
         armor = Enemigo(tamaño_armor, diccionario_animaciones_armor, posicion_inicial_armor, 4)
 
@@ -79,6 +81,8 @@ class Nivel_Dos(Nivel):
         diccionario_animaciones_armor_s = {}
         diccionario_animaciones_armor_s["enemigo_izquierda"] = armor_camina
         diccionario_animaciones_armor_s["enemigo_derecha"] = armor_camina_derecha
+        diccionario_animaciones_armor_s["destroyed_derecha"] = armor_destroyed
+        diccionario_animaciones_armor_s["destroyed_izquierda"] = armor_destroyed_izquierda
 
         self.armor_segundo = Enemigo(tamaño_armor_s, diccionario_animaciones_armor_s, posicion_inicial_armor_s, 1)
 
@@ -89,6 +93,8 @@ class Nivel_Dos(Nivel):
         diccionario_animaciones_crabtank["enemigo_derecha"] = crabtank_camina_derecha
         diccionario_animaciones_crabtank["proyectil_derecha"] = crabtank_proyectil
         diccionario_animaciones_crabtank["proyectil_izquierda"] = crabtank_proyectil_izquierda
+        diccionario_animaciones_crabtank["destroyed_derecha"] = crabtank_destroyed
+        diccionario_animaciones_crabtank["destroyed_izquierda"] = crabtank_destroyed_izquierda
 
         crabtank = Enemigo(tamaño_crabtank, diccionario_animaciones_crabtank, posicion_inicial_crabtank, 2)
 
@@ -189,4 +195,4 @@ class Nivel_Dos(Nivel):
 
         super().__init__(pantalla, mi_personaje, armor, crabtank, lista_plataformas, lista_colision_plataformas, lista_enemigos,
                          lista_monedas, lados_piso, mi_imagen, icono_pj, fondo_vida, fondo, font_timer, fondo_timer, fondo_score, font_coins, 
-                         (1730,100), 90, corazones, segundo_piso)
+                         (1730,100), 90, corazones, cuarto_piso)

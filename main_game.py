@@ -15,7 +15,6 @@ pygame.init()
 RELOJ = pygame.time.Clock()
 PANTALLA = pygame.display.set_mode((TAMAÑO_PANTALLA))
 
-# nivel_actual = Nivel_Uno(PANTALLA)
 form_prueba = Form_Prueba(PANTALLA, 200, 100, 900, 350, "gold", "Magenta", 5, True)
 
 running = True
@@ -29,7 +28,6 @@ while running:
 
     PANTALLA.fill("Black")
     form_prueba.update(eventos)
-    # finish = nivel_actual.update(eventos) 
 
     # if finish == False:
     #     break   

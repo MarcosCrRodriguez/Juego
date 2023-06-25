@@ -71,6 +71,8 @@ class Nivel_Uno(Nivel):
         diccionario_animaciones_armor = {}
         diccionario_animaciones_armor["enemigo_izquierda"] = armor_camina
         diccionario_animaciones_armor["enemigo_derecha"] = armor_camina_derecha
+        diccionario_animaciones_armor["destroyed_derecha"] = armor_destroyed
+        diccionario_animaciones_armor["destroyed_izquierda"] = armor_destroyed_izquierda
 
         armor = Enemigo(tamaño_armor, diccionario_animaciones_armor, posicion_inicial_armor, 3)
 
@@ -81,6 +83,8 @@ class Nivel_Uno(Nivel):
         diccionario_animaciones_crabtank["enemigo_derecha"] = crabtank_camina_derecha
         diccionario_animaciones_crabtank["proyectil_derecha"] = crabtank_proyectil
         diccionario_animaciones_crabtank["proyectil_izquierda"] = crabtank_proyectil_izquierda
+        diccionario_animaciones_crabtank["destroyed_derecha"] = crabtank_destroyed
+        diccionario_animaciones_crabtank["destroyed_izquierda"] = crabtank_destroyed_izquierda
 
         crabtank = Enemigo(tamaño_crabtank, diccionario_animaciones_crabtank, posicion_inicial_crabtank, 2)
 

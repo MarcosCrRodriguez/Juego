@@ -20,8 +20,10 @@ class Nivel:
         self.primer_enemigo = primer_enemigo
         self.segundo_enemigo = segundo_enemigo
         
+        self.tres_enemigos = False
         if len(lista_enemigos) == 3:
             self.tercer_enemigo = self.armor_segundo
+            self.tres_enemigos = True
 
         self.lista_enemigos = lista_enemigos
 
@@ -101,7 +103,7 @@ class Nivel:
             else:
                 proyectil.animar_proyectil(self._slave, "proyectil_pj_izquierda")
                 
-            proyectil.colision_proyectil(self.plataformas_colision, self.lista_enemigos, self.lista_proyectiles)
+            proyectil.colision_proyectil(self.plataformas_colision, self.lista_enemigos, self.lista_proyectiles, self._slave)
 
         con_vida = self.jugador.colision_enemigo(self._slave, self.lista_enemigos, (70, 740))
         self.jugador.verificar_colision_item(self.lista_items, "Recursos\\Score_Item\\All_Grabed\\yare.ogg")
@@ -111,7 +113,7 @@ class Nivel:
         self.jugador.enemigo_dispara(self.segundo_piso, self.segundo_enemigo)
         self.primer_enemigo.colision_plataforma(self.plataformas[1], self.plataformas[4], "right", "left")
         self.segundo_enemigo.colision_plataforma(self.plataformas[3], self.plataformas[3], "left", "right")
-        if len(self.lista_enemigos) == 3:
+        if self.tres_enemigos:
             self.item_recover = self.tercer_enemigo.colision_plataforma(self.plataformas[1], self.plataformas[7], "left", "right")
         
         texto = self.font_coins.render(f"Coins X {self.jugador.mi_score}", False, "Black", self.verde_oscuro)
@@ -184,8 +186,8 @@ class Nivel:
             enemigo.update(self._slave)
         # self.primer_enemigo.update(self._slave)
         # self.segundo_enemigo.update(self._slave)
-        if len(self.lista_enemigos) == 3:
-            self.lista_enemigos[2].update(self._slave)
+        # if len(self.lista_enemigos) == 3:
+        #     self.lista_enemigos[2].update(self._slave)
 
     def dibujar_rectangulos(self):
         if get_modo():

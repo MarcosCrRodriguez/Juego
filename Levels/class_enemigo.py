@@ -56,13 +56,11 @@ class Enemigo:
                 self.direccion_derecha = True
             case "lanzar_proyectil":
                 if self.direccion_derecha:
-                    self.animar_enemigo(pantalla, "proyectil_derecha")
+                    self.animar_enemigo(pantalla, "proyectil_izquierda")
                     self.enemigo_dispara(self.velocidad_proyectil)
                 else:
-                    self.animar_enemigo(pantalla, "proyectil_izquierda")
+                    self.animar_enemigo(pantalla, "proyectil_derecha")
                     self.enemigo_dispara(self.velocidad_proyectil* -1)
-
-
 
     def enemigo_dispara(self, velocidad):
         pass

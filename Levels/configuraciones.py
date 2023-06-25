@@ -94,6 +94,18 @@ armor_camina = [pygame.image.load("Recursos\\Armor_Camina\\84.png"),
 
 armor_camina_derecha = girar_imagenes(armor_camina, True, False)
 
+armor_destroyed = [pygame.image.load("Recursos\\Armor_Destroyed\\5.png"),
+                   pygame.image.load("Recursos\\Armor_Destroyed\\6.png"),
+                   pygame.image.load("Recursos\\Armor_Destroyed\\7.png"),
+                   pygame.image.load("Recursos\\Armor_Destroyed\\8.png"),
+                   pygame.image.load("Recursos\\Armor_Destroyed\\9.png"),
+                   pygame.image.load("Recursos\\Armor_Destroyed\\10.png"),
+                   pygame.image.load("Recursos\\Armor_Destroyed\\11.png"),
+                   pygame.image.load("Recursos\\Armor_Destroyed\\12.png")
+                   ]
+
+armor_destroyed_izquierda = girar_imagenes(armor_destroyed, True, False)
+
 #------------------------------------------------------------#
 
 crabtank_camina = [pygame.image.load("Recursos\\Crabtank_Camina\\14.png"),
@@ -127,6 +139,21 @@ crabtank_proyectil = [pygame.image.load("Recursos\Crabtank_Ataca\\48.png"),
                       ]
 
 crabtank_proyectil_izquierda = girar_imagenes(crabtank_proyectil, True, False) 
+
+crabtank_destroyed = [pygame.image.load("Recursos\Crabyank_Destroy\\163.png"),
+                      pygame.image.load("Recursos\Crabyank_Destroy\\164.png"),
+                      pygame.image.load("Recursos\Crabyank_Destroy\\165.png"),
+                      pygame.image.load("Recursos\Crabyank_Destroy\\166.png"),
+                      pygame.image.load("Recursos\Crabyank_Destroy\\167.png"),
+                      pygame.image.load("Recursos\Crabyank_Destroy\\168.png"),
+                      pygame.image.load("Recursos\Crabyank_Destroy\\169.png"),
+                      pygame.image.load("Recursos\Crabyank_Destroy\\170.png"),
+                      pygame.image.load("Recursos\Crabyank_Destroy\\171.png"),
+                      pygame.image.load("Recursos\Crabyank_Destroy\\172.png"),
+                      pygame.image.load("Recursos\Crabyank_Destroy\\173.png")
+                      ]
+
+crabtank_destroyed_izquierda = girar_imagenes(crabtank_destroyed, True, False) 
 
 #------------------------------------------------------------#
 

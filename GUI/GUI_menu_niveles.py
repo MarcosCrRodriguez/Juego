@@ -64,7 +64,7 @@ class Form_Menu_Niveles(Form):
     def on(self, parametro):
         print("hola", parametro)
  
-    def update_level(self, lista_eventos):
+    def update(self, lista_eventos):
         if self.verificar_dialog_result():                  
             for widget in self.lista_widgets:
                 widget.update(lista_eventos)
@@ -74,18 +74,16 @@ class Form_Menu_Niveles(Form):
 
     def btn_home_click(self, param):
         self.end_dialog()
-        print("home")
 
     def entrar_nivel(self, nombre_nivel):
         nivel = self.manejador_niveles.get_nivel(nombre_nivel)
-        print(nombre_nivel)
 
         frm_contenedor_nivel = Form_Contenedor_Niveles(self._master, nivel)
 
         self.show_dialog(frm_contenedor_nivel)
 
-    def update(self, lista_eventos):
-        if self.active:
-            for widget in self.lista_widgets:
-                widget.update(lista_eventos)
-            self.draw()
+    # def update(self, lista_eventos):
+    #     if self.active:
+    #         for widget in self.lista_widgets:
+    #             widget.update(lista_eventos)
+    #         self.draw()
