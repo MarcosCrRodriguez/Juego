@@ -1,13 +1,13 @@
 #--------------------clase_proyectil--------------------#
 
 import pygame
-from Levels.configuraciones import reescalar_imagenes, obtener_rectangulos, destroy_objetct
+from Levels.configuraciones import reescalar_imagenes, obtener_rectangulos
 from Levels.class_plataforma import *
 from Levels.class_enemigo import *
 # import os
 
 class Proyectil:
-    def __init__(self, tamaño, animaciones, posicion_actual, velocidad) -> None:
+    def __init__(self, tamaño, animaciones, posicion_actual, velocidad, clave) -> None:
         #CONFECCION
         self.ancho = tamaño[0]
         self.alto = tamaño[1]
@@ -16,7 +16,7 @@ class Proyectil:
         self.animaciones_proyectil = animaciones
         self.reescalar_animaciones()
         #RECTANGULOS
-        self.rectangulo = self.animaciones_proyectil["proyectil_pj_derecha"][0].get_rect()
+        self.rectangulo = self.animaciones_proyectil[clave][0].get_rect()
         self.rectangulo.x = posicion_actual[0]
         self.rectangulo.y = posicion_actual[1]
         self.lados_proyectil = obtener_rectangulos(self.rectangulo)
@@ -77,7 +77,7 @@ class Proyectil:
             final_boss.animar_enemigo(pantalla, "destroyed_derecha")
         else:
             final_boss.animar_enemigo(pantalla, "destroyed_izquierda")
-
+        final_boss.vida_finalboss -= 5
         final_boss.daño_recibido_finalboss += 5
 
     def meteor_attack(self):
@@ -86,3 +86,4 @@ class Proyectil:
     def remove_objeto(self, lista_objeto):
         for objeto in lista_objeto:
                 lista_objeto.remove(objeto)
+                

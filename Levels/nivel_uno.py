@@ -88,12 +88,6 @@ class Nivel_Uno(Nivel):
 
         crabtank = Enemigo(tamaño_crabtank, diccionario_animaciones_crabtank, posicion_inicial_crabtank, 2)
 
-        # #PROYECTIL
-        # tamaño_proyectil_pj = (35, 50)
-        # diccionario_animaciones_proyectil_pj = {}
-        # diccionario_animaciones_proyectil_pj["proyectil_pj_derecha"] = proyectil_personaje
-        # diccionario_animaciones_proyectil_pj["proyectil_pj_izquierda"] = proyectil_personaje_izquierda
-
         #Proximamente creer clase para la plataforma
         #PISO
         piso = pygame.Rect(0,0,W,20)

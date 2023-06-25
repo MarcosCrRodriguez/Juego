@@ -1,8 +1,11 @@
 #--------------------clase_enemigo--------------------#
 
 import pygame
+import random
 from Levels.configuraciones import reescalar_imagenes, obtener_rectangulos
 from Levels.class_plataforma import *
+from Levels.class_proyectil import *
+from Levels.configuraciones import *
 
 class Enemigo:
     def __init__(self, tamaño, animaciones, posicion_inicial, velocidad_enemigo) -> None:
@@ -26,6 +29,7 @@ class Enemigo:
 
         self.velocidad_proyectil = 12
 
+        self.vida_finalboss = 330
         self.daño_recibido_finalboss = 0
         
     def reescalar_animaciones(self)->None:
@@ -63,6 +67,103 @@ class Enemigo:
                 else:
                     self.animar_enemigo(pantalla, "proyectil_derecha")
                     self.enemigo_dispara(self.velocidad_proyectil* -1)
+
+    def update_vida_finalboss(self, pantalla, vida_actual, cantidad):
+        match vida_actual:
+            case 50:
+                if self.direccion_derecha:
+                    self.direccion_meteor_attack(pantalla, self.velocidad_proyectil, self.velocidad_enemigo, "meteor_derecha", cantidad)
+                else:
+                    self.direccion_meteor_attack(pantalla, self.velocidad_proyectil* -1, self.velocidad_enemigo* -1, "meteor_izquierda", cantidad)
+            case 100:
+                if self.direccion_derecha:
+                    self.direccion_meteor_attack(pantalla, self.velocidad_proyectil, self.velocidad_enemigo, "meteor_derecha", cantidad)
+                else:
+                    self.direccion_meteor_attack(pantalla, self.velocidad_proyectil* -1, self.velocidad_enemigo* -1, "meteor_izquierda", cantidad)
+            case 150:
+                if self.direccion_derecha:
+                    self.direccion_meteor_attack(pantalla, self.velocidad_proyectil, self.velocidad_enemigo, "meteor_derecha", cantidad)
+                else:
+                    self.direccion_meteor_attack(pantalla, self.velocidad_proyectil* -1, self.velocidad_enemigo* -1, "meteor_izquierda", cantidad)
+            case 200:
+                if self.direccion_derecha:
+                    self.direccion_meteor_attack(pantalla, self.velocidad_proyectil, self.velocidad_enemigo, "meteor_derecha", cantidad)
+                else:
+                    self.direccion_meteor_attack(pantalla, self.velocidad_proyectil* -1, self.velocidad_enemigo* -1, "meteor_izquierda", cantidad)
+            case 250:
+                if self.direccion_derecha:
+                    self.direccion_meteor_attack(pantalla, self.velocidad_proyectil, self.velocidad_enemigo, "meteor_derecha", cantidad)
+                else:
+                    self.direccion_meteor_attack(pantalla, self.velocidad_proyectil* -1, self.velocidad_enemigo* -1, "meteor_izquierda", cantidad)
+            case 300:
+                if self.direccion_derecha:
+                    self.direccion_meteor_attack(pantalla, self.velocidad_proyectil, self.velocidad_enemigo, "meteor_derecha", cantidad)
+                else:
+                    self.direccion_meteor_attack(pantalla, self.velocidad_proyectil* -1, self.velocidad_enemigo* -1, "meteor_izquierda", cantidad)
+
+    def direccion_meteor_attack(self, pantalla, velocidad_proyectil, velocidad_enemigo, direccion, cantidad):
+        self.animar_enemigo(pantalla, direccion)
+        self.realizar_comportamiento(velocidad_enemigo)
+        self.crear_lista_meteoros(cantidad, velocidad_proyectil)
+        # self.comportamiento_meteoros(self.lista_meteoros)
+
+        # blit en nivel no aca porque se quedan los proyectiles arriba
+        for meteoro in self.lista_meteoros:
+            pantalla.blit(meteoro["superficie"], meteoro["rectangulo"])
+        
+    def crear_meteoro(self, x, y, ancho, alto, path, velocidad_proyectil):
+        image_meteor = pygame.image.load(path)
+        image_meteor = pygame.transform.scale(image_meteor, (ancho, alto))
+
+        rectangulo = image_meteor.get_rect()
+        rectangulo.x = x
+        rectangulo.y = y
+
+        dict_meteoro = {}
+        dict_meteoro["superficie"] = image_meteor
+        dict_meteoro["rectangulo"] = rectangulo
+        dict_meteoro["velocidad"] = velocidad_proyectil
+
+        return dict_meteoro
+
+    def crear_lista_meteoros(self, cantidad, velocidad_proyectil):
+        self.lista_meteoros = []
+
+        for i in range(cantidad):
+            x = random.randrange(0, 1000, 60)
+            #print(x)
+            y = random.randrange(-250, 0, 60)
+            #print(y)
+
+            meteoro = self.crear_meteoro(x,y,35,65,"Recursos\Final_Boss\meteor.png",velocidad_proyectil)
+            self.lista_meteoros.append(meteoro)
+    
+    def update_meteoros(self, lista_meteoros):
+        for meteoro in lista_meteoros:
+            rectangulo = meteoro["rectangulo"]
+            rectangulo.y += meteoro["velocidad"]
+    
+    # def crear_lista_meteoros(self, cantidad, velocidad_proyectil):
+    #     lista_nueva = []
+
+    #     for i in range(cantidad):
+    #         tamaño_meteorito = (35, 65)
+    #         diccionario_animaciones_meteorito = {}
+    #         diccionario_animaciones_meteorito["meteor"] = meteorito_finalboss
+    #         x = random.randrange(0, 1000, 60)
+    #         #print(x)
+    #         y = random.randrange(-250, 0, 60)
+    #         #print(y)
+
+    #         meteoro = Proyectil(tamaño_meteorito, diccionario_animaciones_meteorito, (x,y), velocidad_proyectil, "meteor")
+    #         lista_nueva.append(meteoro)
+
+    #     return lista_nueva
+
+    # def comportamiento_meteoros(self, lista_meteoros):
+    #     for meteoro in lista_meteoros:
+    #         for lado in meteoro.lados_proyectil:
+    #             meteoro.lados_proyectil[lado].y += 15
 
     def enemigo_dispara(self, velocidad):
         pass

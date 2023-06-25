@@ -37,8 +37,8 @@ class Nivel:
         #PROYECTIL
         self.tamaño_proyectil = (35, 50)
         self.diccionario_animaciones_proyectil = {}
-        self.diccionario_animaciones_proyectil["proyectil_pj_derecha"] = proyectil_personaje
-        self.diccionario_animaciones_proyectil["proyectil_pj_izquierda"] = proyectil_personaje_izquierda
+        self.diccionario_animaciones_proyectil["proyectil_derecha"] = proyectil_personaje
+        self.diccionario_animaciones_proyectil["proyectil_izquierda"] = proyectil_personaje_izquierda
 
         self.lados_piso = lados_piso
 
@@ -77,8 +77,6 @@ class Nivel:
             self.barra_vida = pygame.image.load("Recursos\\barra_vida.png")
             self.barra_vida = pygame.transform.scale(self.barra_vida,(330, 25))
 
-            self.vida_finalboss = 330
-
         #TIMER
         self.start_time = time.time()
         self.duration = timer
@@ -106,16 +104,15 @@ class Nivel:
         for proyectil in self.lista_proyectiles:
             proyectil.lanzar_proyectil(proyectil.velocidad)
             if self.velocidad_proyectil > 0:
-                proyectil.animar_proyectil(self._slave, "proyectil_pj_derecha")
+                proyectil.animar_proyectil(self._slave, "proyectil_derecha")
             else:
-                proyectil.animar_proyectil(self._slave, "proyectil_pj_izquierda")
+                proyectil.animar_proyectil(self._slave, "proyectil_izquierda")
             
             if self.is_final_lvl  == False:              
                 proyectil.colision_proyectil(self.plataformas_colision, self.lista_enemigos, self.lista_proyectiles, self._slave)
                 self.jugador.enemigo_dispara(self.segundo_piso, self.segundo_enemigo)
             else:
                 proyectil.colision_proyectil_final_boss(self._slave, self.plataformas_colision, self.lista_proyectiles, self.primer_enemigo)
-                self.vida_finalboss -= 5
 
         self.jugador.colision_enemigo(self._slave, self.lista_enemigos, (70, 740))
         self.jugador.verificar_colision_item(self.lista_items, "Recursos\\Score_Item\\All_Grabed\\yare.ogg")
@@ -131,9 +128,7 @@ class Nivel:
             self.primer_enemigo.colision_plataforma(self.plataformas[1], self.plataformas[4], "right", "left")
             #self.primer_enemigo.meteor_attack()
 
-        self.segundo_enemigo.colision_plataforma(self.plataformas[3], self.plataformas[3], "left", "right")
-
-        
+        self.segundo_enemigo.colision_plataforma(self.plataformas[3], self.plataformas[3], "left", "right")        
 
         texto = self.font_coins.render(f"Coins X {self.jugador.mi_score}", False, "Black", self.verde_oscuro)
         self._slave.blit(self.fondo_score, (12,110))
@@ -178,7 +173,7 @@ class Nivel:
                     self.velocidad_proyectil = 18
                 else:
                     self.velocidad_proyectil = -18
-                proyectil = Proyectil(self.tamaño_proyectil, self.diccionario_animaciones_proyectil, self.jugador.lados["main"].center, self.velocidad_proyectil)
+                proyectil = Proyectil(self.tamaño_proyectil, self.diccionario_animaciones_proyectil, self.jugador.lados["main"].center, self.velocidad_proyectil, "proyectil_derecha")
                 self.lista_proyectiles.append(proyectil)
         else:
             self.jugador.que_hace = "quieto"
@@ -204,22 +199,19 @@ class Nivel:
         self._slave.blit(self.icono_pj, (12,8))
         self._slave.blit(self.mi_imagen, (20,15))
         pygame.draw.rect(self._slave, (255,0,0), (102,20, 264, 18)) 
-        pygame.draw.rect(self._slave, self.verde_oscuro, (102,20, 264 - self.jugador.daño_recibido, 18))  
+        pygame.draw.rect(self._slave, self.verde_oscuro, (102,20, 264 - self.jugador.daño_recibido, 18))
+            
+        self.jugador.update(self._slave, self.lados_piso, self.plataformas, self.lista_enemigos)
+        for enemigo in self.lista_enemigos:
+            enemigo.update(self._slave)
         
         if self.is_final_lvl:
             self._slave.blit(self.floor, (0, 995))
             pygame.draw.rect(self._slave, (255,0,0), (1445, 42, 330, 25))
             pygame.draw.rect(self._slave, self.violeta, (1445, 42, 330 - self.primer_enemigo.daño_recibido_finalboss, 25)) 
-            #self._slave.blit(self.barra_vida, (1445, 42))
             self._slave.blit(self.borde_vida_finalboss, (1346, 17))
-            
-        self.jugador.update(self._slave, self.lados_piso, self.plataformas, self.lista_enemigos)
-        for enemigo in self.lista_enemigos:
-            enemigo.update(self._slave)
-        # self.primer_enemigo.update(self._slave)
-        # self.segundo_enemigo.update(self._slave)
-        # if len(self.lista_enemigos) == 3:
-        #     self.lista_enemigos[2].update(self._slave)
+
+            self.primer_enemigo.update_vida_finalboss(self._slave, self.primer_enemigo.vida_finalboss, 20)
 
     def dibujar_rectangulos(self):
         if get_modo():

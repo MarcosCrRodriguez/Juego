@@ -73,6 +73,8 @@ class Nivel_Tres(Nivel):
         diccionario_animaciones_final_boss["enemigo_izquierda"] = camina_final_boss_izquierda
         diccionario_animaciones_final_boss["destroyed_derecha"] = daño_recibido_final_boss
         diccionario_animaciones_final_boss["destroyed_izquierda"] = daño_recibido_final_boss_izquierda
+        diccionario_animaciones_final_boss["meteor_derecha"] = meteor_attack_final_boss
+        diccionario_animaciones_final_boss["meteor_izquierda"] = meteor_attack_final_boss_izquierda
 
         final_boss = Enemigo(tamaño_final_boss, diccionario_animaciones_final_boss, posicion_inicial_final_boss, 5)
 
@@ -83,12 +85,6 @@ class Nivel_Tres(Nivel):
         diccionario_animaciones_bird["enemigo_izquierda"] = bird_vuela_izquierda
 
         bird = Enemigo(tamaño_bird, diccionario_animaciones_bird, posicion_inicial_bird, 6)
-
-        # #PROYECTIL
-        # tamaño_proyectil_pj = (35, 50)
-        # diccionario_animaciones_proyectil_pj = {}
-        # diccionario_animaciones_proyectil_pj["proyectil_pj_derecha"] = proyectil_personaje
-        # diccionario_animaciones_proyectil_pj["proyectil_pj_izquierda"] = proyectil_personaje_izquierda
 
         #Proximamente creer clase para la plataforma
         #PISO
