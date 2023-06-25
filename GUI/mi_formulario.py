@@ -37,7 +37,7 @@ class Form_Prueba(Form):
         self.lista_widgets.append(self.btn_tabla)
         self.lista_widgets.append(self.btn_niveles)
 
-        pygame.mixer.music.load("GUI\Vengeance (Loopable).wav")
+        pygame.mixer.music.load("GUI\Metal Gear Rising REVENGEANCE MainMenu.mp3")
 
         pygame.mixer.music.set_volume(self.volumen)
         pygame.mixer.music.play(-1)

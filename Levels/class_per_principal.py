@@ -201,13 +201,6 @@ class Personaje_Principal:
                 lista_item.remove(lista_item[item])
                 break
 
-    # idea para poyectiles de enemigo
-    # si el personaje pisa cierta plataforma el enemigo dispara (pregunta) - como saco la direccion en la q disparara?
-
-    # def desaparecer_moneda(self, moneda)->None:
-    #     moneda.rectangulo.x = -200
-    #     moneda.rectangulo.y = -200
-        
     
 
 

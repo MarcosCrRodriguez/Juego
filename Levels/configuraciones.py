@@ -19,8 +19,8 @@ def obtener_rectangulos(principal)->dict:
     diccionario = {}
     diccionario["main"] = principal
     diccionario["bottom"] = pygame.Rect(principal.left, principal.bottom -10, principal.width, 10)
-    diccionario["right"] = pygame.Rect(principal.right -7, principal.top, 7, principal.height)
-    diccionario["left"] = pygame.Rect(principal.left, principal.top, 7, principal.height)
+    diccionario["right"] = pygame.Rect(principal.right -9, principal.top, 9, principal.height)
+    diccionario["left"] = pygame.Rect(principal.left, principal.top, 9, principal.height)
     diccionario["top"] = pygame.Rect(principal.left, principal.top, principal.width, 10)
 
     return diccionario
@@ -95,12 +95,20 @@ armor_camina = [pygame.image.load("Recursos\\Armor_Camina\\84.png"),
 armor_camina_derecha = girar_imagenes(armor_camina, True, False)
 
 armor_destroyed = [pygame.image.load("Recursos\\Armor_Destroyed\\5.png"),
+                   pygame.image.load("Recursos\\Armor_Destroyed\\5.png"),
+                   pygame.image.load("Recursos\\Armor_Destroyed\\6.png"),
                    pygame.image.load("Recursos\\Armor_Destroyed\\6.png"),
                    pygame.image.load("Recursos\\Armor_Destroyed\\7.png"),
+                   pygame.image.load("Recursos\\Armor_Destroyed\\7.png"),
+                   pygame.image.load("Recursos\\Armor_Destroyed\\8.png"),
                    pygame.image.load("Recursos\\Armor_Destroyed\\8.png"),
                    pygame.image.load("Recursos\\Armor_Destroyed\\9.png"),
+                   pygame.image.load("Recursos\\Armor_Destroyed\\9.png"),
+                   pygame.image.load("Recursos\\Armor_Destroyed\\10.png"),
                    pygame.image.load("Recursos\\Armor_Destroyed\\10.png"),
                    pygame.image.load("Recursos\\Armor_Destroyed\\11.png"),
+                   pygame.image.load("Recursos\\Armor_Destroyed\\11.png"),
+                   pygame.image.load("Recursos\\Armor_Destroyed\\12.png"),
                    pygame.image.load("Recursos\\Armor_Destroyed\\12.png")
                    ]
 
@@ -141,15 +149,26 @@ crabtank_proyectil = [pygame.image.load("Recursos\Crabtank_Ataca\\48.png"),
 crabtank_proyectil_izquierda = girar_imagenes(crabtank_proyectil, True, False) 
 
 crabtank_destroyed = [pygame.image.load("Recursos\Crabyank_Destroy\\163.png"),
+                      pygame.image.load("Recursos\Crabyank_Destroy\\163.png"),
+                      pygame.image.load("Recursos\Crabyank_Destroy\\164.png"),
                       pygame.image.load("Recursos\Crabyank_Destroy\\164.png"),
                       pygame.image.load("Recursos\Crabyank_Destroy\\165.png"),
+                      pygame.image.load("Recursos\Crabyank_Destroy\\165.png"),
+                      pygame.image.load("Recursos\Crabyank_Destroy\\166.png"),
                       pygame.image.load("Recursos\Crabyank_Destroy\\166.png"),
                       pygame.image.load("Recursos\Crabyank_Destroy\\167.png"),
+                      pygame.image.load("Recursos\Crabyank_Destroy\\167.png"),
+                      pygame.image.load("Recursos\Crabyank_Destroy\\168.png"),
                       pygame.image.load("Recursos\Crabyank_Destroy\\168.png"),
                       pygame.image.load("Recursos\Crabyank_Destroy\\169.png"),
+                      pygame.image.load("Recursos\Crabyank_Destroy\\169.png"),
+                      pygame.image.load("Recursos\Crabyank_Destroy\\170.png"),
                       pygame.image.load("Recursos\Crabyank_Destroy\\170.png"),
                       pygame.image.load("Recursos\Crabyank_Destroy\\171.png"),
+                      pygame.image.load("Recursos\Crabyank_Destroy\\171.png"),
                       pygame.image.load("Recursos\Crabyank_Destroy\\172.png"),
+                      pygame.image.load("Recursos\Crabyank_Destroy\\172.png"),
+                      pygame.image.load("Recursos\Crabyank_Destroy\\173.png"),
                       pygame.image.load("Recursos\Crabyank_Destroy\\173.png")
                       ]
 
@@ -196,4 +215,25 @@ corazon_animation = [pygame.image.load("Recursos\\Corazon\\0.png"),
                     pygame.image.load("Recursos\\Corazon\\3.png"),
                     pygame.image.load("Recursos\\Corazon\\4.png"),
                     pygame.image.load("Recursos\\Corazon\\5.png")
-                        ]
+                    ]
+
+#------------------------------------------------------------#
+
+camina_final_boss = [pygame.image.load("Recursos\\Final_Boss\\Primer_Fase\\Camina\\33.png")
+                    ]
+
+camina_final_boss_izquierda = girar_imagenes(camina_final_boss, True, False)
+
+#------------------------------------------------------------#
+
+bird_vuela = [pygame.image.load("Recursos\\Black_Bird\\0.png"),
+              pygame.image.load("Recursos\\Black_Bird\\1.png"),
+              pygame.image.load("Recursos\\Black_Bird\\2.png"),
+              pygame.image.load("Recursos\\Black_Bird\\3.png"),
+              pygame.image.load("Recursos\\Black_Bird\\4.png"),
+              pygame.image.load("Recursos\\Black_Bird\\5.png"),
+              pygame.image.load("Recursos\\Black_Bird\\6.png"),
+              pygame.image.load("Recursos\\Black_Bird\\7.png")
+              ]
+
+bird_vuela_izquierda = girar_imagenes(bird_vuela, True, False)

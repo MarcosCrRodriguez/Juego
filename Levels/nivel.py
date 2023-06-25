@@ -14,7 +14,7 @@ from Levels.nivel import *
 
 class Nivel:
     def __init__(self, pantalla, personaje_principal, primer_enemigo, segundo_enemigo, lista_plataformas, lista_colision_plataformas, lista_enemigos, 
-                 lista_items, lados_piso, mi_imagen, icono_pj, fondo_vida, fondo, font_timer, fondo_timer, fondo_score, font_coins, final_tuple, timer, corazones, segundo_piso) -> None:
+                 lista_items, lados_piso, mi_imagen, icono_pj, fondo_vida, fondo, font_timer, fondo_timer, fondo_score, font_coins, final_tuple, pos_inicial_corazon, timer, corazones, segundo_piso, final_lvl) -> None:
         self._slave = pantalla
         self.jugador = personaje_principal
         self.primer_enemigo = primer_enemigo
@@ -57,8 +57,9 @@ class Nivel:
         self.lista_next_lvl = []
 
         self.hay_corazones = corazones
+        self.is_final_lvl = final_lvl
 
-        posicion_inicial_corazon = (100, 560)
+        posicion_inicial_corazon = pos_inicial_corazon
         tamaño_corazon = (50, 50)
 
         diccionario_animaciones_corazon = {}
@@ -69,9 +70,18 @@ class Nivel:
         self.lista_corazones = []
         self.lista_corazones.append(self.corazon)
 
+        if self.is_final_lvl:
+            self.borde_vida_finalboss = pygame.image.load("Recursos\\borde_vida_finalboss.png")
+            self.borde_vida_finalboss = pygame.transform.scale(self.borde_vida_finalboss,(541, 80))
+            self.barra_vida = pygame.image.load("Recursos\\barra_vida.png")
+            self.barra_vida = pygame.transform.scale(self.barra_vida,(330, 25))
+
         #TIMER
         self.start_time = time.time()
         self.duration = timer
+
+        self.floor = pygame.image.load("Recursos\\floor.png")
+        self.floor = pygame.transform.scale(self.floor,(1900,30))
 
     def update(self, lista_eventos)->None:
         # self.finish = True
@@ -104,18 +114,24 @@ class Nivel:
                 proyectil.animar_proyectil(self._slave, "proyectil_pj_izquierda")
                 
             proyectil.colision_proyectil(self.plataformas_colision, self.lista_enemigos, self.lista_proyectiles, self._slave)
-
-        con_vida = self.jugador.colision_enemigo(self._slave, self.lista_enemigos, (70, 740))
+        
+        self.jugador.colision_enemigo(self._slave, self.lista_enemigos, (70, 740))
         self.jugador.verificar_colision_item(self.lista_items, "Recursos\\Score_Item\\All_Grabed\\yare.ogg")
         if self.hay_corazones:
             self.jugador.verificar_colision_vida(self.lista_corazones, "Recursos\\Corazon\\Sound\\vpcn120.ogg", "Recursos\\Corazon\\Sound\\vpcn118.ogg") 
         
         self.jugador.enemigo_dispara(self.segundo_piso, self.segundo_enemigo)
-        self.primer_enemigo.colision_plataforma(self.plataformas[1], self.plataformas[4], "right", "left")
+
+        if self.is_final_lvl  == False:
+            self.primer_enemigo.colision_plataforma(self.plataformas[1], self.plataformas[4], "right", "left")
+            if self.tres_enemigos:
+                self.item_recover = self.tercer_enemigo.colision_plataforma(self.plataformas[1], self.plataformas[7], "left", "right")
+        else:
+            # armar nueva colision que se teletransporte por el mapa mientras colisiona para el "final_boss"
+            self.primer_enemigo.colision_plataforma(self.plataformas[1], self.plataformas[4], "right", "left")
+
         self.segundo_enemigo.colision_plataforma(self.plataformas[3], self.plataformas[3], "left", "right")
-        if self.tres_enemigos:
-            self.item_recover = self.tercer_enemigo.colision_plataforma(self.plataformas[1], self.plataformas[7], "left", "right")
-        
+
         texto = self.font_coins.render(f"Coins X {self.jugador.mi_score}", False, "Black", self.verde_oscuro)
         self._slave.blit(self.fondo_score, (12,110))
         self._slave.blit(texto, (22,120)) 
@@ -180,6 +196,11 @@ class Nivel:
 
         if len(self.lista_items) == 0:
             self.obtener_next_lvl()
+        
+        if self.is_final_lvl:
+            self._slave.blit(self.floor, (0, 995))
+            self._slave.blit(self.barra_vida, (1445, 42))
+            self._slave.blit(self.borde_vida_finalboss, (1346, 17))
             
         self.jugador.update(self._slave, self.lados_piso, self.plataformas, self.lista_enemigos)
         for enemigo in self.lista_enemigos:

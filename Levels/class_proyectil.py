@@ -60,7 +60,6 @@ class Proyectil:
                     enemigo.animar_enemigo(pantalla, "destroyed_derecha")
                 self.remove_objeto(lista_proyectiles)
                 lista_enemigo.remove(enemigo)
-                # lista_enemigo.remove(lista_enemigo[enemigo])
             
     def remove_objeto(self, lista_objeto):
         for objeto in lista_objeto:
