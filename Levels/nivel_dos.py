@@ -114,7 +114,7 @@ class Nivel_Dos(Nivel):
         #PLATAFORMAS
         posicion_inicial_plataforma_1 = (1440,689)
         tamaño_plataforma_1 = (170,25)
-        posicion_inicial_plataforma_2 = (1112,765)
+        posicion_inicial_plataforma_2 = (1112,775)
         tamaño_plataforma_2 = (170,25)
         posicion_inicial_primer_piso = (1650,570)
         tamaño_primer_piso = (250,25)
@@ -162,7 +162,7 @@ class Nivel_Dos(Nivel):
         tamaño_moneda_2 = (40, 40)
         posicion_inicial_moneda_3 = (1800, 495)
         tamaño_moneda_3 = (40, 40)
-        posicion_inicial_moneda_4 = (1174, 695)
+        posicion_inicial_moneda_4 = (1174, 705)
         tamaño_moneda_4 = (40, 40)
         posicion_inicial_moneda_5 = (650, 410)
         tamaño_moneda_5 = (40, 40)

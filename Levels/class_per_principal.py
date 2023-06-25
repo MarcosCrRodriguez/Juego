@@ -36,7 +36,7 @@ class Personaje_Principal:
         self.mi_score = 0
         #NIVEL SALUD
         self.salud = 3
-        self.daño_recivido = 0
+        self.daño_recibido = 0
 
     def reescalar_animaciones(self)->None:
         for clave in self.animaciones:
@@ -52,11 +52,7 @@ class Personaje_Principal:
         pantalla.blit(animacion[self.contador_pasos], self.lados["main"]) 
         self.contador_pasos += 1  
 
-        # Creo barra de vida - (proximamente seran corazones) 
-
     def mover(self, velocidad)->None:
-        # para mover al personaje hay que mover la x del rectangulo principal
-        # movemos todos los lados del rectangulo
         for lado in self.lados:
             self.lados[lado].x += velocidad
 
@@ -139,7 +135,7 @@ class Personaje_Principal:
             if self.lados["main"].colliderect(enemigo.lados_enemigo["main"]):
                 self.animar(pantalla, "recibo_daño")
                 self.salud -= 1
-                self.daño_recivido += 88
+                self.daño_recibido += 88
                 # luego de recivir daño vuelve a la posicion de inicio
                 self.rectangulo.x = posicion_inicial[0]
                 self.rectangulo.y = posicion_inicial[1]

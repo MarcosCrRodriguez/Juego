@@ -60,7 +60,29 @@ class Proyectil:
                     enemigo.animar_enemigo(pantalla, "destroyed_derecha")
                 self.remove_objeto(lista_proyectiles)
                 lista_enemigo.remove(enemigo)
+
+    def colision_proyectil_final_boss(self, pantalla, lista_plataformas, lista_proyectiles, final_boss):
+        for lado in lista_plataformas:
+            if self.lados_proyectil["main"].colliderect(lado.lados_plataforma["main"]):
+                self.sonido_colision.play()
+                self.remove_objeto(lista_proyectiles)
+
+        if self.lados_proyectil["main"].colliderect(final_boss.lados_enemigo["main"]):
+            self.daño_final_boss(pantalla, final_boss)
+            self.sonido_colision.play()
+            self.remove_objeto(lista_proyectiles)
             
+    def daño_final_boss(self, pantalla, final_boss):
+        if final_boss.direccion_derecha:
+            final_boss.animar_enemigo(pantalla, "destroyed_derecha")
+        else:
+            final_boss.animar_enemigo(pantalla, "destroyed_izquierda")
+
+        final_boss.daño_recibido_finalboss += 5
+
+    def meteor_attack(self):
+        pass
+        
     def remove_objeto(self, lista_objeto):
         for objeto in lista_objeto:
                 lista_objeto.remove(objeto)

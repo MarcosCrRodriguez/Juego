@@ -224,6 +224,11 @@ camina_final_boss = [pygame.image.load("Recursos\\Final_Boss\\Primer_Fase\\Camin
 
 camina_final_boss_izquierda = girar_imagenes(camina_final_boss, True, False)
 
+daño_recibido_final_boss = [pygame.image.load("Recursos\\Final_Boss\\Primer_Fase\\Daño_Recibido\\35.png")
+                            ]
+
+daño_recibido_final_boss_izquierda = girar_imagenes(daño_recibido_final_boss, True, False)
+
 #------------------------------------------------------------#
 
 bird_vuela = [pygame.image.load("Recursos\\Black_Bird\\0.png"),

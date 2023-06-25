@@ -25,6 +25,8 @@ class Enemigo:
         self.direccion_derecha = True
 
         self.velocidad_proyectil = 12
+
+        self.daño_recibido_finalboss = 0
         
     def reescalar_animaciones(self)->None:
         for clave in self.animaciones_enemigo:
