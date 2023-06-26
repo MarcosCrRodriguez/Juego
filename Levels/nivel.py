@@ -211,7 +211,18 @@ class Nivel:
             pygame.draw.rect(self._slave, self.violeta, (1445, 42, 330 - self.primer_enemigo.daño_recibido_finalboss, 25)) 
             self._slave.blit(self.borde_vida_finalboss, (1346, 17))
 
-            self.primer_enemigo.update_vida_finalboss(self._slave, self.primer_enemigo.vida_finalboss, 20)
+            self.esta_atacando = self.primer_enemigo.update_vida_finalboss(self._slave, self.primer_enemigo.vida_finalboss, 20)
+            
+            if self.esta_atacando:
+                self.crear_lista_meteoros(4, 2)
+                for meteoro in self.lista_meteoros:
+                    meteoro.lanzar_meteoro(2)
+                    meteoro.animar_proyectil(self._slave, "meteor")
+
+            # if len(self.meteorite_lista) != 0:
+            #     for meteoro in self.meteorite_lista:
+            #         self._slave.blit(meteoro["superficie"], meteoro["rectangulo"])
+            #     self.primer_enemigo.update_meteoros(self.meteorite_lista)
 
     def dibujar_rectangulos(self):
         if get_modo():
@@ -247,4 +258,19 @@ class Nivel:
         self.next_lvl.animar_item(self._slave, "next_lvl")
 
         self.lista_next_lvl.append(self.next_lvl)
+
+    def crear_lista_meteoros(self, cantidad, velocidad_proyectil):
+        self.lista_meteoros = []
+
+        for i in range(cantidad):
+            tamaño_meteorito = (35, 65)
+            diccionario_animaciones_meteorito = {}
+            diccionario_animaciones_meteorito["meteor"] = meteorito_finalboss
+            x = random.randrange(0, 1900, 60)
+            #print(x)
+            y = random.randrange(-800, 900, 60)
+            #print(y)
+
+            meteoro = Proyectil(tamaño_meteorito, diccionario_animaciones_meteorito, (x,y), velocidad_proyectil, "meteor")
+            self.lista_meteoros.append(meteoro)
         

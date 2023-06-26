@@ -33,6 +33,10 @@ class Proyectil:
     def lanzar_proyectil(self, velocidad)->None:
         for lado in self.lados_proyectil:
             self.lados_proyectil[lado].x += velocidad
+    
+    def lanzar_meteoro(self, velocidad)->None:
+        for lado in self.lados_proyectil:
+            self.lados_proyectil[lado].y += velocidad
 
     def animar_proyectil(self, pantalla, que_animacion:str)->None:
         animacion = self.animaciones_proyectil[que_animacion]
