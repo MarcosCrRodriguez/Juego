@@ -53,9 +53,11 @@ class Nivel:
 
         self.verde_oscuro = (0, 100, 0)
         self.violeta = (138, 43, 226)
+        self.azul = (0, 0, 255)
 
         self.final_tuple = final_tuple
         self.lista_next_lvl = []
+        self.lista_meteoros = []
 
         self.hay_corazones = corazones
         self.is_final_lvl = final_lvl
@@ -76,6 +78,10 @@ class Nivel:
             self.borde_vida_finalboss = pygame.transform.scale(self.borde_vida_finalboss,(541, 80))
             self.barra_vida = pygame.image.load("Recursos\\barra_vida.png")
             self.barra_vida = pygame.transform.scale(self.barra_vida,(330, 25))
+
+            self.sonido_spawn = pygame.mixer.Sound("Recursos\Final_Boss\spawn.wav")
+            self.sonido_spawn.set_volume(0.4)
+            self.sonido_spawn.play()
 
         #TIMER
         self.start_time = time.time()
@@ -124,9 +130,13 @@ class Nivel:
             if self.tres_enemigos:
                 self.item_recover = self.tercer_enemigo.colision_plataforma(self.plataformas[1], self.plataformas[7], "left", "right")
         else:
-            # armar nueva colision que se teletransporte por el mapa mientras colisiona para el "final_boss"
-            self.primer_enemigo.colision_plataforma(self.plataformas[1], self.plataformas[4], "right", "left")
-            #self.primer_enemigo.meteor_attack()
+            self.primer_enemigo.teletransportacion(self.plataformas[1], "left", "right", (1350, 323))
+            self.primer_enemigo.colision_para_tp(self.plataformas[9], "left", "left", "e_derecha")
+            self.primer_enemigo.teletransportacion(self.plataformas[9], "right", "right", (500, 735))
+            self.primer_enemigo.teletransportacion(self.plataformas[4], "right", "left", (385, 323))
+            self.primer_enemigo.colision_para_tp(self.plataformas[5], "right", "right", "e_izquierda")
+            self.primer_enemigo.teletransportacion(self.plataformas[5], "left", "left", (1280, 735))
+            #self.primer_enemigo.meteor_attack()  
 
         self.segundo_enemigo.colision_plataforma(self.plataformas[3], self.plataformas[3], "left", "right")        
 
@@ -200,6 +210,11 @@ class Nivel:
         self._slave.blit(self.mi_imagen, (20,15))
         pygame.draw.rect(self._slave, (255,0,0), (102,20, 264, 18)) 
         pygame.draw.rect(self._slave, self.verde_oscuro, (102,20, 264 - self.jugador.daño_recibido, 18))
+
+        pygame.draw.rect(self._slave, (0,0,0), (102,54, 83, 28))
+        if len(self.lista_proyectiles) == 0:
+            pygame.draw.rect(self._slave, self.azul, (102,54, 83, 28)) 
+            
             
         self.jugador.update(self._slave, self.lados_piso, self.plataformas, self.lista_enemigos)
         for enemigo in self.lista_enemigos:
@@ -214,10 +229,11 @@ class Nivel:
             self.esta_atacando = self.primer_enemigo.update_vida_finalboss(self._slave, self.primer_enemigo.vida_finalboss, 20)
             
             if self.esta_atacando:
-                self.crear_lista_meteoros(4, 2)
-                for meteoro in self.lista_meteoros:
-                    meteoro.lanzar_meteoro(2)
-                    meteoro.animar_proyectil(self._slave, "meteor")
+                if len(self.lista_meteoros) < 10:
+                    self.crear_lista_meteoros(10, 10)
+                    for meteoro in range(len(self.lista_meteoros)):
+                        self.lista_meteoros[meteoro].lanzar_meteoro(10)
+                        self.lista_meteoros[meteoro].animar_proyectil(self._slave, "meteor")
 
             # if len(self.meteorite_lista) != 0:
             #     for meteoro in self.meteorite_lista:
@@ -236,6 +252,9 @@ class Nivel:
                 if len(self.lista_proyectiles) > 0:
                     for proyectil in self.lista_proyectiles:
                         pygame.draw.rect(self._slave, "Gray", proyectil.lados_proyectil[lado], 2)
+                if self.esta_atacando:
+                    for meteoro in self.lista_meteoros:
+                        pygame.draw.rect(self._slave, "Gray", meteoro.lados_proyectil[lado], 2)
 
             for item in self.lista_items:
                 pygame.draw.rect(self._slave, "Blue", item.rectangulo, 2)
@@ -246,7 +265,7 @@ class Nivel:
             if len(self.lista_next_lvl) > 0:
                 for next_lvl in self.lista_next_lvl:
                         pygame.draw.rect(self._slave, "Blue", next_lvl.rectangulo, 2)
-            
+                                    
     def obtener_next_lvl(self)->None:
         #NEXT_LVL
         tamaño_next_lvl = (105, 105)
@@ -260,15 +279,13 @@ class Nivel:
         self.lista_next_lvl.append(self.next_lvl)
 
     def crear_lista_meteoros(self, cantidad, velocidad_proyectil):
-        self.lista_meteoros = []
-
         for i in range(cantidad):
             tamaño_meteorito = (35, 65)
             diccionario_animaciones_meteorito = {}
             diccionario_animaciones_meteorito["meteor"] = meteorito_finalboss
             x = random.randrange(0, 1900, 60)
             #print(x)
-            y = random.randrange(-800, 900, 60)
+            y = random.randrange(-200, 0, 60)
             #print(y)
 
             meteoro = Proyectil(tamaño_meteorito, diccionario_animaciones_meteorito, (x,y), velocidad_proyectil, "meteor")

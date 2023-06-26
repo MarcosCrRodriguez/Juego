@@ -66,7 +66,7 @@ class Nivel_Tres(Nivel):
         mi_personaje = Personaje_Principal(tamaño, diccionario_animaciones_personaje, posicion_inicial, 12)
 
         #ENEMIGO 
-        posicion_inicial_final_boss = (1300, 735)
+        posicion_inicial_final_boss = (1280, 735)
         tamaño_final_boss = (190, 265)
         diccionario_animaciones_final_boss = {}
         diccionario_animaciones_final_boss["enemigo_derecha"] = camina_final_boss
@@ -94,7 +94,7 @@ class Nivel_Tres(Nivel):
         lados_piso = obtener_rectangulos(piso)
 
         #PLATAFORMAS
-        posicion_inicial_plataforma_1 = (0 + 375,580)
+        posicion_inicial_plataforma_1 = (375,580)
         tamaño_plataforma_1 = (325,30)
         posicion_inicial_plataforma_2 = (1900 - 675,580)
         tamaño_plataforma_2 = (325,30)

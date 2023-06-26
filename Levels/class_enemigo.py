@@ -18,16 +18,25 @@ class Enemigo:
         self.animaciones_enemigo = animaciones
         self.reescalar_animaciones()
         #RECTANGULOS
-        rectangulo = self.animaciones_enemigo["enemigo_izquierda"][0].get_rect()
-        rectangulo.x = posicion_inicial[0]
-        rectangulo.y = posicion_inicial[1]
-        self.lados_enemigo = obtener_rectangulos(rectangulo)
+        self.rectangulo = self.animaciones_enemigo["enemigo_izquierda"][0].get_rect()
+        self.rectangulo.x = posicion_inicial[0]
+        self.rectangulo.y = posicion_inicial[1]
+        self.lados_enemigo = obtener_rectangulos(self.rectangulo)
         #ACCION_ENEMIGO
         self.velocidad_enemigo = velocidad_enemigo
         #DIRECCION
         self.direccion_derecha = True
 
         self.velocidad_proyectil = 12
+
+        self.sonido_teleeport = pygame.mixer.Sound("Recursos\\Final_Boss\\teleporter.wav")
+        self.sonido_teleeport.set_volume(0.4)
+        self.sonido_shinde = pygame.mixer.Sound("Recursos\Final_Boss\shinde.wav")
+        self.sonido_shinde.set_volume(0.4)
+        self.sonido_metari = pygame.mixer.Sound("Recursos\Final_Boss\metari.wav")
+        self.sonido_metari.set_volume(0.4)
+        self.sonido_kurae = pygame.mixer.Sound("Recursos\Final_Boss\kurae.wav")
+        self.sonido_kurae.set_volume(0.4)
 
         self.vida_finalboss = 330
         self.daño_recibido_finalboss = 0
@@ -74,36 +83,42 @@ class Enemigo:
 
         match vida_actual:
             case 50:
+                #self.sonido_metari.play()
                 if self.direccion_derecha:
                     self.direccion_meteor_attack(pantalla, self.velocidad_enemigo, "meteor_derecha", cantidad)
                 else:
                     self.direccion_meteor_attack(pantalla, self.velocidad_enemigo* -1, "meteor_izquierda", cantidad)
                 esta_atacando = True
             case 100:
+                #self.sonido_metari.play()
                 if self.direccion_derecha:
                     self.direccion_meteor_attack(pantalla, self.velocidad_enemigo, "meteor_derecha", cantidad)
                 else:
                     self.direccion_meteor_attack(pantalla, self.velocidad_enemigo* -1, "meteor_izquierda", cantidad)
                 esta_atacando = True
             case 150:
+                #self.sonido_kurae.play()
                 if self.direccion_derecha:
                     self.direccion_meteor_attack(pantalla, self.velocidad_enemigo, "meteor_derecha", cantidad)
                 else:
                     self.direccion_meteor_attack(pantalla, self.velocidad_enemigo* -1, "meteor_izquierda", cantidad)
                 esta_atacando = True
             case 200:
+                #self.sonido_kurae.play()
                 if self.direccion_derecha:
                     self.direccion_meteor_attack(pantalla, self.velocidad_enemigo, "meteor_derecha", cantidad)
                 else:
                     self.direccion_meteor_attack(pantalla, self.velocidad_enemigo* -1, "meteor_izquierda", cantidad)
                 esta_atacando = True
             case 250:
+                #self.sonido_shinde.play()
                 if self.direccion_derecha:
                     self.direccion_meteor_attack(pantalla, self.velocidad_enemigo, "meteor_derecha", cantidad)
                 else:
                     self.direccion_meteor_attack(pantalla, self.velocidad_enemigo* -1, "meteor_izquierda", cantidad)
                 esta_atacando = True
             case 300:
+                #self.sonido_shinde.play()
                 if self.direccion_derecha:
                     self.direccion_meteor_attack(pantalla, self.velocidad_enemigo, "meteor_derecha", cantidad)
                 else:
@@ -117,7 +132,22 @@ class Enemigo:
     def direccion_meteor_attack(self, pantalla, velocidad_enemigo, direccion, cantidad):
         self.animar_enemigo(pantalla, direccion)
         self.realizar_comportamiento(velocidad_enemigo)
-        
+
+    def teletransportacion(self, plataforma:Plataforma, primer_clave:str, segunda_clave:str, posicion_teletransporte:tuple):
+        if self.lados_enemigo[primer_clave].colliderect(plataforma.lados_plataforma[segunda_clave]):
+            self.sonido_teleeport.play()
+            self.rectangulo.x = posicion_teletransporte[0]
+            self.rectangulo.y = posicion_teletransporte[1]
+            self.lados_enemigo = obtener_rectangulos(self.rectangulo)
+
+    def colision_para_tp(self, plataforma_izquierda:Plataforma, primer_clave:str, segunda_clave:str, direccion:str)->None:
+        if self.lados_enemigo[primer_clave].colliderect(plataforma_izquierda.lados_plataforma[segunda_clave]):
+            self.comportamiento = direccion
+
+
+            #self.comportamiento = "e_derecha"
+
+
         # self.crear_lista_meteoros(cantidad, velocidad_proyectil)
         # self.comportamiento_meteoros(self.lista_meteoros)
 
