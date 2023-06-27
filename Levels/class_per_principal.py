@@ -159,14 +159,22 @@ class Personaje_Principal:
         return con_vida    
 
     # revisar.....
-    def enemigo_dispara(self, segundo_piso, enemigo):
+    def enemigo_dispara(self, segundo_piso, enemigo)->bool:
+        hostil = False
+
         if self.lados["bottom"].colliderect(segundo_piso.lados_plataforma["top"]):
-            enemigo.comportamiento = "lanzar_proyectil"
+            # enemigo.comportamiento = "lanzar_proyectil"
+            enemigo.velocidad_enemigo = 7
+            hostil = True
         else:
-            if enemigo.direccion_derecha:
-                enemigo.comportamiento = "e_derecha"
-            else:
-                enemigo.comportamiento = "e_izquierda"
+            enemigo.velocidad_enemigo = 2
+        # else:
+        #     if enemigo.direccion_derecha:
+        #         enemigo.comportamiento = "e_derecha"
+        #     else:
+        #         enemigo.comportamiento = "e_izquierda"
+
+        return hostil
             
     def verificar_colision_item(self, lista_item:list, sound:str)->None:
         for item in range(len(lista_item)):
@@ -190,7 +198,7 @@ class Personaje_Principal:
                     self.all_collected.play()
                 else:
                     self.salud += 1 
-                    self.daño_recivido -= 88
+                    self.daño_recibido -= 88
                     self.all_collected = pygame.mixer.Sound(sound_2)
                     self.all_collected.set_volume(0.4)
                     self.all_collected.play()

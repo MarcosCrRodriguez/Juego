@@ -25,10 +25,7 @@ while running:
             running = False
 
     PANTALLA.fill("Black")
-    form_prueba.update(eventos)
-
-    # if finish == False:
-    #     break   
+    form_prueba.update(eventos) 
 
     pygame.display.flip()
 
