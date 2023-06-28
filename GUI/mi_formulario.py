@@ -20,6 +20,9 @@ class Form_Prueba(Form):
 
         pygame.mixer.init()
 
+        self.window = pygame.image.load("GUI\\window_galaxy.png")
+        self.window = pygame.transform.scale(self.window,(w,h))     
+
         #-------------------------------CONTROLES-----------------------------------#
         self.txtbox = TextBox(self._slave, x, y, 50, 50, 150, 30, "Grey", "White", "Red", "Green", 2, font="Comic Sans", font_size=15, font_color="Black")
         self.btn_play = Button(self._slave, x, y, 100, 100, 100, 50, "Red", "Blue", self.btn_play_click, "Nombre", "Pause", font="Verdana", font_size=15, font_color="White")
@@ -57,7 +60,8 @@ class Form_Prueba(Form):
             self.hijo.update(lista_eventos)
 
     def render(self):   
-        self._slave.fill(self._color_background)
+        # self._slave.fill(self._color_background)
+        self._slave.blit(self.window, (0,0))
 
     def btn_play_click(self, texto):
         if self.flag_play:
@@ -84,18 +88,18 @@ class Form_Prueba(Form):
                      {"Jugador": "German", "Score": 500}
                      ]
         
-        form_puntaje = Form_Menu_Score(self._master, 250, 25, 500, 550, (220,0,220), "White", True, "GUI\Window.png",
+        form_puntaje = Form_Menu_Score(self._master, 250, 25, 500, 550, (220,0,220), "White", True, "GUI\\board_menu.jpg",
                                        score_dict, 100, 100, 10)
         
         self.show_dialog(form_puntaje)
 
     def btn_niveles_click(self, texto):
-        niveles_dict = [{"Nivel":1, "Dificultad":"Easy"},
-                        {"Nivel":2, "Dificultad":"Normal"},
-                        {"Nivel":3, "Dificultad":"Hard"}
+        niveles_dict = [{"Nivel":"", "Dificultad":"Easy"},
+                        {"Nivel":"", "Dificultad":"Normal"},
+                        {"Nivel":"", "Dificultad":"Hard"}
                         ]
         
-        form_niveles = Form_Menu_Niveles(self._master, 250, 25, 500, 550, (220,0,220), "White", True, "GUI\Window.png",
+        form_niveles = Form_Menu_Niveles(self._master, 250, 25, 500, 550, (220,0,220), "White", True, "GUI\\board_menu.jpg",
                                        niveles_dict, 100, 100, 10)
 
         self.show_dialog(form_niveles)

@@ -205,6 +205,17 @@ class Personaje_Principal:
                 lista_item.remove(lista_item[item])
                 break
 
+    # def colision_final_item(self, lista_item:list)->None:
+    #     for item in lista_item:
+    #         if self.lados["main"].colliderect(item.rectangulo):
+    #             item.sonido_colision.play()
+    #             self.remove_objeto(lista_item)
+    #         break
+
+    # def remove_objeto(self, lista_objeto):
+    #     for objeto in lista_objeto:
+    #             lista_objeto.remove(objeto)
+
     
 
 

@@ -62,6 +62,8 @@ class Nivel_Tres(Nivel):
         diccionario_animaciones_personaje["animacion_proyectil_pj"] = personaje_proyectil_animacion
         diccionario_animaciones_personaje["animacion_proyectil_pj_izquierda"] = personaje_proyectil_animacion_izquierda
         diccionario_animaciones_personaje["recibo_daño"] = personaje_daño_recibido
+        # diccionario_animaciones_personaje["final_derecha"] = final
+        # diccionario_animaciones_personaje["final_izquierda"] = final_izquierda
 
         mi_personaje = Personaje_Principal(tamaño, diccionario_animaciones_personaje, posicion_inicial, 12)
 
@@ -71,10 +73,14 @@ class Nivel_Tres(Nivel):
         diccionario_animaciones_final_boss = {}
         diccionario_animaciones_final_boss["enemigo_derecha"] = camina_final_boss
         diccionario_animaciones_final_boss["enemigo_izquierda"] = camina_final_boss_izquierda
+        # diccionario_animaciones_final_boss["rage_derecha"] = rage_final_boss
+        # diccionario_animaciones_final_boss["rage_izquierda"] = rage_final_boss_izquierda
         diccionario_animaciones_final_boss["destroyed_derecha"] = daño_recibido_final_boss
         diccionario_animaciones_final_boss["destroyed_izquierda"] = daño_recibido_final_boss_izquierda
         diccionario_animaciones_final_boss["meteor_derecha"] = meteor_attack_final_boss
         diccionario_animaciones_final_boss["meteor_izquierda"] = meteor_attack_final_boss_izquierda
+        diccionario_animaciones_final_boss["r_meteor_derecha"] = meteor_attack_final_boss_rage
+        diccionario_animaciones_final_boss["r_meteor_izquierda"] = meteor_attack_final_boss_izquierda_rage
 
         final_boss = Enemigo(tamaño_final_boss, diccionario_animaciones_final_boss, posicion_inicial_final_boss, 5)
 
@@ -152,10 +158,12 @@ class Nivel_Tres(Nivel):
         lista_monedas = [primer_moneda, segunda_moneda, tercer_moneda, cuarta_moneda]
         lista_enemigos = [final_boss, bird]
 
+        lista_plataforma_final = [plataforma_vida, tercer_piso, segundo_piso, cuarto_piso, primer_piso, rectangulo_derecha, rectangulo_izquierda]
+
         #CORAZON
         corazones = True 
-        final_lvl = True
+        final_lvl = True 
 
         super().__init__(pantalla, mi_personaje, final_boss, bird, lista_plataformas, lista_colision_plataformas, lista_enemigos,
                          lista_monedas, lados_piso, mi_imagen, icono_pj, fondo_vida, fondo, font_timer, fondo_timer, fondo_score, font_coins, 
-                         (900,800), (925,385), 300, corazones, segundo_piso, final_lvl)
+                         (900,800), (925,175), 300, corazones, segundo_piso, final_lvl, lista_plataforma_final, (895, 265))

@@ -70,6 +70,12 @@ personaje_daño_recibido = [pygame.image.load("Recursos\\Daño_recibido\\852.png
                            pygame.image.load("Recursos\\Daño_recibido\\855.png")
                            ]
 
+final = [pygame.image.load("Recursos\\Nivel_Terminado\\565.png"),
+         pygame.image.load("Recursos\\Nivel_Terminado\\566.png")
+         ]
+
+final_izquierda = girar_imagenes(final, True, False)
+
 #------------------------------------------------------------#
 
 armor_camina = [pygame.image.load("Recursos\\Armor_Camina\\84.png"),
@@ -227,25 +233,23 @@ daño_recibido_final_boss = [pygame.image.load("Recursos\\Final_Boss\\Primer_Fas
 
 daño_recibido_final_boss_izquierda = girar_imagenes(daño_recibido_final_boss, True, False)
 
-meteor_attack_final_boss = [pygame.image.load("Recursos\\Final_Boss\\Primer_Fase\\Meteoros\\32.png"),
-                            pygame.image.load("Recursos\\Final_Boss\\Primer_Fase\\Meteoros\\1.png"),
-                            pygame.image.load("Recursos\\Final_Boss\\Primer_Fase\\Meteoros\\32.png"),
-                            pygame.image.load("Recursos\\Final_Boss\\Primer_Fase\\Meteoros\\1.png"),
-                            pygame.image.load("Recursos\\Final_Boss\\Primer_Fase\\Meteoros\\32.png"),
-                            pygame.image.load("Recursos\\Final_Boss\\Primer_Fase\\Meteoros\\1.png"),
-                            pygame.image.load("Recursos\\Final_Boss\\Primer_Fase\\Meteoros\\32.png"),
-                            pygame.image.load("Recursos\\Final_Boss\\Primer_Fase\\Meteoros\\1.png"),
-                            pygame.image.load("Recursos\\Final_Boss\\Primer_Fase\\Meteoros\\32.png"),
-                            pygame.image.load("Recursos\\Final_Boss\\Primer_Fase\\Meteoros\\1.png"),
-                            pygame.image.load("Recursos\\Final_Boss\\Primer_Fase\\Meteoros\\32.png"),
-                            pygame.image.load("Recursos\\Final_Boss\\Primer_Fase\\Meteoros\\1.png"),
-                            pygame.image.load("Recursos\\Final_Boss\\Primer_Fase\\Meteoros\\32.png"),
-                            pygame.image.load("Recursos\\Final_Boss\\Primer_Fase\\Meteoros\\1.png"),
-                            pygame.image.load("Recursos\\Final_Boss\\Primer_Fase\\Meteoros\\32.png"),
-                            pygame.image.load("Recursos\\Final_Boss\\Primer_Fase\\Meteoros\\1.png")
+meteor_attack_final_boss = [pygame.image.load("Recursos\\Final_Boss\\Primer_Fase\\Meteoros\\32.png")
                             ]
 
 meteor_attack_final_boss_izquierda = girar_imagenes(meteor_attack_final_boss, True, False)
+
+meteor_attack_final_boss_rage = [pygame.image.load("Recursos\\Final_Boss\\Segunda_Fase\\Meteoros\\36.png")
+                                 ]
+
+meteor_attack_final_boss_izquierda_rage = girar_imagenes(meteor_attack_final_boss_rage, True, False)
+
+meteorito_finalboss = [pygame.image.load("Recursos\\Final_Boss\\meteor.png")]
+
+rage_final_boss = [pygame.image.load("Recursos\\Final_Boss\\Segunda_Fase\\Camina\\37.png"),
+                   pygame.image.load("Recursos\\Final_Boss\\Segunda_Fase\\Camina\\38.png")
+                   ]
+
+rage_final_boss_izquierda = girar_imagenes(rage_final_boss, True, False)
 
 #------------------------------------------------------------#
 
@@ -262,6 +266,3 @@ bird_vuela = [pygame.image.load("Recursos\\Black_Bird\\0.png"),
 bird_vuela_izquierda = girar_imagenes(bird_vuela, True, False)
 
 #------------------------------------------------------------#
-
-meteorito_finalboss = [pygame.image.load("Recursos\\Final_Boss\\meteor.png")
-                       ]

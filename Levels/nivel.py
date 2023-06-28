@@ -14,7 +14,8 @@ from Levels.nivel import *
 
 class Nivel:
     def __init__(self, pantalla, personaje_principal, primer_enemigo, segundo_enemigo, lista_plataformas, lista_colision_plataformas, lista_enemigos, 
-                 lista_items, lados_piso, mi_imagen, icono_pj, fondo_vida, fondo, font_timer, fondo_timer, fondo_score, font_coins, final_tuple, pos_inicial_corazon, timer, corazones, segundo_piso, final_lvl) -> None:
+                 lista_items, lados_piso, mi_imagen, icono_pj, fondo_vida, fondo, font_timer, fondo_timer, fondo_score, font_coins, final_tuple, pos_inicial_corazon, 
+                 timer, corazones, segundo_piso, final_lvl, lista_plataforma_final, posicion_inicial_pj) -> None:
         self._slave = pantalla
         self.jugador = personaje_principal
         self.primer_enemigo = primer_enemigo
@@ -33,8 +34,11 @@ class Nivel:
         self.lista_items = lista_items
         self.lista_proyectiles = []
         self.lista_proyectiles_enemigo = []
+        self.lista_plataforma_final = lista_plataforma_final
 
         self.segundo_piso = segundo_piso
+
+        self.posicion_inicial_pj = posicion_inicial_pj
 
         #PROYECTIL
         self.tamaño_proyectil = (35, 50)
@@ -59,7 +63,6 @@ class Nivel:
 
         self.final_tuple = final_tuple
         self.lista_next_lvl = []
-        self.lista_meteoros = []
 
         self.hay_corazones = corazones
         self.is_final_lvl = final_lvl
@@ -86,6 +89,8 @@ class Nivel:
             self.sonido_spawn = pygame.mixer.Sound("Recursos\Final_Boss\spawn.wav")
             self.sonido_spawn.set_volume(0.4)
             self.sonido_spawn.play()
+
+            self.lista_meteoros = self.crear_lista_meteoros(25, 15)
 
         #TIMER
         self.start_time = time.time()
@@ -145,7 +150,7 @@ class Nivel:
         # else:
         #     pass
 
-        con_vida = self.jugador.colision_enemigo(self._slave, self.lista_enemigos, (70, 740))
+        con_vida = self.jugador.colision_enemigo(self._slave, self.lista_enemigos, self.posicion_inicial_pj)
         self.jugador.verificar_colision_item(self.lista_items, "Recursos\\Score_Item\\All_Grabed\\yare.ogg")
         if self.hay_corazones:
             self.jugador.verificar_colision_vida(self.lista_corazones, "Recursos\\Corazon\\Sound\\vpcn120.ogg", "Recursos\\Corazon\\Sound\\vpcn118.ogg") 
@@ -179,7 +184,7 @@ class Nivel:
         elif con_vida == False:
             self.finish = False 
 
-        print(self.finish)
+        # print(self.finish)
 
         self.dibujar_rectangulos()
 
@@ -230,8 +235,14 @@ class Nivel:
             for corazon in range(len(self.lista_corazones)):
                 self.lista_corazones[corazon].animar_item(self._slave, "corazon")
 
-        if len(self.lista_items) == 0:
+        if len(self.lista_items) == 0 and self.is_final_lvl == False:
             self.obtener_next_lvl()
+        if len(self.lista_items) == 0 and self.is_final_lvl:
+            if self.primer_enemigo.vida_finalboss == 0:
+                self.obtener_next_lvl()
+
+            # if len(self.lista_next_lvl) != 0:
+                # self.jugador.colision_final_item(self.lista_next_lvl)
 
         self._slave.blit(self.fondo_vida, (102,15))
         self._slave.blit(self.icono_pj, (12,8))
@@ -253,14 +264,20 @@ class Nivel:
             pygame.draw.rect(self._slave, self.violeta, (1445, 42, 330 - self.primer_enemigo.daño_recibido_finalboss, 25)) 
             self._slave.blit(self.borde_vida_finalboss, (1346, 17))
 
-            self.esta_atacando = self.primer_enemigo.update_vida_finalboss(self._slave, self.primer_enemigo.vida_finalboss, 20)
+            self.esta_atacando = self.primer_enemigo.update_vida_finalboss(self._slave, self.primer_enemigo.vida_finalboss, self.lista_enemigos)
             
             if self.esta_atacando:
-                if len(self.lista_meteoros) < 10:
-                    self.crear_lista_meteoros(10, 10)
-                    for meteoro in range(len(self.lista_meteoros)):
-                        self.lista_meteoros[meteoro].lanzar_meteoro(10)
-                        self.lista_meteoros[meteoro].animar_proyectil(self._slave, "meteor")
+                # for meteoro in self.lista_meteoros:
+                    # self._slave.blit(meteoro["superficie"], meteoro["rectangulo"])
+                for meteoro in range(len(self.lista_meteoros)):
+                    self.lista_meteoros[meteoro].animar_proyectil(self._slave, "meteor")
+                    self.lista_meteoros[meteoro].lanzar_meteoro(15)
+
+                for meteoro in self.lista_meteoros:
+                    meteoro.colision_proyectil_pj(self._slave, self.lados_piso, self.lista_plataforma_final, self.jugador, self.lista_meteoros, self.posicion_inicial_pj)
+            
+            elif self.esta_atacando == False:
+                self.lista_meteoros = self.crear_lista_meteoros(25, 15)
 
     def dibujar_rectangulos(self):
         if get_modo():
@@ -277,6 +294,9 @@ class Nivel:
                 # if len(self.lista_proyectiles_enemigo) > 0:
                 #     for proyectil_enemigo in self.lista_proyectiles_enemigo:
                 #         pygame.draw.rect(self._slave, "Gray", proyectil_enemigo.lados_proyectil[lado], 2)
+                # if self.esta_atacando:
+                #     for meteoro in self.lista_meteoros:
+                #         pygame.draw.rect(self._slave, "Gray", meteoro["rectangulo"], 2)
                 if self.esta_atacando:
                     for meteoro in self.lista_meteoros:
                         pygame.draw.rect(self._slave, "Gray", meteoro.lados_proyectil[lado], 2)
@@ -303,7 +323,9 @@ class Nivel:
 
         self.lista_next_lvl.append(self.next_lvl)
 
-    def crear_lista_meteoros(self, cantidad, velocidad_proyectil):
+    def crear_lista_meteoros(self, cantidad, velocidad_proyectil)->list:
+        lista_nueva = [] 
+
         for i in range(cantidad):
             tamaño_meteorito = (35, 65)
             diccionario_animaciones_meteorito = {}
@@ -314,6 +336,7 @@ class Nivel:
             #print(y)
 
             meteoro = Proyectil(tamaño_meteorito, diccionario_animaciones_meteorito, (x,y), velocidad_proyectil, "meteor")
-            self.lista_meteoros.append(meteoro)
-
-    
+            lista_nueva.append(meteoro)
+        
+        return lista_nueva
+        

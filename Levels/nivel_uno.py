@@ -62,6 +62,8 @@ class Nivel_Uno(Nivel):
         diccionario_animaciones_personaje["animacion_proyectil_pj"] = personaje_proyectil_animacion
         diccionario_animaciones_personaje["animacion_proyectil_pj_izquierda"] = personaje_proyectil_animacion_izquierda
         diccionario_animaciones_personaje["recibo_daño"] = personaje_daño_recibido
+        # diccionario_animaciones_personaje["final_derecha"] = final
+        # diccionario_animaciones_personaje["final_izquierda"] = final_izquierda
 
         mi_personaje = Personaje_Principal(tamaño, diccionario_animaciones_personaje, posicion_inicial, 12)
 
@@ -157,10 +159,12 @@ class Nivel_Uno(Nivel):
         lista_monedas = [primer_moneda, segunda_moneda, tercer_moneda, cuarta_moneda, quinta_moneda, sexta_moneda, septima_moneda, octava_moneda]
         lista_enemigos = [armor, crabtank]
 
+        lista_plataforma_final = [segundo_piso, primer_plataforma, primer_piso, rectangulo_derecha, rectangulo_izquierda, segunda_plataforma]
+
         #CORAZON
         corazones = False
         final_lvl = False
 
         super().__init__(pantalla, mi_personaje, armor, crabtank, lista_plataformas, lista_colision_plataformas, lista_enemigos,
                          lista_monedas, lados_piso, mi_imagen, icono_pj, fondo_vida, fondo, font_timer, fondo_timer, fondo_score, font_coins, 
-                         (1680,740), (0,0), 60, corazones, segundo_piso, final_lvl)
+                         (1680,740), (0,0), 60, corazones, segundo_piso, final_lvl, lista_plataforma_final, (40, 740))

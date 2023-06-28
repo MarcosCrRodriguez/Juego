@@ -67,11 +67,15 @@ class Proyectil:
 
         return len(lista_enemigo)
 
-    def colision_proyectil_pj(self, pantalla, lista_plataformas, jugador, lista_proyectiles, posicion_inicial):
+    def colision_proyectil_pj(self, pantalla, lados_piso, lista_plataformas, jugador, lista_proyectiles, posicion_inicial):
         for lado in lista_plataformas:
             if self.lados_proyectil["main"].colliderect(lado.lados_plataforma["main"]):
                 self.sonido_colision.play()
                 self.remove_objeto(lista_proyectiles)
+
+        if self.lados_proyectil["main"].colliderect(lados_piso["main"]):
+            self.sonido_colision.play()
+            self.remove_objeto(lista_proyectiles)
         
         if self.lados_proyectil["main"].colliderect(jugador.lados["main"]):
             jugador.animar(pantalla, "recibo_daño")
@@ -115,9 +119,6 @@ class Proyectil:
         final_boss.vida_finalboss -= 5
         final_boss.daño_recibido_finalboss += 5
 
-    def meteor_attack(self):
-        pass
-        
     def remove_objeto(self, lista_objeto):
         for objeto in lista_objeto:
                 lista_objeto.remove(objeto)

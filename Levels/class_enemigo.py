@@ -31,12 +31,14 @@ class Enemigo:
 
         self.sonido_teleeport = pygame.mixer.Sound("Recursos\\Final_Boss\\teleporter.wav")
         self.sonido_teleeport.set_volume(0.4)
-        self.sonido_shinde = pygame.mixer.Sound("Recursos\Final_Boss\shinde.wav")
-        self.sonido_shinde.set_volume(0.4)
+        self.sonido_shine = pygame.mixer.Sound("Recursos\Final_Boss\shinde.wav")
+        self.sonido_shine.set_volume(0.4)
         self.sonido_metari = pygame.mixer.Sound("Recursos\Final_Boss\metari.wav")
         self.sonido_metari.set_volume(0.4)
         self.sonido_kurae = pygame.mixer.Sound("Recursos\Final_Boss\kurae.wav")
         self.sonido_kurae.set_volume(0.4)
+        self.vida_cero = pygame.mixer.Sound("Recursos\\Final_Boss\\final_boss_die.wav")
+        self.vida_cero.set_volume(0.4)
 
         self.vida_finalboss = 330
         self.daño_recibido_finalboss = 0
@@ -76,60 +78,72 @@ class Enemigo:
                 else:
                     self.animar_enemigo(pantalla, "proyectil_derecha")
                     self.enemigo_dispara(self.velocidad_proyectil* -1)
+            # case "r_derecha":
+            #     self.animar_enemigo(pantalla, "rage_derecha")
+            #     self.realizar_comportamiento((self.velocidad_enemigo + 5)* -1)
+            #     self.direccion_derecha = False
+            # case "r_izquierda":
+            #     self.animar_enemigo(pantalla, "rage_izquierda")
+            #     self.realizar_comportamiento(self.velocidad_enemigo + 5)
+            #     self.direccion_derecha = True
 
-    def update_vida_finalboss(self, pantalla, vida_actual, cantidad)->bool:
+
+    def update_vida_finalboss(self, pantalla, vida_actual, lista_enemigos)->bool:
         # self.lista_meteoros = []
         esta_atacando = False
 
         match vida_actual:
+            case 0:
+                self.remove_objeto(lista_enemigos)
+                self.vida_cero.play()
             case 50:
                 #self.sonido_metari.play()
                 if self.direccion_derecha:
-                    self.direccion_meteor_attack(pantalla, self.velocidad_enemigo, "meteor_derecha", cantidad)
+                    self.direccion_meteor_attack(pantalla, self.velocidad_enemigo+5, "r_meteor_derecha")
                 else:
-                    self.direccion_meteor_attack(pantalla, self.velocidad_enemigo* -1, "meteor_izquierda", cantidad)
+                    self.direccion_meteor_attack(pantalla, (self.velocidad_enemigo+5)* -1, "r_meteor_izquierda")
                 esta_atacando = True
             case 100:
                 #self.sonido_metari.play()
                 if self.direccion_derecha:
-                    self.direccion_meteor_attack(pantalla, self.velocidad_enemigo, "meteor_derecha", cantidad)
+                    self.direccion_meteor_attack(pantalla, self.velocidad_enemigo+5, "r_meteor_derecha")
                 else:
-                    self.direccion_meteor_attack(pantalla, self.velocidad_enemigo* -1, "meteor_izquierda", cantidad)
+                    self.direccion_meteor_attack(pantalla, (self.velocidad_enemigo+5)* -1, "r_meteor_izquierda")
                 esta_atacando = True
             case 150:
                 #self.sonido_kurae.play()
                 if self.direccion_derecha:
-                    self.direccion_meteor_attack(pantalla, self.velocidad_enemigo, "meteor_derecha", cantidad)
+                    self.direccion_meteor_attack(pantalla, self.velocidad_enemigo+5, "r_meteor_derecha")
                 else:
-                    self.direccion_meteor_attack(pantalla, self.velocidad_enemigo* -1, "meteor_izquierda", cantidad)
+                    self.direccion_meteor_attack(pantalla, (self.velocidad_enemigo+5), "r_meteor_izquierda")
                 esta_atacando = True
             case 200:
                 #self.sonido_kurae.play()
                 if self.direccion_derecha:
-                    self.direccion_meteor_attack(pantalla, self.velocidad_enemigo, "meteor_derecha", cantidad)
+                    self.direccion_meteor_attack(pantalla, self.velocidad_enemigo, "meteor_derecha")
                 else:
-                    self.direccion_meteor_attack(pantalla, self.velocidad_enemigo* -1, "meteor_izquierda", cantidad)
+                    self.direccion_meteor_attack(pantalla, self.velocidad_enemigo* -1, "meteor_izquierda")
                 esta_atacando = True
             case 250:
-                #self.sonido_shinde.play()
+                #self.sonido_shine.play()
                 if self.direccion_derecha:
-                    self.direccion_meteor_attack(pantalla, self.velocidad_enemigo, "meteor_derecha", cantidad)
+                    self.direccion_meteor_attack(pantalla, self.velocidad_enemigo, "meteor_derecha")
                 else:
-                    self.direccion_meteor_attack(pantalla, self.velocidad_enemigo* -1, "meteor_izquierda", cantidad)
+                    self.direccion_meteor_attack(pantalla, self.velocidad_enemigo* -1, "meteor_izquierda")
                 esta_atacando = True
             case 300:
-                #self.sonido_shinde.play()
+                #self.sonido_shine.play()
                 if self.direccion_derecha:
-                    self.direccion_meteor_attack(pantalla, self.velocidad_enemigo, "meteor_derecha", cantidad)
+                    self.direccion_meteor_attack(pantalla, self.velocidad_enemigo, "meteor_derecha")
                 else:
-                    self.direccion_meteor_attack(pantalla, self.velocidad_enemigo* -1, "meteor_izquierda", cantidad)
+                    self.direccion_meteor_attack(pantalla, self.velocidad_enemigo* -1, "meteor_izquierda")
                 esta_atacando = True
         
         return esta_atacando
 
         # return self.lista_meteoros        
 
-    def direccion_meteor_attack(self, pantalla, velocidad_enemigo, direccion, cantidad):
+    def direccion_meteor_attack(self, pantalla, velocidad_enemigo, direccion):
         self.animar_enemigo(pantalla, direccion)
         self.realizar_comportamiento(velocidad_enemigo)
 
@@ -144,69 +158,6 @@ class Enemigo:
         if self.lados_enemigo[primer_clave].colliderect(plataforma_izquierda.lados_plataforma[segunda_clave]):
             self.comportamiento = direccion
 
-
-            #self.comportamiento = "e_derecha"
-
-
-        # self.crear_lista_meteoros(cantidad, velocidad_proyectil)
-        # self.comportamiento_meteoros(self.lista_meteoros)
-
-        # blit en nivel no aca porque se quedan los proyectiles arriba
-        # for meteoro in self.lista_meteoros:
-        #     pantalla.blit(meteoro["superficie"], meteoro["rectangulo"])
-        
-    # def crear_meteoro(self, x, y, ancho, alto, path, velocidad_proyectil):
-    #     image_meteor = pygame.image.load(path)
-    #     image_meteor = pygame.transform.scale(image_meteor, (ancho, alto))
-
-    #     rectangulo = image_meteor.get_rect()
-    #     rectangulo.x = x
-    #     rectangulo.y = y
-
-    #     dict_meteoro = {}
-    #     dict_meteoro["superficie"] = image_meteor
-    #     dict_meteoro["rectangulo"] = rectangulo
-    #     dict_meteoro["velocidad"] = velocidad_proyectil
-
-    #     return dict_meteoro
-
-    # def crear_lista_meteoros(self, cantidad, velocidad_proyectil):
-    #     for i in range(cantidad):
-    #         x = random.randrange(0, 1900, 1)
-    #         #print(x)
-    #         y = random.randrange(-250, 0, 1)
-    #         #print(y)
-
-    #         meteoro = self.crear_meteoro(x,y,35,65,"Recursos\Final_Boss\meteor.png",velocidad_proyectil)
-    #         self.lista_meteoros.append(meteoro)
-    
-    # def update_meteoros(self, lista_meteoros):
-    #     for meteoro in lista_meteoros:
-    #         rectangulo = meteoro["rectangulo"]
-    #         rectangulo.y += meteoro["velocidad"]
-    
-    # def crear_lista_meteoros(self, cantidad, velocidad_proyectil):
-    #     lista_nueva = []
-
-    #     for i in range(cantidad):
-    #         tamaño_meteorito = (35, 65)
-    #         diccionario_animaciones_meteorito = {}
-    #         diccionario_animaciones_meteorito["meteor"] = meteorito_finalboss
-    #         x = random.randrange(0, 1000, 60)
-    #         #print(x)
-    #         y = random.randrange(-250, 0, 60)
-    #         #print(y)
-
-    #         meteoro = Proyectil(tamaño_meteorito, diccionario_animaciones_meteorito, (x,y), velocidad_proyectil, "meteor")
-    #         lista_nueva.append(meteoro)
-
-    #     return lista_nueva
-
-    # def comportamiento_meteoros(self, lista_meteoros):
-    #     for meteoro in lista_meteoros:
-    #         for lado in meteoro.lados_proyectil:
-    #             meteoro.lados_proyectil[lado].y += 15
-
     def enemigo_dispara(self, velocidad):
         pass
 
@@ -215,3 +166,7 @@ class Enemigo:
             self.comportamiento = "e_derecha"
         elif self.lados_enemigo["right"].colliderect(plataforma_derecha.lados_plataforma[segunda_clave]):
             self.comportamiento = "e_izquierda"
+
+    def remove_objeto(self, lista_objeto):
+        for objeto in lista_objeto:
+                lista_objeto.remove(objeto)

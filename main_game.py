@@ -13,7 +13,10 @@ pygame.init()
 RELOJ = pygame.time.Clock()
 PANTALLA = pygame.display.set_mode((TAMAÑO_PANTALLA))
 
-form_prueba = Form_Prueba(PANTALLA, 200, 100, 900, 350, "gold", "Magenta", 5, True)
+fondo = pygame.image.load("GUI\\background_menu.png")
+fondo = pygame.transform.scale(fondo,(TAMAÑO_PANTALLA))
+
+form_prueba = Form_Prueba(PANTALLA, 200, 100, 900, 350, "gold", "Gray", 5, True)
 
 running = True
 
@@ -24,7 +27,7 @@ while running:
         if evento.type == pygame.QUIT:
             running = False
 
-    PANTALLA.fill("Black")
+    PANTALLA.blit(fondo, (0,0))
     form_prueba.update(eventos) 
 
     pygame.display.flip()

@@ -33,3 +33,4 @@ class Score_Item:
 
         pantalla.blit(animacion[self.contador_pasos], self.rectangulo) 
         self.contador_pasos += 1 
+        
