@@ -4,7 +4,7 @@ import pygame
 from Levels.configuraciones import obtener_rectangulos
 
 class Plataforma:
-    def __init__(self, tamaño, posicion_inicial_plataforma, path_imagen) -> None:
+    def __init__(self, tamaño:tuple, posicion_inicial_plataforma:tuple, path_imagen:str) -> None:
         #CONFECCION
         self.ancho = tamaño[0]
         self.alto = tamaño[1]

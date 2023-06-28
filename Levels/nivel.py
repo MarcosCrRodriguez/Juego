@@ -79,7 +79,7 @@ class Nivel:
         
         self.lista_corazones = []
         self.lista_corazones.append(self.corazon)
-
+        #
         self.que_nivel = que_nivel
 
         self.esta_atacando = False
@@ -109,7 +109,7 @@ class Nivel:
         self.finish = False
         self.game_over = False
 
-    def update(self, lista_eventos)->bool:
+    def update(self, lista_eventos:list)->bool:
         for evento in lista_eventos:
             if evento.type == pygame.KEYDOWN and evento.key == pygame.K_F12:
                 cambiar_modo()
@@ -190,7 +190,8 @@ class Nivel:
         if time_left == 0 or con_vida == False or self.game_over == True:
             if self.finish == False:
                 lista_datos = leer_json("archivo_score.json")
-                self.finish = self.trabajando_base_datos(lista_datos)
+                nombre = leer_dato_json("archivo_nombre.json")
+                self.finish = self.trabajando_base_datos(lista_datos, nombre)
 
         print(self.finish)
 
@@ -334,7 +335,7 @@ class Nivel:
 
         self.lista_next_lvl.append(self.next_lvl)
 
-    def crear_lista_meteoros(self, cantidad, velocidad_proyectil)->list:
+    def crear_lista_meteoros(self, cantidad:int, velocidad_proyectil:int)->list:
         lista_nueva = [] 
 
         for i in range(cantidad):
@@ -351,15 +352,15 @@ class Nivel:
         
         return lista_nueva
     
-    def trabajando_base_datos(self, lista_datos)->bool:
+    def trabajando_base_datos(self, lista_datos:list, nombre:str)->bool:
         carga = False
 
         if len(lista_datos) < 3:
-            lista_datos.append({"Nivel": self.que_nivel , "Score": self.jugador.mi_score})
+            lista_datos.append({"Nombre": nombre , "Score": self.jugador.mi_score})
             retorno = generar_json(self.ruta_json, lista_datos)
         else:
             lista_datos.remove(lista_datos[0])
-            lista_datos.append({"Nivel": self.que_nivel , "Score": self.jugador.mi_score})
+            lista_datos.append({"Nombre": nombre , "Score": self.jugador.mi_score})
             retorno = generar_json(self.ruta_json, lista_datos)
         if retorno != -1:
             print("\nSe cargaron correctamente los datos")
@@ -368,8 +369,3 @@ class Nivel:
             print("Algo salio mal al generar el json")
 
         return carga
-    
-
-
-
-        

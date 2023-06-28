@@ -3,11 +3,11 @@
 import pygame
 
 #------------------------------------------------------------#
-def reescalar_imagenes(lista_imagenes, tamaño)->None:
+def reescalar_imagenes(lista_imagenes:list, tamaño:tuple)->None:
     for i in range(len(lista_imagenes)):
         lista_imagenes[i] = pygame.transform.scale(lista_imagenes[i], tamaño)
 
-def girar_imagenes(lista_original, flip_x, flip_y)->list:
+def girar_imagenes(lista_original:list, flip_x:bool, flip_y:bool)->list:
     lista_girada = []
 
     for imagen in lista_original:

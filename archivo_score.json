@@ -1,14 +1,14 @@
 [
     {
-        "Nivel": "lvl 2",
-        "Score": 2300
-    },
-    {
-        "Nivel": "lvl 1",
+        "Nombre": "Marcos",
         "Score": 1800
     },
     {
-        "Nivel": "lvl 2",
+        "Nombre": "Juan",
         "Score": 2300
+    },
+    {
+        "Nombre": "Juan",
+        "Score": 5900
     }
 ]

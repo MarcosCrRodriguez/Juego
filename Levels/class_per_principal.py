@@ -6,7 +6,7 @@ from Levels.class_plataforma import *
 from Levels.class_proyectil import *
 
 class Personaje_Principal:
-    def __init__(self, tamaño, animaciones, posicion_inicial, velocidad) -> None:
+    def __init__(self, tamaño:tuple, animaciones:dict, posicion_inicial:tuple, velocidad:int) -> None:
         #CONFECCION
         self.ancho = tamaño[0]
         self.alto = tamaño[1]

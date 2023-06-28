@@ -10,7 +10,7 @@ from GUI.GUI_button import *
 from GUI.GUI_button_image import *
 from GUI.GUI_menu_score import *
 from GUI.GUI_menu_niveles import *
-from Levels.archivo_json import leer_json
+from Levels.archivo_json import *
 
 class Form_Prueba(Form):
     def __init__(self, screen, x, y, w, h, color_background, color_border="Black", border_size=-1, active=True):
@@ -27,6 +27,7 @@ class Form_Prueba(Form):
         #-------------------------------CONTROLES-----------------------------------#
         self.txtbox = TextBox(self._slave, x, y, 50, 50, 150, 30, "Grey", "White", "Red", "Green", 2, font="Comic Sans", font_size=15, font_color="Black")
         self.btn_play = Button(self._slave, x, y, 100, 100, 100, 50, "Red", "Blue", self.btn_play_click, "Nombre", "Pause", font="Verdana", font_size=15, font_color="White")
+        self.cadena_play = Button(self._slave, x, y, 235, 50, 80, 30, "Grey", "Blue", self.btn_cadena_click, "Nombre", "Get name", font="Verdana", font_size=15, font_color="Black")
         self.label_volume = Label(self._slave, 650, 190, 100, 50, "20%", font="Comic Sans", font_size=15, font_color="White", path_image="GUI\Table.png")
         self.slider_volumen = Slider(self._slave, x, y, 100, 200, 500, 15, self.volumen, "Blue", "White")
         self.btn_tabla = Button_Image(self._slave, x, y, 255, 100, 50, 50, "GUI\menu_image.png", self.btn_tabla_click, "Any") 
@@ -36,6 +37,7 @@ class Form_Prueba(Form):
         #Agrego controles a lista
         self.lista_widgets.append(self.txtbox)
         self.lista_widgets.append(self.btn_play)
+        self.lista_widgets.append(self.cadena_play)
         self.lista_widgets.append(self.label_volume)
         self.lista_widgets.append(self.slider_volumen)
         self.lista_widgets.append(self.btn_tabla)
@@ -63,6 +65,17 @@ class Form_Prueba(Form):
     def render(self):   
         # self._slave.fill(self._color_background)
         self._slave.blit(self.window, (0,0))
+
+    def btn_cadena_click(self, texto):
+        nombre = "?"
+        nombre = self.txtbox.get_text()
+        retorno = generar_dato_json("archivo_nombre.json", nombre)
+        if retorno != -1:
+            print("\nSe cargaron correctamente los datos")
+        else:
+            print("Algo salio mal al generar el json")
+            
+        # print(nombre)
 
     def btn_play_click(self, texto):
         if self.flag_play:

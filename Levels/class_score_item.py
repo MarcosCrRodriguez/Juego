@@ -4,7 +4,7 @@ import pygame
 from Levels.configuraciones import reescalar_imagenes
 
 class Score_Item:
-    def __init__(self, tamaño, animaciones, posicion_inicial, clave) -> None:
+    def __init__(self, tamaño:tuple, animaciones:dict, posicion_inicial:tuple, clave:str) -> None:
         #CONFECCION
         self.ancho = tamaño[0]
         self.alto = tamaño[1]

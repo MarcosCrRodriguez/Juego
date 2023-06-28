@@ -7,7 +7,7 @@ from Levels.class_enemigo import *
 # import os
 
 class Proyectil:
-    def __init__(self, tamaño, animaciones, posicion_actual, velocidad, clave) -> None:
+    def __init__(self, tamaño:tuple, animaciones:dict, posicion_actual:tuple, velocidad:int, clave:str) -> None:
         #CONFECCION
         self.ancho = tamaño[0]
         self.alto = tamaño[1]

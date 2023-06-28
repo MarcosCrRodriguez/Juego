@@ -5,7 +5,7 @@
 from configuraciones import obtener_rectangulos
 
 class Objeto:
-    def __init__(self, tamaño, posicion_inicial, clave) -> None:
+    def __init__(self, tamaño:tuple, posicion_inicial:tuple, clave:str) -> None:
         #CONFECCION
         self.ancho = tamaño[0]
         self.alto = tamaño[1]
