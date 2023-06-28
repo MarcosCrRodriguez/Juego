@@ -124,7 +124,7 @@ class Nivel:
                 proyectil.animar_proyectil(self._slave, "proyectil_izquierda")
 
             if self.is_final_lvl  == False:              
-                self.largo_lista_enemigos = proyectil.colision_proyectil(self.plataformas_colision, self.lista_enemigos, self.lista_proyectiles, self._slave)    
+                self.largo_lista_enemigos = proyectil.colision_proyectil(self.plataformas_colision, self.lista_enemigos, self.lista_proyectiles, self._slave, self.jugador)    
             else:
                 proyectil.colision_proyectil_final_boss(self._slave, self.plataformas_colision, self.lista_proyectiles, self.primer_enemigo)
 
@@ -171,7 +171,7 @@ class Nivel:
 
         self.segundo_enemigo.colision_plataforma(self.plataformas[3], self.plataformas[3], "left", "right")       
 
-        texto = self.font_coins.render(f"Coins X {self.jugador.mi_score}", False, "Black", self.verde_oscuro)
+        texto = self.font_coins.render(f"Score: {self.jugador.mi_score}", False, "Black", self.verde_oscuro)
         self._slave.blit(self.fondo_score, (12,110))
         self._slave.blit(texto, (22,120)) 
 
@@ -239,6 +239,7 @@ class Nivel:
             self.obtener_next_lvl()
         if len(self.lista_items) == 0 and self.is_final_lvl:
             if self.primer_enemigo.vida_finalboss == 0:
+                self.jugador.mi_score += 5500
                 self.obtener_next_lvl()
 
             # if len(self.lista_next_lvl) != 0:

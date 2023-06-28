@@ -180,7 +180,7 @@ class Personaje_Principal:
         for item in range(len(lista_item)):
             if self.lados["main"].colliderect(lista_item[item].rectangulo):
                 lista_item[item].sonido_colision.play()
-                self.mi_score += 1  
+                self.mi_score += 100 
                 lista_item.remove(lista_item[item])
                 if len(lista_item) == 0:
                     self.all_collected = pygame.mixer.Sound(sound)
@@ -204,17 +204,6 @@ class Personaje_Principal:
                     self.all_collected.play()
                 lista_item.remove(lista_item[item])
                 break
-
-    # def colision_final_item(self, lista_item:list)->None:
-    #     for item in lista_item:
-    #         if self.lados["main"].colliderect(item.rectangulo):
-    #             item.sonido_colision.play()
-    #             self.remove_objeto(lista_item)
-    #         break
-
-    # def remove_objeto(self, lista_objeto):
-    #     for objeto in lista_objeto:
-    #             lista_objeto.remove(objeto)
 
     
 

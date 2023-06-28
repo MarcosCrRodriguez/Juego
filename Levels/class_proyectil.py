@@ -35,6 +35,7 @@ class Proyectil:
             self.lados_proyectil[lado].x += velocidad
     
     def lanzar_meteoro(self, velocidad)->None:
+
         for lado in self.lados_proyectil:
             self.lados_proyectil[lado].y += velocidad
 
@@ -48,7 +49,7 @@ class Proyectil:
         pantalla.blit(animacion[self.contador_pasos], self.lados_proyectil["main"]) 
         self.contador_pasos += 1 
 
-    def colision_proyectil(self, lista_plataformas, lista_enemigo, lista_proyectiles, pantalla):
+    def colision_proyectil(self, lista_plataformas, lista_enemigo, lista_proyectiles, pantalla, jugador):
         for lado in lista_plataformas:
             if self.lados_proyectil["main"].colliderect(lado.lados_plataforma["main"]):
                 self.sonido_colision.play()
@@ -57,11 +58,13 @@ class Proyectil:
         for enemigo in lista_enemigo:
             if self.lados_proyectil["main"].colliderect(enemigo.lados_enemigo["main"]):
                 self.sonido_colision.play()
+                jugador.mi_score += 500
                 enemigo.comportamiento = "destroyed"
                 if enemigo.direccion_derecha:
                     enemigo.animar_enemigo(pantalla, "destroyed_izquierda")
                 else:
                     enemigo.animar_enemigo(pantalla, "destroyed_derecha")
+                enemigo.animar_enemigo(pantalla, "burst")
                 self.remove_objeto(lista_proyectiles)
                 lista_enemigo.remove(enemigo)
 

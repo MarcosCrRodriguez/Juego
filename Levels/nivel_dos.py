@@ -42,7 +42,7 @@ class Nivel_Dos(Nivel):
 
         #IMAGEN_SCORE
         fondo_score = pygame.image.load("Recursos\\fondo_score.png")
-        fondo_score = pygame.transform.scale(fondo_score,(155, 70))
+        fondo_score = pygame.transform.scale(fondo_score,(188, 70))
 
         #MUSICA
         pygame.mixer.music.load("Sound_track\\[Music] Metal Gear Rising Revengeance - The Mastermind.mp3")
@@ -75,6 +75,7 @@ class Nivel_Dos(Nivel):
         diccionario_animaciones_armor["enemigo_derecha"] = armor_camina_derecha
         diccionario_animaciones_armor["destroyed_derecha"] = armor_destroyed
         diccionario_animaciones_armor["destroyed_izquierda"] = armor_destroyed_izquierda
+        diccionario_animaciones_armor["burst"] = enemy_burst
 
         armor = Enemigo(tamaño_armor, diccionario_animaciones_armor, posicion_inicial_armor, 4)
 
@@ -85,6 +86,7 @@ class Nivel_Dos(Nivel):
         diccionario_animaciones_armor_s["enemigo_derecha"] = armor_camina_derecha
         diccionario_animaciones_armor_s["destroyed_derecha"] = armor_destroyed
         diccionario_animaciones_armor_s["destroyed_izquierda"] = armor_destroyed_izquierda
+        diccionario_animaciones_armor_s["burst"] = enemy_burst
 
         self.armor_segundo = Enemigo(tamaño_armor_s, diccionario_animaciones_armor_s, posicion_inicial_armor_s, 1)
 
@@ -97,6 +99,7 @@ class Nivel_Dos(Nivel):
         diccionario_animaciones_crabtank["proyectil_izquierda"] = crabtank_proyectil_izquierda
         diccionario_animaciones_crabtank["destroyed_derecha"] = crabtank_destroyed
         diccionario_animaciones_crabtank["destroyed_izquierda"] = crabtank_destroyed_izquierda
+        diccionario_animaciones_crabtank["burst"] = enemy_burst
 
         crabtank = Enemigo(tamaño_crabtank, diccionario_animaciones_crabtank, posicion_inicial_crabtank, 2)
 

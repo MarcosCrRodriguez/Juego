@@ -118,6 +118,19 @@ armor_destroyed = [pygame.image.load("Recursos\\Armor_Destroyed\\5.png"),
 
 armor_destroyed_izquierda = girar_imagenes(armor_destroyed, True, False)
 
+enemy_burst = [pygame.image.load("Recursos\\Enemy_Burst\\349.png"),
+               pygame.image.load("Recursos\\Enemy_Burst\\350.png"),
+               pygame.image.load("Recursos\\Enemy_Burst\\351.png"),
+               pygame.image.load("Recursos\\Enemy_Burst\\352.png"),
+               pygame.image.load("Recursos\\Enemy_Burst\\353.png"),
+               pygame.image.load("Recursos\\Enemy_Burst\\354.png"),
+               pygame.image.load("Recursos\\Enemy_Burst\\355.png"),
+               pygame.image.load("Recursos\\Enemy_Burst\\381.png"),
+               pygame.image.load("Recursos\\Enemy_Burst\\382.png"),
+               pygame.image.load("Recursos\\Enemy_Burst\\385.png"),
+               pygame.image.load("Recursos\\Enemy_Burst\\386.png")
+               ]
+
 #------------------------------------------------------------#
 
 crabtank_camina = [pygame.image.load("Recursos\\Crabtank_Camina\\14.png"),
