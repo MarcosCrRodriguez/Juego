@@ -6,7 +6,7 @@ import sys
 from GUI.mi_formulario import *
 
 W,H = 1900,1000
-FPS = 25
+FPS = 28
 TAMAÑO_PANTALLA = (W,H)
 
 pygame.init()
@@ -28,7 +28,7 @@ while running:
             running = False
 
     PANTALLA.blit(fondo, (0,0))
-    form_prueba.update(eventos) 
+    form_prueba.update(eventos)
 
     pygame.display.flip()
 

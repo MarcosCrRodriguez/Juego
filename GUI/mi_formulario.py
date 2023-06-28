@@ -10,6 +10,7 @@ from GUI.GUI_button import *
 from GUI.GUI_button_image import *
 from GUI.GUI_menu_score import *
 from GUI.GUI_menu_niveles import *
+from Levels.archivo_json import leer_json
 
 class Form_Prueba(Form):
     def __init__(self, screen, x, y, w, h, color_background, color_border="Black", border_size=-1, active=True):
@@ -83,10 +84,7 @@ class Form_Prueba(Form):
         pygame.mixer.music.set_volume(self.volumen)
 
     def btn_tabla_click(self, texto):
-        score_dict = [{"Jugador": "Gio", "Score": 1000},
-                     {"Jugador": "Fausto", "Score": 300},
-                     {"Jugador": "German", "Score": 500}
-                     ]
+        score_dict = leer_json("archivo_score.json")
         
         form_puntaje = Form_Menu_Score(self._master, 250, 25, 500, 550, (220,0,220), "White", True, "GUI\\board_menu.jpg",
                                        score_dict, 100, 100, 10)

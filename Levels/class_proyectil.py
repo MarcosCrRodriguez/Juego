@@ -70,38 +70,33 @@ class Proyectil:
 
         return len(lista_enemigo)
 
-    def colision_proyectil_pj(self, pantalla, lados_piso, lista_plataformas, jugador, lista_proyectiles, posicion_inicial):
+    def colision_proyectil_pj(self, pantalla, lados_piso, lista_plataformas, jugador, lista_proyectiles, posicion_inicial, meteoro):
         for lado in lista_plataformas:
             if self.lados_proyectil["main"].colliderect(lado.lados_plataforma["main"]):
                 self.sonido_colision.play()
-                self.remove_objeto(lista_proyectiles)
+                lista_proyectiles.remove(meteoro)
 
         if self.lados_proyectil["main"].colliderect(lados_piso["main"]):
             self.sonido_colision.play()
-            self.remove_objeto(lista_proyectiles)
+            lista_proyectiles.remove(meteoro)
         
         if self.lados_proyectil["main"].colliderect(jugador.lados["main"]):
             jugador.animar(pantalla, "recibo_daño")
             jugador.salud -= 1
             jugador.daño_recibido += 88
+            match jugador.salud:
+                case 2:
+                    jugador.damage_2.play()
+                case 1:
+                    jugador.damage_1.play()
+                case 0:
+                    jugador.damage_0.play()
             # luego de recivir daño vuelve a la posicion de inicio
             jugador.rectangulo.x = posicion_inicial[0]
             jugador.rectangulo.y = posicion_inicial[1]
             jugador.lados = obtener_rectangulos(jugador.rectangulo)
-            match jugador.salud:
-                case 2:
-                    jugador.damage = pygame.mixer.Sound("Recursos\\Daño_recibido\Sonido\\vpcn005.ogg")
-                    jugador.damage.set_volume(0.4)
-                    jugador.damage.play()
-                case 1:
-                    jugador.damage = pygame.mixer.Sound("Recursos\\Daño_recibido\Sonido\\vpcn030.ogg")
-                    jugador.damage.set_volume(0.4)
-                    jugador.damage.play()
-                case 0:
-                    jugador.damage = pygame.mixer.Sound("Recursos\\Daño_recibido\Sonido\\vpcn031.ogg")
-                    jugador.damage.set_volume(0.4)
-                    jugador.damage.play()
-            self.remove_objeto(lista_proyectiles)
+            lista_proyectiles.remove(meteoro)
+            
 
     def colision_proyectil_final_boss(self, pantalla, lista_plataformas, lista_proyectiles, final_boss):
         for lado in lista_plataformas:
@@ -109,10 +104,11 @@ class Proyectil:
                 self.sonido_colision.play()
                 self.remove_objeto(lista_proyectiles)
 
-        if self.lados_proyectil["main"].colliderect(final_boss.lados_enemigo["main"]):
-            self.daño_final_boss(pantalla, final_boss)
-            self.sonido_colision.play()
-            self.remove_objeto(lista_proyectiles)
+        if final_boss.vida_finalboss != 0:
+            if self.lados_proyectil["main"].colliderect(final_boss.lados_enemigo["main"]):
+                self.daño_final_boss(pantalla, final_boss)
+                self.sonido_colision.play()
+                self.remove_objeto(lista_proyectiles)
             
     def daño_final_boss(self, pantalla, final_boss):
         if final_boss.direccion_derecha:

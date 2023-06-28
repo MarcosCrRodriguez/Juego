@@ -19,8 +19,8 @@ def obtener_rectangulos(principal)->dict:
     diccionario = {}
     diccionario["main"] = principal
     diccionario["bottom"] = pygame.Rect(principal.left, principal.bottom -10, principal.width, 10)
-    diccionario["right"] = pygame.Rect(principal.right -9, principal.top, 9, principal.height)
-    diccionario["left"] = pygame.Rect(principal.left, principal.top, 9, principal.height)
+    diccionario["right"] = pygame.Rect(principal.right -10, principal.top, 10, principal.height)
+    diccionario["left"] = pygame.Rect(principal.left, principal.top, 10, principal.height)
     diccionario["top"] = pygame.Rect(principal.left, principal.top, principal.width, 10)
 
     return diccionario

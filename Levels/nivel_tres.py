@@ -166,4 +166,4 @@ class Nivel_Tres(Nivel):
 
         super().__init__(pantalla, mi_personaje, final_boss, bird, lista_plataformas, lista_colision_plataformas, lista_enemigos,
                          lista_monedas, lados_piso, mi_imagen, icono_pj, fondo_vida, fondo, font_timer, fondo_timer, fondo_score, font_coins, 
-                         (900,800), (925,175), 300, corazones, segundo_piso, final_lvl, lista_plataforma_final, (895, 265))
+                         (900,800), (925,175), 300, corazones, segundo_piso, final_lvl, lista_plataforma_final, (895, 265), "lvl 3")

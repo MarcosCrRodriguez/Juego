@@ -169,4 +169,4 @@ class Nivel_Uno(Nivel):
 
         super().__init__(pantalla, mi_personaje, armor, crabtank, lista_plataformas, lista_colision_plataformas, lista_enemigos,
                          lista_monedas, lados_piso, mi_imagen, icono_pj, fondo_vida, fondo, font_timer, fondo_timer, fondo_score, font_coins, 
-                         (1680,740), (0,0), 60, corazones, segundo_piso, final_lvl, lista_plataforma_final, (40, 740))
+                         (1680,740), (0,0), 60, corazones, segundo_piso, final_lvl, lista_plataforma_final, (40, 740), "lvl 1")

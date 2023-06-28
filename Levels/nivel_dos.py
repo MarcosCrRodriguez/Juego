@@ -197,4 +197,4 @@ class Nivel_Dos(Nivel):
 
         super().__init__(pantalla, mi_personaje, armor, crabtank, lista_plataformas, lista_colision_plataformas, lista_enemigos,
                          lista_monedas, lados_piso, mi_imagen, icono_pj, fondo_vida, fondo, font_timer, fondo_timer, fondo_score, font_coins, 
-                         (1730,100),(100, 560), 90, corazones, cuarto_piso, final_lvl, lista_plataforma_final, (70, 740))
+                         (1730,100),(100, 560), 90, corazones, cuarto_piso, final_lvl, lista_plataforma_final, (70, 740), "lvl 2")

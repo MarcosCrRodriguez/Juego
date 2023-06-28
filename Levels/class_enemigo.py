@@ -37,8 +37,6 @@ class Enemigo:
         self.sonido_metari.set_volume(0.4)
         self.sonido_kurae = pygame.mixer.Sound("Recursos\Final_Boss\kurae.wav")
         self.sonido_kurae.set_volume(0.4)
-        self.vida_cero = pygame.mixer.Sound("Recursos\\Final_Boss\\final_boss_die.wav")
-        self.vida_cero.set_volume(0.4)
 
         self.vida_finalboss = 330
         self.daño_recibido_finalboss = 0
@@ -95,27 +93,26 @@ class Enemigo:
         match vida_actual:
             case 0:
                 self.remove_objeto(lista_enemigos)
-                self.vida_cero.play()
             case 50:
                 #self.sonido_metari.play()
                 if self.direccion_derecha:
-                    self.direccion_meteor_attack(pantalla, self.velocidad_enemigo+5, "r_meteor_derecha")
+                    self.direccion_meteor_attack(pantalla, self.velocidad_enemigo+4, "r_meteor_derecha")
                 else:
-                    self.direccion_meteor_attack(pantalla, (self.velocidad_enemigo+5)* -1, "r_meteor_izquierda")
+                    self.direccion_meteor_attack(pantalla, (self.velocidad_enemigo+4)* -1, "r_meteor_izquierda")
                 esta_atacando = True
             case 100:
                 #self.sonido_metari.play()
                 if self.direccion_derecha:
-                    self.direccion_meteor_attack(pantalla, self.velocidad_enemigo+5, "r_meteor_derecha")
+                    self.direccion_meteor_attack(pantalla, self.velocidad_enemigo+4, "r_meteor_derecha")
                 else:
-                    self.direccion_meteor_attack(pantalla, (self.velocidad_enemigo+5)* -1, "r_meteor_izquierda")
+                    self.direccion_meteor_attack(pantalla, (self.velocidad_enemigo+4)* -1, "r_meteor_izquierda")
                 esta_atacando = True
             case 150:
                 #self.sonido_kurae.play()
                 if self.direccion_derecha:
-                    self.direccion_meteor_attack(pantalla, self.velocidad_enemigo+5, "r_meteor_derecha")
+                    self.direccion_meteor_attack(pantalla, self.velocidad_enemigo+4, "r_meteor_derecha")
                 else:
-                    self.direccion_meteor_attack(pantalla, (self.velocidad_enemigo+5), "r_meteor_izquierda")
+                    self.direccion_meteor_attack(pantalla, (self.velocidad_enemigo+4)* -1, "r_meteor_izquierda")
                 esta_atacando = True
             case 200:
                 #self.sonido_kurae.play()

@@ -10,12 +10,14 @@ from Levels.class_proyectil import *
 from Levels.class_plataforma import *
 from Levels.class_score_item import *
 from Levels.modo import *
-from Levels.nivel import *
+from Levels.archivo_json import *
 
 class Nivel:
     def __init__(self, pantalla, personaje_principal, primer_enemigo, segundo_enemigo, lista_plataformas, lista_colision_plataformas, lista_enemigos, 
                  lista_items, lados_piso, mi_imagen, icono_pj, fondo_vida, fondo, font_timer, fondo_timer, fondo_score, font_coins, final_tuple, pos_inicial_corazon, 
-                 timer, corazones, segundo_piso, final_lvl, lista_plataforma_final, posicion_inicial_pj) -> None:
+                 timer, corazones, segundo_piso, final_lvl, lista_plataforma_final, posicion_inicial_pj, que_nivel) -> None:
+        self.ruta_json = "archivo_score.json"
+
         self._slave = pantalla
         self.jugador = personaje_principal
         self.primer_enemigo = primer_enemigo
@@ -78,7 +80,10 @@ class Nivel:
         self.lista_corazones = []
         self.lista_corazones.append(self.corazon)
 
+        self.que_nivel = que_nivel
+
         self.esta_atacando = False
+        self.go_on = False
 
         if self.is_final_lvl:
             self.borde_vida_finalboss = pygame.image.load("Recursos\\borde_vida_finalboss.png")
@@ -89,6 +94,8 @@ class Nivel:
             self.sonido_spawn = pygame.mixer.Sound("Recursos\Final_Boss\spawn.wav")
             self.sonido_spawn.set_volume(0.4)
             self.sonido_spawn.play()
+            self.finalboss_dies = pygame.mixer.Sound("Recursos\\Final_Boss\\final_boss_die.wav")
+            self.finalboss_dies.set_volume(0.5)
 
             self.lista_meteoros = self.crear_lista_meteoros(25, 15)
 
@@ -99,9 +106,10 @@ class Nivel:
         self.floor = pygame.image.load("Recursos\\floor.png")
         self.floor = pygame.transform.scale(self.floor,(1900,30))
 
-        self.finish = True
+        self.finish = False
+        self.game_over = False
 
-    def update(self, lista_eventos)->None:
+    def update(self, lista_eventos)->bool:
         for evento in lista_eventos:
             if evento.type == pygame.KEYDOWN and evento.key == pygame.K_F12:
                 cambiar_modo()
@@ -130,14 +138,14 @@ class Nivel:
 
         # if self.hostil:
         #     if len(self.lista_proyectiles_enemigo) < 1:
-        #         if self.segundo_enemigo.direccion_derecha:
-        #             self.velocidad_proyectil_e = 13
-        #         else:
-        #             self.velocidad_proyectil_e = -13
 
         #         proyectil_enemigo = Proyectil(self.tamaño_proyectil, self.diccionario_animaciones_proyectil, self.segundo_enemigo.lados_enemigo["main"].center, self.velocidad_proyectil_e, "proyectil_derecha")
         #         self.lista_proyectiles_enemigo.append(proyectil_enemigo) 
-
+        #     if self.segundo_enemigo.direccion_derecha:
+        #         self.velocidad_proyectil_e = 13
+        #     else:
+        #         self.velocidad_proyectil_e = -13
+            
         #     if self.largo_lista_enemigos != 0:
         #         for proyectil_enemigo in self.lista_proyectiles_enemigo:
         #             proyectil_enemigo.lanzar_proyectil(proyectil_enemigo.velocidad)
@@ -179,12 +187,12 @@ class Nivel:
         self._slave.blit(self.fondo_timer, (860, 8))
         self._slave.blit(text_surface, (900, 35))
 
-        if time_left == 0:
-            self.finish = False
-        elif con_vida == False:
-            self.finish = False 
+        if time_left == 0 or con_vida == False or self.game_over == True:
+            if self.finish == False:
+                lista_datos = leer_json("archivo_score.json")
+                self.finish = self.trabajando_base_datos(lista_datos)
 
-        # print(self.finish)
+        print(self.finish)
 
         self.dibujar_rectangulos()
 
@@ -235,13 +243,6 @@ class Nivel:
             for corazon in range(len(self.lista_corazones)):
                 self.lista_corazones[corazon].animar_item(self._slave, "corazon")
 
-        if len(self.lista_items) == 0 and self.is_final_lvl == False:
-            self.obtener_next_lvl()
-        if len(self.lista_items) == 0 and self.is_final_lvl:
-            if self.primer_enemigo.vida_finalboss == 0:
-                self.jugador.mi_score += 5500
-                self.obtener_next_lvl()
-
             # if len(self.lista_next_lvl) != 0:
                 # self.jugador.colision_final_item(self.lista_next_lvl)
 
@@ -251,10 +252,19 @@ class Nivel:
         pygame.draw.rect(self._slave, (255,0,0), (102,20, 264, 18)) 
         pygame.draw.rect(self._slave, self.verde_oscuro, (102,20, 264 - self.jugador.daño_recibido, 18))
 
+        if len(self.lista_items) == 0 and self.is_final_lvl == False:
+            self.obtener_next_lvl()
+            if self.finish == False:
+                self.game_over = self.jugador.verificar_colision_final_item(self.lista_next_lvl)
+        if len(self.lista_items) == 0 and self.is_final_lvl == True and self.go_on == True:
+            self.obtener_next_lvl()
+            if self.finish == False:
+                self.game_over = self.jugador.verificar_colision_final_item(self.lista_next_lvl)
+
         pygame.draw.rect(self._slave, (0,0,0), (102,54, 83, 28))
         if len(self.lista_proyectiles) == 0:
             pygame.draw.rect(self._slave, self.azul, (102,54, 83, 28)) 
-            
+
         self.jugador.update(self._slave, self.lados_piso, self.plataformas, self.lista_enemigos)
         for enemigo in self.lista_enemigos:
             enemigo.update(self._slave)
@@ -268,17 +278,20 @@ class Nivel:
             self.esta_atacando = self.primer_enemigo.update_vida_finalboss(self._slave, self.primer_enemigo.vida_finalboss, self.lista_enemigos)
             
             if self.esta_atacando:
-                # for meteoro in self.lista_meteoros:
-                    # self._slave.blit(meteoro["superficie"], meteoro["rectangulo"])
                 for meteoro in range(len(self.lista_meteoros)):
                     self.lista_meteoros[meteoro].animar_proyectil(self._slave, "meteor")
                     self.lista_meteoros[meteoro].lanzar_meteoro(15)
 
                 for meteoro in self.lista_meteoros:
-                    meteoro.colision_proyectil_pj(self._slave, self.lados_piso, self.lista_plataforma_final, self.jugador, self.lista_meteoros, self.posicion_inicial_pj)
+                    meteoro.colision_proyectil_pj(self._slave, self.lados_piso, self.lista_plataforma_final, self.jugador, self.lista_meteoros, self.posicion_inicial_pj, meteoro)
             
             elif self.esta_atacando == False:
                 self.lista_meteoros = self.crear_lista_meteoros(25, 15)
+
+            if self.primer_enemigo.vida_finalboss < 5 and self.go_on == False:
+                self.jugador.mi_score += 5500
+                self.finalboss_dies.play()
+                self.go_on = True
 
     def dibujar_rectangulos(self):
         if get_modo():
@@ -295,9 +308,6 @@ class Nivel:
                 # if len(self.lista_proyectiles_enemigo) > 0:
                 #     for proyectil_enemigo in self.lista_proyectiles_enemigo:
                 #         pygame.draw.rect(self._slave, "Gray", proyectil_enemigo.lados_proyectil[lado], 2)
-                # if self.esta_atacando:
-                #     for meteoro in self.lista_meteoros:
-                #         pygame.draw.rect(self._slave, "Gray", meteoro["rectangulo"], 2)
                 if self.esta_atacando:
                     for meteoro in self.lista_meteoros:
                         pygame.draw.rect(self._slave, "Gray", meteoro.lados_proyectil[lado], 2)
@@ -340,4 +350,26 @@ class Nivel:
             lista_nueva.append(meteoro)
         
         return lista_nueva
+    
+    def trabajando_base_datos(self, lista_datos)->bool:
+        carga = False
+
+        if len(lista_datos) < 3:
+            lista_datos.append({"Nivel": self.que_nivel , "Score": self.jugador.mi_score})
+            retorno = generar_json(self.ruta_json, lista_datos)
+        else:
+            lista_datos.remove(lista_datos[0])
+            lista_datos.append({"Nivel": self.que_nivel , "Score": self.jugador.mi_score})
+            retorno = generar_json(self.ruta_json, lista_datos)
+        if retorno != -1:
+            print("\nSe cargaron correctamente los datos")
+            carga = True
+        else:
+            print("Algo salio mal al generar el json")
+
+        return carga
+    
+
+
+
         
