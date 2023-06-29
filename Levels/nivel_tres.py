@@ -17,6 +17,8 @@ class Nivel_Tres(Nivel):
         W = pantalla.get_width()
         H = pantalla.get_height()
 
+        self.nivel_tres_completado = False
+
         #VIDA
         mi_imagen = pygame.image.load("Recursos\\face_pj.png")
         mi_imagen = pygame.transform.scale(mi_imagen,(76,76))
@@ -166,4 +168,4 @@ class Nivel_Tres(Nivel):
 
         super().__init__(pantalla, mi_personaje, final_boss, bird, lista_plataformas, lista_colision_plataformas, lista_enemigos,
                          lista_monedas, lados_piso, mi_imagen, icono_pj, fondo_vida, fondo, font_timer, fondo_timer, fondo_score, font_coins, 
-                         (900,800), (925,175), 300, corazones, segundo_piso, final_lvl, lista_plataforma_final, (895, 265), "lvl 3")
+                         (900,800), (925,175), 300, corazones, segundo_piso, final_lvl, lista_plataforma_final, (895, 265), "lvl 3", self.nivel_tres_completado)

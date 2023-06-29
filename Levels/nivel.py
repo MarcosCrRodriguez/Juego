@@ -15,13 +15,15 @@ from Levels.archivo_json import *
 class Nivel:
     def __init__(self, pantalla, personaje_principal, primer_enemigo, segundo_enemigo, lista_plataformas, lista_colision_plataformas, lista_enemigos, 
                  lista_items, lados_piso, mi_imagen, icono_pj, fondo_vida, fondo, font_timer, fondo_timer, fondo_score, font_coins, final_tuple, pos_inicial_corazon, 
-                 timer, corazones, segundo_piso, final_lvl, lista_plataforma_final, posicion_inicial_pj, que_nivel) -> None:
+                 timer, corazones, segundo_piso, final_lvl, lista_plataforma_final, posicion_inicial_pj, que_nivel, nivel_completado) -> None:
         self.ruta_json = "archivo_score.json"
 
         self._slave = pantalla
         self.jugador = personaje_principal
         self.primer_enemigo = primer_enemigo
         self.segundo_enemigo = segundo_enemigo
+
+        self.nivel_completado = nivel_completado
         
         self.tres_enemigos = False
         if len(lista_enemigos) == 3:
@@ -264,10 +266,12 @@ class Nivel:
             self.obtener_next_lvl()
             if self.finish == False:
                 self.game_over = self.jugador.verificar_colision_final_item(self.lista_next_lvl, self.path_sonido_1)
+                self.nivel_completado = True
         if len(self.lista_items) == 0 and self.is_final_lvl == True and self.go_on == True:
             self.obtener_next_lvl()
             if self.finish == False:
                 self.game_over = self.jugador.verificar_colision_final_item(self.lista_next_lvl, self.path_sonido_2)
+                self.nivel_completado = True
 
         pygame.draw.rect(self._slave, (0,0,0), (102,54, 83, 28))
         if len(self.lista_proyectiles) == 0:

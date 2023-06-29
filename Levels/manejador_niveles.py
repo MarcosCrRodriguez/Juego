@@ -10,6 +10,11 @@ class Manejador_Niveles:
         self.niveles = {"nivel_uno": Nivel_Uno,
                         "nivel_dos": Nivel_Dos,
                         "nivel_tres": Nivel_Tres}
+        self.obtener_nivel = ""
         
     def get_nivel(self, nombre_nivel):
+        self.obtener_nivel = nombre_nivel
         return self.niveles[nombre_nivel](self._slave)
+    
+    def devolver_nivel_actual(self):
+        return self.obtener_nivel

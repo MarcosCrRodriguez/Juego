@@ -17,6 +17,8 @@ class Nivel_Uno(Nivel):
         W = pantalla.get_width()
         H = pantalla.get_height()
 
+        self.nivel_uno_completado = False
+
         #VIDA
         mi_imagen = pygame.image.load("Recursos\\face_pj.png")
         mi_imagen = pygame.transform.scale(mi_imagen,(76,76))
@@ -169,4 +171,4 @@ class Nivel_Uno(Nivel):
 
         super().__init__(pantalla, mi_personaje, armor, crabtank, lista_plataformas, lista_colision_plataformas, lista_enemigos,
                          lista_monedas, lados_piso, mi_imagen, icono_pj, fondo_vida, fondo, font_timer, fondo_timer, fondo_score, font_coins, 
-                         (1680,740), (0,0), 60, corazones, segundo_piso, final_lvl, lista_plataforma_final, (40, 740), "lvl 1")
+                         (1680,740), (0,0), 60, corazones, segundo_piso, final_lvl, lista_plataforma_final, (40, 740), "lvl 1", self.nivel_uno_completado)
