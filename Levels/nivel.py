@@ -48,6 +48,12 @@ class Nivel:
         self.diccionario_animaciones_proyectil["proyectil_derecha"] = proyectil_personaje
         self.diccionario_animaciones_proyectil["proyectil_izquierda"] = proyectil_personaje_izquierda
 
+        #PROYECTIL_ENEMIGO
+        self.tamaño_proyectil = (35, 50)
+        self.diccionario_animaciones_proyectil = {}
+        self.diccionario_animaciones_proyectil["proyectil_derecha"] = proyectil_personaje
+        self.diccionario_animaciones_proyectil["proyectil_izquierda"] = proyectil_personaje_izquierda
+
         self.lados_piso = lados_piso
 
         self.mi_imagen = mi_imagen
@@ -105,6 +111,9 @@ class Nivel:
 
         self.floor = pygame.image.load("Recursos\\floor.png")
         self.floor = pygame.transform.scale(self.floor,(1900,30))
+
+        self.path_sonido_1 = "Recursos\\Finish_lvl\\vpcn506.ogg"
+        self.path_sonido_2 = "Recursos\\Finish_lvl\\vpcn605.ogg"
 
         self.finish = False
         self.game_over = False
@@ -193,8 +202,6 @@ class Nivel:
                 nombre = leer_dato_json("archivo_nombre.json")
                 self.finish = self.trabajando_base_datos(lista_datos, nombre)
 
-        print(self.finish)
-
         self.dibujar_rectangulos()
 
         return self.finish 
@@ -256,11 +263,11 @@ class Nivel:
         if len(self.lista_items) == 0 and self.is_final_lvl == False:
             self.obtener_next_lvl()
             if self.finish == False:
-                self.game_over = self.jugador.verificar_colision_final_item(self.lista_next_lvl)
+                self.game_over = self.jugador.verificar_colision_final_item(self.lista_next_lvl, self.path_sonido_1)
         if len(self.lista_items) == 0 and self.is_final_lvl == True and self.go_on == True:
             self.obtener_next_lvl()
             if self.finish == False:
-                self.game_over = self.jugador.verificar_colision_final_item(self.lista_next_lvl)
+                self.game_over = self.jugador.verificar_colision_final_item(self.lista_next_lvl, self.path_sonido_2)
 
         pygame.draw.rect(self._slave, (0,0,0), (102,54, 83, 28))
         if len(self.lista_proyectiles) == 0:

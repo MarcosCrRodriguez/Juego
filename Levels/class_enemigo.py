@@ -85,7 +85,6 @@ class Enemigo:
             #     self.realizar_comportamiento(self.velocidad_enemigo + 5)
             #     self.direccion_derecha = True
 
-
     def update_vida_finalboss(self, pantalla, vida_actual, lista_enemigos)->bool:
         # self.lista_meteoros = []
         esta_atacando = False

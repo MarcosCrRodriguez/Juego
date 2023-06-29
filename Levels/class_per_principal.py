@@ -206,13 +206,15 @@ class Personaje_Principal:
                 lista_item.remove(lista_item[item])
                 break
 
-    def verificar_colision_final_item(self, lista_item:list)->bool:
+    def verificar_colision_final_item(self, lista_item:list, path:str)->bool:
         retorno = False
 
         for item in range(len(lista_item)):
             if self.lados["main"].colliderect(lista_item[item].rectangulo):
-                lista_item[item].sonido_colision.play()
                 lista_item.remove(lista_item[item])
+                finish = pygame.mixer.Sound(path)
+                finish.set_volume(0.4)
+                finish.play()
                 retorno = True
                 break
 

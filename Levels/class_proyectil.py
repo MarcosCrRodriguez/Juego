@@ -97,7 +97,6 @@ class Proyectil:
             jugador.lados = obtener_rectangulos(jugador.rectangulo)
             lista_proyectiles.remove(meteoro)
             
-
     def colision_proyectil_final_boss(self, pantalla, lista_plataformas, lista_proyectiles, final_boss):
         for lado in lista_plataformas:
             if self.lados_proyectil["main"].colliderect(lado.lados_plataforma["main"]):

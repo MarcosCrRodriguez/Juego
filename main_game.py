@@ -26,7 +26,7 @@ while running:
     for evento in eventos:
         if evento.type == pygame.QUIT:
             running = False
-
+            
     PANTALLA.blit(fondo, (0,0))
     form_prueba.update(eventos)
 
