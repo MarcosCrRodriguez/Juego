@@ -13,12 +13,14 @@ from GUI.GUI_menu_niveles import *
 from Levels.archivo_json import *
 from Levels.manejador_niveles import *
 
-class Form_Prueba(Form):
+class Form_Menu_Pause(Form):
     def __init__(self, screen, x, y, w, h, color_background, color_border="Black", border_size=-1, active=True):
         super().__init__(screen, x, y, w, h, color_background, color_border, border_size, active)
 
         self.volumen = 0.2
         self.flag_play = True
+
+        self.game_pause = False
 
         self.obtener_nivel = ""
 
@@ -28,23 +30,18 @@ class Form_Prueba(Form):
         self.window = pygame.transform.scale(self.window,(w,h))     
 
         #-------------------------------CONTROLES-----------------------------------#
-        self.txtbox = TextBox(self._slave, x, y, 50, 50, 150, 30, "Grey", "White", "Red", "Green", 2, font="Comic Sans", font_size=15, font_color="Black")
-        self.btn_play = Button(self._slave, x, y, 100, 100, 100, 50, "Red", "Blue", self.btn_play_click, "Nombre", "Pause", font="Comic Sans", font_size=15, font_color="White")
-        self.cadena_play = Button(self._slave, x, y, 235, 50, 80, 30, "Grey", "Blue", self.btn_cadena_click, "Nombre", "Registrar", font="Comic Sans", font_size=15, font_color="Black")
+        self.btn_renaudar = Button_Image(self._slave, x, y, 255, 100, 50, 50, "GUI\menu_image.png", self.btn_pause_click, "Any") 
+        self.btn_play = Button(self._slave, x, y, 100, 100, 100, 50, "Blue", "Gray", self.btn_play_click, "Nombre", "Pause", font="Comic Sans", font_size=15, font_color="White")
         self.label_volume = Label(self._slave, 650, 190, 100, 50, "20%", font="Comic Sans", font_size=15, font_color="White", path_image="GUI\Table.png")
         self.slider_volumen = Slider(self._slave, x, y, 100, 200, 500, 15, self.volumen, "Blue", "White")
-        self.btn_tabla = Button_Image(self._slave, x, y, 255, 100, 50, 50, "GUI\menu_image.png", self.btn_tabla_click, "Any") 
-        self.btn_niveles = Button_Image(self._slave, x, y, 355, 100, 50, 50, "GUI\start.png", self.btn_niveles_click, "Any")
         #---------------------------------------------------------------------------#
 
         #Agrego controles a lista
-        self.lista_widgets.append(self.txtbox)
+        self.lista_widgets.append(self._btn_home)
         self.lista_widgets.append(self.btn_play)
-        self.lista_widgets.append(self.cadena_play)
+        self.lista_widgets.append(self.btn_renaudar)
         self.lista_widgets.append(self.label_volume)
         self.lista_widgets.append(self.slider_volumen)
-        self.lista_widgets.append(self.btn_tabla)
-        self.lista_widgets.append(self.btn_niveles)
 
         pygame.mixer.music.load("GUI\Metal Gear Rising REVENGEANCE MainMenu.mp3")
 
@@ -69,14 +66,9 @@ class Form_Prueba(Form):
         # self._slave.fill(self._color_background)
         self._slave.blit(self.window, (0,0))
 
-    def btn_cadena_click(self, texto):
-        nombre = "?"
-        nombre = self.txtbox.get_text()
-        retorno = generar_dato_json("archivo_nombre.json", nombre)
-        if retorno != -1:
-            print("\nSe cargaron correctamente los datos")
-        else:
-            print("Algo salio mal al generar el json")
+    def btn_pause_click(self, texto):
+        #self.game_pause = False
+        self.end_dialog()
 
     def btn_play_click(self, texto):
         if self.flag_play:
@@ -97,21 +89,4 @@ class Form_Prueba(Form):
         self.label_volume.set_text(f"{round(self.volumen * 100)}%")
         pygame.mixer.music.set_volume(self.volumen)
 
-    def btn_tabla_click(self, texto):
-        score_dict = leer_json("archivo_score.json")
-        
-        form_puntaje = Form_Menu_Score(self._master, 250, 25, 500, 550, (220,0,220), "White", True, "GUI\\board_menu.jpg",
-                                       score_dict, 100, 100, 10)
-        
-        self.show_dialog(form_puntaje)
-
-    def btn_niveles_click(self, texto):
-        niveles_dict = [{"Nivel":"", "Dificultad":"Easy"},
-                        {"Nivel":"", "Dificultad":"Normal"},
-                        {"Nivel":"", "Dificultad":"Hard"}
-                        ]
-        
-        form_niveles = Form_Menu_Niveles(self._master, 250, 25, 500, 550, (220,0,220), "White", True, "GUI\\board_menu.jpg",
-                                       niveles_dict, 100, 100, 10)
-
-        self.show_dialog(form_niveles)
+   

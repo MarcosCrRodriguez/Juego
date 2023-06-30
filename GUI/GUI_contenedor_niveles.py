@@ -10,6 +10,7 @@ class Form_Contenedor_Niveles(Form):
         super().__init__(pantalla, 0, 0, pantalla.get_width(), pantalla.get_height(), None)
         self.nivel = nivel
         self.nivel._slave = self._slave
+        # self.nivel_actual = nivel_actual
 
         self._btn_home = Button_Image(screen=self._slave,
                         master_x = self._x,
@@ -25,6 +26,7 @@ class Form_Contenedor_Niveles(Form):
         self.lista_widgets.append(self._btn_home)
 
     def update(self, lista_eventos):
+        # print(self.nivel_actual)
         self.nivel.update(lista_eventos)
         for widget in self.lista_widgets:
             widget.update(lista_eventos)

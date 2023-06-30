@@ -4,9 +4,12 @@ import pygame
 from Levels.configuraciones import reescalar_imagenes, obtener_rectangulos
 from Levels.class_plataforma import *
 from Levels.class_proyectil import *
+from Levels.class_objeto import *
 
-class Personaje_Principal:
+class Personaje_Principal (Objeto):
     def __init__(self, tamaño:tuple, animaciones:dict, posicion_inicial:tuple, velocidad:int) -> None:
+
+        super().__init__(tamaño)
         #CONFECCION
         self.ancho = tamaño[0]
         self.alto = tamaño[1]

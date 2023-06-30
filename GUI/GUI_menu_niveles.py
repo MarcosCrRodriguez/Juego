@@ -6,12 +6,23 @@ from GUI.GUI_form import *
 from GUI.GUI_button_image import *
 from GUI.GUI_contenedor_niveles import *
 from Levels.manejador_niveles import Manejador_Niveles
+from Levels.nivel import *
+from Levels.archivo_json import *
 
 class Form_Menu_Niveles(Form):
     def __init__(self, screen, x, y, w, h, color_background, color_border, active, path_imagen, niveles_dict, margen_x, margen_y, espacio):
         super().__init__(screen, x, y, w, h, color_background, color_border, active)
 
         self.manejador_niveles = Manejador_Niveles(self._master)
+        self.nivel_completado = "Incompleto"
+
+        retorno = generar_nivel_completado("archivo_nivel_completado.json", self.nivel_completado)
+        if retorno != -1:
+            print("\nSe cargaron correctamente los datos")
+        else:
+            print("Algo salio mal al generar el json")
+
+        self.nivel_acutal = "N/A"
 
         aux_imagen = pygame.image.load(path_imagen)
         aux_imagen = pygame.transform.scale(aux_imagen,(w,h))
@@ -58,8 +69,6 @@ class Form_Menu_Niveles(Form):
 
         self.lista_widgets.append(self._btn_home)
         self.lista_widgets.append(self._btn_level_1)
-        self.lista_widgets.append(self._btn_level_2)
-        self.lista_widgets.append(self._btn_level_3)
 
     def on(self, parametro):
         print("hola", parametro)
@@ -69,6 +78,8 @@ class Form_Menu_Niveles(Form):
             for widget in self.lista_widgets:
                 widget.update(lista_eventos)
             self.draw()
+            if self.nivel_acutal != "N/A":
+                self.desbloqueo_niveles()
         else:
             self.hijo.update(lista_eventos)
 
@@ -77,10 +88,25 @@ class Form_Menu_Niveles(Form):
 
     def entrar_nivel(self, nombre_nivel):
         nivel = self.manejador_niveles.get_nivel(nombre_nivel)
+        self.nivel_acutal = nombre_nivel
 
         frm_contenedor_nivel = Form_Contenedor_Niveles(self._master, nivel)
 
         self.show_dialog(frm_contenedor_nivel)
+        self.desbloqueo_niveles()
+
+    def desbloqueo_niveles(self):
+        self.nivel_completado = leer_nivel_completado("archivo_nivel_completado.json")
+
+        if self.nivel_completado == "Incompleto":
+            self.nivel_completado = False
+        elif self.nivel_completado == "Completado":
+            self.nivel_completado = True
+
+        if self.nivel_acutal == "nivel_uno" and self.nivel_completado == True:
+            self.lista_widgets.append(self._btn_level_2)
+        elif self.nivel_acutal == "nivel_dos" and self.nivel_completado == True:
+            self.lista_widgets.append(self._btn_level_3)
 
     # def update(self, lista_eventos):
     #     if self.active:

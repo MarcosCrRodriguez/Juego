@@ -2,9 +2,12 @@
 
 import pygame
 from Levels.configuraciones import reescalar_imagenes
+from Levels.class_objeto import *
 
-class Score_Item:
+class Score_Item (Objeto):
     def __init__(self, tamaño:tuple, animaciones:dict, posicion_inicial:tuple, clave:str) -> None:
+
+        super().__init__(tamaño)
         #CONFECCION
         self.ancho = tamaño[0]
         self.alto = tamaño[1]

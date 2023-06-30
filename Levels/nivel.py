@@ -89,6 +89,7 @@ class Nivel:
         self.lista_corazones.append(self.corazon)
         #
         self.que_nivel = que_nivel
+        self.nivel_completado = "Incompleto"
 
         self.esta_atacando = False
         self.go_on = False
@@ -128,9 +129,9 @@ class Nivel:
                 print(evento.pos)
 
         current_time = time.time() - self.start_time
-        time_left = max(self.duration - current_time, 0)
-        minutes = int(time_left // 60)
-        seconds = int(time_left % 60)
+        self.time_left = max(self.duration - current_time, 0)
+        minutes = int(self.time_left // 60)
+        seconds = int(self.time_left % 60)
 
         self.leer_inputs()
         self.actualizar_pantalla()          
@@ -188,22 +189,33 @@ class Nivel:
             self.primer_enemigo.teletransportacion(self.plataformas[5], "left", "left", (1280, 735))
             # self.primer_enemigo.meteor_attack()  
 
-        self.segundo_enemigo.colision_plataforma(self.plataformas[3], self.plataformas[3], "left", "right")       
+        self.segundo_enemigo.colision_plataforma(self.plataformas[3], self.plataformas[3], "left", "right")
+
+        self._slave.blit(self.fondo_timer, (860, 8))
+
+        if self.game_over == True:
+            if self.finish == False:
+                self.time_left = int(self.time_left)
+                tiempo_faltante = self.time_left * 100
+                self.jugador.mi_score += tiempo_faltante
+                text_surface = self.font_timer.render(f"Timer: {60}:{60}", True, "White") 
+        else:
+            text_surface = self.font_timer.render(f"Timer: {minutes:02d}:{seconds:02d}", True, "White")
+            self._slave.blit(text_surface, (900, 35))      
 
         texto = self.font_coins.render(f"Score: {self.jugador.mi_score}", False, "Black", self.verde_oscuro)
         self._slave.blit(self.fondo_score, (12,110))
         self._slave.blit(texto, (22,120)) 
 
-        text_surface = self.font_timer.render(f"Timer: {minutes:02d}:{seconds:02d}", True, "White")
-        self._slave.blit(self.fondo_timer, (860, 8))
-        self._slave.blit(text_surface, (900, 35))
+        
+        # print(self.time_left)
 
-        if time_left == 0 or con_vida == False or self.game_over == True:
+        if self.time_left == 0 or con_vida == False or self.game_over == True:
             if self.finish == False:
                 lista_datos = leer_json("archivo_score.json")
                 nombre = leer_dato_json("archivo_nombre.json")
                 self.finish = self.trabajando_base_datos(lista_datos, nombre)
-
+                
         self.dibujar_rectangulos()
 
         return self.finish 
@@ -266,12 +278,16 @@ class Nivel:
             self.obtener_next_lvl()
             if self.finish == False:
                 self.game_over = self.jugador.verificar_colision_final_item(self.lista_next_lvl, self.path_sonido_1)
-                self.nivel_completado = True
+                self.nivel_completado = "Completado"
         if len(self.lista_items) == 0 and self.is_final_lvl == True and self.go_on == True:
             self.obtener_next_lvl()
             if self.finish == False:
                 self.game_over = self.jugador.verificar_colision_final_item(self.lista_next_lvl, self.path_sonido_2)
-                self.nivel_completado = True
+                self.nivel_completado = "Completado"
+
+        retorno = generar_nivel_completado("archivo_nivel_completado.json", self.nivel_completado)
+        # if retorno != -1:
+        #     print("\nSe cargaron correctamente los datos")
 
         pygame.draw.rect(self._slave, (0,0,0), (102,54, 83, 28))
         if len(self.lista_proyectiles) == 0:
