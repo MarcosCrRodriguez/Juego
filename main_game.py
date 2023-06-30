@@ -22,7 +22,7 @@ pygame.display.set_icon(icono)
 fondo = pygame.image.load("GUI\\background_menu.png")
 fondo = pygame.transform.scale(fondo,(TAMAÑO_PANTALLA))
 
-form_prueba = Form_Prueba(PANTALLA, 200, 100, 900, 350, "gold", "Gray", 5, True)
+form_prueba = Form_Prueba(PANTALLA, 200, 100, 1000, 600, "gold", "Gray", 5, True)
 form_pause = Form_Menu_Pause(PANTALLA, 540, 250, 900, 350, "gold", "Gray", 5, True)
 
 running = True

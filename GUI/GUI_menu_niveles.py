@@ -57,18 +57,20 @@ class Form_Menu_Niveles(Form):
         self._btn_home = Button_Image(screen=self._slave, x=w-70, y=h-70, master_x=x, master_y=y, w=50, h=50,
                                      color_background=(255,0,0), color_border=(255,0,255), onclick=self.btn_home_click,
                                      onclick_param="", text="", font="Verdana", font_size=15, font_color=(0,255,0), path_image="GUI\home.png")
-        self._btn_level_1 = Button_Image(screen=self._slave, x=w-356, y=h-441, master_x=x, master_y=y, w=70, h=70,
+        self._btn_level_1 = Button_Image(screen=self._slave, x=272, y=108, master_x=x, master_y=y, w=70, h=70,
                                          color_background=(255,0,0), color_border=(0,0,255), onclick=self.entrar_nivel,
                                          onclick_param="nivel_uno", text="", font="Verdana", font_size=15, font_color=(0,255,0), path_image="GUI\\1st_lvl.png")
-        self._btn_level_2 = Button_Image(screen=self._slave, x=w-356, y=h-331, master_x=x, master_y=y, w=70, h=70,
+        self._btn_level_2 = Button_Image(screen=self._slave, x=275, y=218, master_x=x, master_y=y, w=70, h=70,
                                          color_background=(255,0,0), color_border=(0,0,255), onclick=self.entrar_nivel,
                                          onclick_param="nivel_dos", text="", font="Verdana", font_size=15, font_color=(0,255,0), path_image="GUI\\2nd_lvl.png")
-        self._btn_level_3 = Button_Image(screen=self._slave, x=w-356, y=h-221, master_x=x, master_y=y, w=70, h=70,
+        self._btn_level_3 = Button_Image(screen=self._slave, x=275, y=328, master_x=x, master_y=y, w=70, h=70,
                                          color_background=(255,0,0), color_border=(0,0,255), onclick=self.entrar_nivel,
                                          onclick_param="nivel_tres", text="", font="Verdana", font_size=15, font_color=(0,255,0), path_image="GUI\\3rd_lvl.png")
 
         self.lista_widgets.append(self._btn_home)
         self.lista_widgets.append(self._btn_level_1)
+        self.lista_widgets.append(self._btn_level_2)
+        self.lista_widgets.append(self._btn_level_3)
 
     def on(self, parametro):
         print("hola", parametro)
