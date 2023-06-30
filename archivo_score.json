@@ -1,14 +1,14 @@
 [
     {
         "Nombre": "Renzo",
-        "Score": 8700
-    },
-    {
-        "Nombre": "Renzo",
         "Score": 19900
     },
     {
         "Nombre": "Carlos",
         "Score": 4800
+    },
+    {
+        "Nombre": "Carlos",
+        "Score": 6100
     }
 ]
