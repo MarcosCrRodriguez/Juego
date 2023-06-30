@@ -92,6 +92,7 @@ class Nivel:
         self.nivel_completado = "Incompleto"
 
         self.esta_atacando = False
+        self.rage_fase = False
         self.go_on = False
 
         if self.is_final_lvl:
@@ -103,8 +104,11 @@ class Nivel:
             self.sonido_spawn = pygame.mixer.Sound("Recursos\Final_Boss\spawn.wav")
             self.sonido_spawn.set_volume(0.4)
             self.sonido_spawn.play()
+            self.sonido_metari = pygame.mixer.Sound("Recursos\Final_Boss\metari.wav")
+            self.sonido_metari.set_volume(0.4)
             self.finalboss_dies = pygame.mixer.Sound("Recursos\\Final_Boss\\final_boss_die.wav")
             self.finalboss_dies.set_volume(0.5)
+            
 
             self.lista_meteoros = self.crear_lista_meteoros(25, 15)
 
@@ -278,16 +282,23 @@ class Nivel:
             self.obtener_next_lvl()
             if self.finish == False:
                 self.game_over = self.jugador.verificar_colision_final_item(self.lista_next_lvl, self.path_sonido_1)
-                self.nivel_completado = "Completado"
+                if self.game_over:
+                    self.nivel_completado = "Completado"
         if len(self.lista_items) == 0 and self.is_final_lvl == True and self.go_on == True:
             self.obtener_next_lvl()
             if self.finish == False:
                 self.game_over = self.jugador.verificar_colision_final_item(self.lista_next_lvl, self.path_sonido_2)
-                self.nivel_completado = "Completado"
+                if self.game_over:
+                    self.nivel_completado = "Completado"
 
         retorno = generar_nivel_completado("archivo_nivel_completado.json", self.nivel_completado)
         # if retorno != -1:
         #     print("\nSe cargaron correctamente los datos")
+
+        if self.primer_enemigo.vida_finalboss == 130 and self.rage_fase == False:
+            self.rage_fase = True
+            if self.rage_fase:
+                self.sonido_metari.play()
 
         pygame.draw.rect(self._slave, (0,0,0), (102,54, 83, 28))
         if len(self.lista_proyectiles) == 0:
@@ -352,14 +363,18 @@ class Nivel:
                                     
     def obtener_next_lvl(self)->None:
         #NEXT_LVL
-        tamaño_next_lvl = (105, 105)
-        diccionario_animaciones_next_lvl = {} 
-        diccionario_animaciones_next_lvl["next_lvl"] = next_lvl
+        if self.is_final_lvl:
+            tamaño_next_lvl = (110, 165)
+            diccionario_animaciones_next_lvl = {} 
+            diccionario_animaciones_next_lvl["next_lvl"] = final_lvl
+        else:
+            tamaño_next_lvl = (105, 105)
+            diccionario_animaciones_next_lvl = {} 
+            diccionario_animaciones_next_lvl["next_lvl"] = next_lvl
 
         self.next_lvl = Score_Item(tamaño_next_lvl, diccionario_animaciones_next_lvl, self.final_tuple, "next_lvl")
-    
-        self.next_lvl.animar_item(self._slave, "next_lvl")
 
+        self.next_lvl.animar_item(self._slave, "next_lvl")
         self.lista_next_lvl.append(self.next_lvl)
 
     def crear_lista_meteoros(self, cantidad:int, velocidad_proyectil:int)->list:

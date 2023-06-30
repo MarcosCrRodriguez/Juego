@@ -26,7 +26,7 @@ class Nivel_Dos(Nivel):
         icono_pj = pygame.transform.scale(icono_pj,(90,90))
         fondo_vida = pygame.image.load("Recursos\\vida.png")
         fondo_vida = pygame.transform.scale(fondo_vida,(275, 75))
-
+        
         #ICONO
         icono = pygame.image.load("Recursos\\icon.png")
         pygame.display.set_icon(icono)
@@ -44,7 +44,7 @@ class Nivel_Dos(Nivel):
 
         #IMAGEN_SCORE
         fondo_score = pygame.image.load("Recursos\\fondo_score.png")
-        fondo_score = pygame.transform.scale(fondo_score,(188, 70))
+        fondo_score = pygame.transform.scale(fondo_score,(203, 70))
 
         #MUSICA
         pygame.mixer.music.load("Sound_track\\[Music] Metal Gear Rising Revengeance - The Mastermind.mp3")

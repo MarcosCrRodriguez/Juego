@@ -16,13 +16,16 @@ pygame.init()
 RELOJ = pygame.time.Clock()
 PANTALLA = pygame.display.set_mode((TAMAÑO_PANTALLA))
 
+pygame.display.set_caption("Fight_Club")
+
+icono = pygame.image.load("Recursos\\icon.png")
+pygame.display.set_icon(icono)
+
 fondo = pygame.image.load("GUI\\background_menu.png")
 fondo = pygame.transform.scale(fondo,(TAMAÑO_PANTALLA))
 
 form_prueba = Form_Prueba(PANTALLA, 200, 100, 900, 350, "gold", "Gray", 5, True)
-form_pause = Form_Menu_Pause(PANTALLA, 200, 100, 900, 350, "gold", "Gray", 5, True)
-
-# pause_menu = pygame.image.load("GUI\\Window.png")
+form_pause = Form_Menu_Pause(PANTALLA, 540, 250, 900, 350, "gold", "Gray", 5, True)
 
 running = True
 
@@ -43,11 +46,7 @@ while running:
     else:
         form_prueba.update(eventos) 
 
-    # form_prueba.comprobar_nivel_completado() 
-
     pygame.display.flip()
 
 pygame.quit()
-sys.exit()
-
-    
+sys.exit()    

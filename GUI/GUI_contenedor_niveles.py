@@ -4,13 +4,15 @@ from pygame.locals import *
 from GUI.GUI_label import *
 from GUI.GUI_form import *
 from GUI.GUI_button_image import *
+from Levels.archivo_json import *
 
 class Form_Contenedor_Niveles(Form):
     def __init__(self, pantalla: pygame.Surface, nivel) -> None:
         super().__init__(pantalla, 0, 0, pantalla.get_width(), pantalla.get_height(), None)
         self.nivel = nivel
         self.nivel._slave = self._slave
-        # self.nivel_actual = nivel_actual
+
+        self.terminado = "Incompleto"
 
         self._btn_home = Button_Image(screen=self._slave,
                         master_x = self._x,
@@ -21,12 +23,11 @@ class Form_Contenedor_Niveles(Form):
                         h = 50,
                         onclick = self.btn_home_click,
                         onclick_param = "",
-                        path_image= "GUI\home.png")
-        
-        self.lista_widgets.append(self._btn_home)
+                        path_image= "GUI\menu_image.png")
 
     def update(self, lista_eventos):
-        # print(self.nivel_actual)
+        self.terminado = leer_nivel_completado("archivo_nivel_completado.json")
+        self.completed()
         self.nivel.update(lista_eventos)
         for widget in self.lista_widgets:
             widget.update(lista_eventos)
@@ -34,3 +35,7 @@ class Form_Contenedor_Niveles(Form):
 
     def btn_home_click(self, param):
         self.end_dialog()
+
+    def completed(self):
+        if self.terminado == "Completado":
+            self.lista_widgets.append(self._btn_home)

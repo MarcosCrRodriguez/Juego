@@ -44,7 +44,7 @@ class Nivel_Uno(Nivel):
 
         #IMAGEN_SCORE
         fondo_score = pygame.image.load("Recursos\\fondo_score.png")
-        fondo_score = pygame.transform.scale(fondo_score,(188, 70))
+        fondo_score = pygame.transform.scale(fondo_score,(203, 70))
 
         #MUSICA
         pygame.mixer.music.load("Sound_track\\Metal Gear Rising Revengeance Soundtrack - 01. Rules of Nature (Platinum Mix).mp3")

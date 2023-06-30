@@ -8,10 +8,6 @@ from GUI.GUI_label import *
 from GUI.GUI_form import *
 from GUI.GUI_button import *
 from GUI.GUI_button_image import *
-from GUI.GUI_menu_score import *
-from GUI.GUI_menu_niveles import *
-from Levels.archivo_json import *
-from Levels.manejador_niveles import *
 
 class Form_Menu_Pause(Form):
     def __init__(self, screen, x, y, w, h, color_background, color_border="Black", border_size=-1, active=True):
@@ -22,22 +18,19 @@ class Form_Menu_Pause(Form):
 
         self.game_pause = False
 
-        self.obtener_nivel = ""
-
         pygame.mixer.init()
 
-        self.window = pygame.image.load("GUI\\window_galaxy.png")
+        self.window = pygame.image.load("GUI\\background_pause_menu.jpg")
         self.window = pygame.transform.scale(self.window,(w,h))     
 
         #-------------------------------CONTROLES-----------------------------------#
-        self.btn_renaudar = Button_Image(self._slave, x, y, 255, 100, 50, 50, "GUI\menu_image.png", self.btn_pause_click, "Any") 
-        self.btn_play = Button(self._slave, x, y, 100, 100, 100, 50, "Blue", "Gray", self.btn_play_click, "Nombre", "Pause", font="Comic Sans", font_size=15, font_color="White")
+        self.btn_renaudar = Button_Image(self._slave, x, y, 245, 95, 85, 58, "GUI\\back_menu.png", self.btn_pause_click, "Any") 
+        self.btn_play = Button(self._slave, x, y, 100, 100, 100, 50, "Gray", "Black", self.btn_play_click, "Nombre", "Pause", font="Comic Sans", font_size=15, font_color="Black")
         self.label_volume = Label(self._slave, 650, 190, 100, 50, "20%", font="Comic Sans", font_size=15, font_color="White", path_image="GUI\Table.png")
         self.slider_volumen = Slider(self._slave, x, y, 100, 200, 500, 15, self.volumen, "Blue", "White")
         #---------------------------------------------------------------------------#
 
         #Agrego controles a lista
-        self.lista_widgets.append(self._btn_home)
         self.lista_widgets.append(self.btn_play)
         self.lista_widgets.append(self.btn_renaudar)
         self.lista_widgets.append(self.label_volume)
@@ -63,12 +56,10 @@ class Form_Menu_Pause(Form):
             self.hijo.update(lista_eventos)
 
     def render(self):   
-        # self._slave.fill(self._color_background)
         self._slave.blit(self.window, (0,0))
 
     def btn_pause_click(self, texto):
-        #self.game_pause = False
-        self.end_dialog()
+        self.game_pause = False
 
     def btn_play_click(self, texto):
         if self.flag_play:
@@ -78,8 +69,8 @@ class Form_Menu_Pause(Form):
             self.btn_play.set_text("Play")
         else:
             pygame.mixer.music.unpause()
-            self.btn_play._color_background = "Red"
-            self.btn_play._font_color = "White"
+            self.btn_play._color_background = "Gray"
+            self.btn_play._font_color = "Black"
             self.btn_play.set_text("Pause")
 
         self.flag_play = not self.flag_play

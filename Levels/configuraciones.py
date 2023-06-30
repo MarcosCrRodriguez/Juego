@@ -224,6 +224,9 @@ proyectil_personaje_izquierda = girar_imagenes(proyectil_personaje, True, False)
 next_lvl = [pygame.image.load("Recursos\\Finish_lvl\\933.png")
             ]
 
+final_lvl = [pygame.image.load("Recursos\\are.png")
+             ]
+
 #------------------------------------------------------------#
 
 corazon_animation = [pygame.image.load("Recursos\\Corazon\\0.png"),

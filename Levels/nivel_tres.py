@@ -44,7 +44,7 @@ class Nivel_Tres(Nivel):
 
         #IMAGEN_SCORE
         fondo_score = pygame.image.load("Recursos\\fondo_score.png")
-        fondo_score = pygame.transform.scale(fondo_score,(188, 70))
+        fondo_score = pygame.transform.scale(fondo_score,(203, 70))
 
         #MUSICA
         pygame.mixer.music.load("Sound_track\[Music] Metal Gear Rising Revengeance - Vs. Jetstream Sam.mp3")

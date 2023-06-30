@@ -19,9 +19,7 @@ class Form_Prueba(Form):
 
         self.volumen = 0.2
         self.flag_play = True
-
-        self.obtener_nivel = ""
-
+        
         pygame.mixer.init()
 
         self.window = pygame.image.load("GUI\\window_galaxy.png")
@@ -66,7 +64,6 @@ class Form_Prueba(Form):
             self.hijo.update(lista_eventos)
 
     def render(self):   
-        # self._slave.fill(self._color_background)
         self._slave.blit(self.window, (0,0))
 
     def btn_cadena_click(self, texto):
