@@ -17,7 +17,7 @@ class Nivel_Tres(Nivel):
         W = pantalla.get_width()
         H = pantalla.get_height()
 
-        self.nivel_tres_completado = False
+        self.nivel_tres_completado = "Incompleto"
 
         #VIDA
         mi_imagen = pygame.image.load("Recursos\\face_pj.png")
@@ -26,10 +26,6 @@ class Nivel_Tres(Nivel):
         icono_pj = pygame.transform.scale(icono_pj,(90,90))
         fondo_vida = pygame.image.load("Recursos\\vida.png")
         fondo_vida = pygame.transform.scale(fondo_vida,(275, 75))
-
-        #ICONO
-        icono = pygame.image.load("Recursos\\icon.png")
-        pygame.display.set_icon(icono)
 
         #FONDO
         fondo = pygame.image.load("Recursos\\fondo_3.png")

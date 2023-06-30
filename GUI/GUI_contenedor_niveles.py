@@ -23,7 +23,7 @@ class Form_Contenedor_Niveles(Form):
                         h = 50,
                         onclick = self.btn_home_click,
                         onclick_param = "",
-                        path_image= "GUI\menu_image.png")
+                        path_image= "GUI\home.png")
 
     def update(self, lista_eventos):
         self.terminado = leer_nivel_completado("archivo_nivel_completado.json")

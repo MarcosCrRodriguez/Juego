@@ -5,8 +5,6 @@ import sys
 
 from GUI.mi_formulario import *
 from GUI.menu_pause import *
-from GUI.GUI_button_image import *
-from GUI.GUI_label import *
 
 W,H = 1900,1000
 FPS = 28

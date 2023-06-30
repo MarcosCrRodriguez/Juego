@@ -91,6 +91,7 @@ class Nivel:
         self.que_nivel = que_nivel
         self.nivel_completado = "Incompleto"
 
+        self.realizando_ataque = False
         self.esta_atacando = False
         self.rage_fase = False
         self.go_on = False
@@ -109,7 +110,6 @@ class Nivel:
             self.finalboss_dies = pygame.mixer.Sound("Recursos\\Final_Boss\\final_boss_die.wav")
             self.finalboss_dies.set_volume(0.5)
             
-
             self.lista_meteoros = self.crear_lista_meteoros(25, 15)
 
         #TIMER
@@ -191,7 +191,6 @@ class Nivel:
             self.primer_enemigo.teletransportacion(self.plataformas[4], "right", "left", (385, 323))
             self.primer_enemigo.colision_para_tp(self.plataformas[5], "right", "right", "e_izquierda")
             self.primer_enemigo.teletransportacion(self.plataformas[5], "left", "left", (1280, 735))
-            # self.primer_enemigo.meteor_attack()  
 
         self.segundo_enemigo.colision_plataforma(self.plataformas[3], self.plataformas[3], "left", "right")
 
@@ -202,7 +201,7 @@ class Nivel:
                 self.time_left = int(self.time_left)
                 tiempo_faltante = self.time_left * 100
                 self.jugador.mi_score += tiempo_faltante
-                text_surface = self.font_timer.render(f"Timer: {60}:{60}", True, "White") 
+                text_surface = self.font_timer.render(f"Timer: {59}:{59}", True, "White") 
         else:
             text_surface = self.font_timer.render(f"Timer: {minutes:02d}:{seconds:02d}", True, "White")
             self._slave.blit(text_surface, (900, 35))      
@@ -210,9 +209,6 @@ class Nivel:
         texto = self.font_coins.render(f"Score: {self.jugador.mi_score}", False, "Black", self.verde_oscuro)
         self._slave.blit(self.fondo_score, (12,110))
         self._slave.blit(texto, (22,120)) 
-
-        
-        # print(self.time_left)
 
         if self.time_left == 0 or con_vida == False or self.game_over == True:
             if self.finish == False:
@@ -269,9 +265,6 @@ class Nivel:
             for corazon in range(len(self.lista_corazones)):
                 self.lista_corazones[corazon].animar_item(self._slave, "corazon")
 
-            # if len(self.lista_next_lvl) != 0:
-                # self.jugador.colision_final_item(self.lista_next_lvl)
-
         self._slave.blit(self.fondo_vida, (102,15))
         self._slave.blit(self.icono_pj, (12,8))
         self._slave.blit(self.mi_imagen, (20,15))
@@ -295,7 +288,7 @@ class Nivel:
         # if retorno != -1:
         #     print("\nSe cargaron correctamente los datos")
 
-        if self.primer_enemigo.vida_finalboss == 130 and self.rage_fase == False:
+        if self.primer_enemigo.vida_finalboss == 150 and self.rage_fase == False:
             self.rage_fase = True
             if self.rage_fase:
                 self.sonido_metari.play()
@@ -315,16 +308,22 @@ class Nivel:
             self._slave.blit(self.borde_vida_finalboss, (1346, 17))
 
             self.esta_atacando = self.primer_enemigo.update_vida_finalboss(self._slave, self.primer_enemigo.vida_finalboss, self.lista_enemigos)
-            
+
             if self.esta_atacando:
+                self.realizando_ataque = True
+                
+            if self.realizando_ataque:
                 for meteoro in range(len(self.lista_meteoros)):
                     self.lista_meteoros[meteoro].animar_proyectil(self._slave, "meteor")
                     self.lista_meteoros[meteoro].lanzar_meteoro(15)
 
                 for meteoro in self.lista_meteoros:
                     meteoro.colision_proyectil_pj(self._slave, self.lados_piso, self.lista_plataforma_final, self.jugador, self.lista_meteoros, self.posicion_inicial_pj, meteoro)
-            
-            elif self.esta_atacando == False:
+
+                if len(self.lista_meteoros) < 1:
+                    self.realizando_ataque = False            
+
+            elif self.realizando_ataque == False:
                 self.lista_meteoros = self.crear_lista_meteoros(25, 15)
 
             if self.primer_enemigo.vida_finalboss < 5 and self.go_on == False:
