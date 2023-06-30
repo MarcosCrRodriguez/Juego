@@ -323,8 +323,8 @@ class Nivel:
                 if len(self.lista_meteoros) < 1:
                     self.realizando_ataque = False            
 
-            elif self.realizando_ataque == False:
-                self.lista_meteoros = self.crear_lista_meteoros(25, 15)
+                if self.realizando_ataque == False:
+                    self.lista_meteoros = self.crear_lista_meteoros(25, 15)
 
             if self.primer_enemigo.vida_finalboss < 5 and self.go_on == False:
                 self.jugador.mi_score += 5500
