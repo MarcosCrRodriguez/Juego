@@ -363,7 +363,7 @@ class Nivel:
     def obtener_next_lvl(self)->None:
         #NEXT_LVL
         if self.is_final_lvl:
-            tamaño_next_lvl = (110, 165)
+            tamaño_next_lvl = (110, 180)
             diccionario_animaciones_next_lvl = {} 
             diccionario_animaciones_next_lvl["next_lvl"] = final_lvl
         else:
