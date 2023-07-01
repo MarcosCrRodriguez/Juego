@@ -17,6 +17,24 @@ class Form_Controls(Form):
         aux_imagen = pygame.image.load(path_imagen)
         aux_imagen = pygame.transform.scale(aux_imagen,(w,h))
 
+        self.q_buttom = pygame.image.load("GUI\\16.png")
+        self.q_buttom = pygame.transform.scale(self.q_buttom,(35,35))
+        self.top_arrow = pygame.image.load("GUI\\42.png")
+        self.top_arrow = pygame.transform.scale(self.top_arrow,(35,35))
+        self.left_arrow = pygame.image.load("GUI\\45.png")
+        self.left_arrow = pygame.transform.scale(self.left_arrow,(35,35))
+        self.right_arrow = pygame.image.load("GUI\\43.png")
+        self.right_arrow = pygame.transform.scale(self.right_arrow,(35,35))
+        self.F12 = pygame.image.load("GUI\\F12.png")
+        self.F12 = pygame.transform.scale(self.F12,(65,43))
+
+        font_controls = pygame.font.SysFont("Comic Sans", 34)
+        self.texto_q = font_controls.render("------------  fire projectile", True, "Gray")
+        self.texto_top_arrow = font_controls.render("------------  jump", True, "Gray")
+        self.texto_left_arrow = font_controls.render("------------  move left", True, "Gray")
+        self.texto_right_arrow = font_controls.render("------------  move right", True, "Gray")
+        self.texto_f12 = font_controls.render("------------  programmer visual", True, "Gray")
+
         self._slave = aux_imagen
 
         self._niveles_dict = niveles_dict
@@ -52,6 +70,16 @@ class Form_Controls(Form):
         if self.verificar_dialog_result():                  
             for widget in self.lista_widgets:
                 widget.update(lista_eventos)
+            self._slave.blit(self.q_buttom, (30,115))
+            self._slave.blit(self.top_arrow, (30,175))
+            self._slave.blit(self.left_arrow, (30,235))
+            self._slave.blit(self.right_arrow, (30,295))
+            self._slave.blit(self.F12, (20,355))
+            self._slave.blit(self.texto_q, (110,110))
+            self._slave.blit(self.texto_top_arrow, (110,170))
+            self._slave.blit(self.texto_left_arrow, (110,230))
+            self._slave.blit(self.texto_right_arrow, (110,290))
+            self._slave.blit(self.texto_f12, (110,350))
             self.draw()
         else:
             self.hijo.update(lista_eventos)
