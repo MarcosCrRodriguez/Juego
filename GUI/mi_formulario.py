@@ -37,6 +37,15 @@ class Form_Prueba(Form):
         self.btn_tabla = Button_Image(self._slave, x, y, 845, 130, 130, 60, "GUI\score_image.png", self.btn_tabla_click, "Any") 
         self.btn_niveles = Button_Image(self._slave, x, y, 685, 452, 300, 130, "GUI\start_image.png", self.btn_niveles_click, "Any")
         #---------------------------------------------------------------------------#
+
+        font_controls = pygame.font.SysFont("Comic Sans", 30)
+        self.new_user = font_controls.render("New_User", True, "Gray")
+        self.existing_user = font_controls.render("Existing_User", True, "Gray")
+        self.user_for_new = font_controls.render("User: ", True, "Gray")
+        self.name = font_controls.render("Name: ", True, "Gray")
+        self.mail = font_controls.render("Mail: ", True, "Gray")
+        self.user_for_existing = font_controls.render("User: ", True, "Gray")
+
  
         #Agrego controles a lista
         self.lista_widgets.append(self.txtbox_usuario)
@@ -62,11 +71,16 @@ class Form_Prueba(Form):
             if self.active:
                 self.draw()
                 self.render()
-
                 # self._master.blit(self.texto, (22,120))
                 for widget in self.lista_widgets:
                     widget.update(lista_eventos)
                 # self.update_volumen(lista_eventos)
+                self._slave.blit(self.new_user, (187,60))
+                self._slave.blit(self.existing_user, (165,405))
+                self._slave.blit(self.user_for_new, (37,115))
+                self._slave.blit(self.name, (37,185))
+                self._slave.blit(self.mail, (37,255))
+                self._slave.blit(self.user_for_existing, (37,455))
         else:
             self.hijo.update(lista_eventos)
 

@@ -138,7 +138,12 @@ class Nivel:
         seconds = int(self.time_left % 60)
 
         self.leer_inputs()
-        self.actualizar_pantalla()          
+        self.actualizar_pantalla()       
+
+        if self.time_left > 75.5 and self.time_left < 75.6:
+            print("75")
+        elif self.time_left > 60.5 and self.time_left < 60.6:
+            print("60")
 
         for proyectil in self.lista_proyectiles:
             proyectil.lanzar_proyectil(proyectil.velocidad)
