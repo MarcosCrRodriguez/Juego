@@ -188,7 +188,6 @@ class Nivel:
             self.largo_lista_segundo_timer = proyectil.eliminar_smile(self._slave, self.jugador, self.lista_segundo_timer, self.lista_proyectiles)
             self.largo_lista_tercer_timer = proyectil.eliminar_smile(self._slave, self.jugador, self.lista_tercer_timer, self.lista_proyectiles)
 
-
         # if self.hostil:
         #     if len(self.lista_proyectiles_enemigo) < 1:
 
@@ -236,7 +235,7 @@ class Nivel:
 
         self._slave.blit(self.fondo_timer, (860, 8))
 
-        if self.game_over == True:
+        if self.game_over:
             if self.finish == False:
                 self.time_left = int(self.time_left)
                 tiempo_faltante = self.time_left * 100
@@ -250,12 +249,16 @@ class Nivel:
         self._slave.blit(self.fondo_score, (12,110))
         self._slave.blit(texto, (22,120)) 
 
-        if self.time_left == 0 or con_vida == False or self.game_over == True:
+        if self.time_left == 0 or self.jugador.salud == 0 or self.game_over == True:
             if self.finish == False:
+                self.nivel_completado = "Completado"
                 lista_datos = leer_json("archivo_score.json")
                 nombre = leer_dato_json("archivo_nombre.json")
                 self.finish = self.trabajando_base_datos(lista_datos, nombre)
-                
+                retorno = generar_nivel_completado("archivo_nivel_completado.json", self.nivel_completado)
+                if retorno != -1:
+                    print("\nSe cargaron correctamente los datos")
+
         self.dibujar_rectangulos()
 
         return self.finish 
@@ -315,18 +318,10 @@ class Nivel:
             self.obtener_next_lvl()
             if self.finish == False:
                 self.game_over = self.jugador.verificar_colision_final_item(self.lista_next_lvl, self.path_sonido_1)
-                if self.game_over:
-                    self.nivel_completado = "Completado"
         if len(self.lista_items) == 0 and self.is_final_lvl == True and self.go_on == True:
             self.obtener_next_lvl()
             if self.finish == False:
                 self.game_over = self.jugador.verificar_colision_final_item(self.lista_next_lvl, self.path_sonido_2)
-                if self.game_over:
-                    self.nivel_completado = "Completado"
-
-        retorno = generar_nivel_completado("archivo_nivel_completado.json", self.nivel_completado)
-        # if retorno != -1:
-        #     print("\nSe cargaron correctamente los datos")
 
         if self.primer_enemigo.vida_finalboss == 150 and self.rage_fase == False:
             self.rage_fase = True

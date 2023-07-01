@@ -38,4 +38,5 @@ class Form_Contenedor_Niveles(Form):
 
     def completed(self):
         if self.terminado == "Completado":
-            self.lista_widgets.append(self._btn_home)
+            self.btn_home_click("exit")
+            #self.lista_widgets.append(self._btn_home)
