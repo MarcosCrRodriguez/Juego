@@ -69,8 +69,6 @@ class Form_Menu_Niveles(Form):
 
         self.lista_widgets.append(self._btn_home)
         self.lista_widgets.append(self._btn_level_1)
-        self.lista_widgets.append(self._btn_level_2)
-        self.lista_widgets.append(self._btn_level_3)
 
     def on(self, parametro):
         print("hola", parametro)
