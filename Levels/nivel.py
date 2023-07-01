@@ -512,15 +512,15 @@ class Nivel:
                 self.largo_lista_tercer_timer = len(self.lista_tercer_timer)
 
     def smiles_final_lvl(self):
-        if self.time_left > 285.4 and self.time_left < 285.6:
+        if self.time_left > 285.5 and self.time_left < 285.6:
             self.bandera_85 = True
             self.crear_smiles()
             print("85")
-        elif self.time_left > 245.4 and self.time_left < 245.6:
+        elif self.time_left > 245.5 and self.time_left < 245.6:
             self.bandera_70 = True
             self.crear_smiles()
             print("70")
-        elif self.time_left > 205.4 and self.time_left < 205.6:
+        elif self.time_left > 205.5 and self.time_left < 205.6:
             self.bandera_55 = True
             self.crear_smiles()
             print("55")

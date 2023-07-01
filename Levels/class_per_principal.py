@@ -38,7 +38,7 @@ class Personaje_Principal (Objeto):
         #SCORE
         self.mi_score = 0
         #NIVEL SALUD
-        self.salud = 3
+        self.salud = 6
         self.daño_recibido = 0
 
         self.damage_2 = pygame.mixer.Sound("Recursos\\Daño_recibido\Sonido\\vpcn005.ogg")
@@ -143,17 +143,21 @@ class Personaje_Principal (Objeto):
             if self.lados["main"].colliderect(enemigo.lados_enemigo["main"]):
                 self.animar(pantalla, "recibo_daño")
                 self.salud -= 1
-                self.daño_recibido += 88
+                self.daño_recibido += 44
                 # luego de recivir daño vuelve a la posicion de inicio
                 self.rectangulo.x = posicion_inicial[0]
                 self.rectangulo.y = posicion_inicial[1]
                 self.lados = obtener_rectangulos(self.rectangulo)
                 match self.salud:
-                    case 2:
+                    case 5:
+                        self.damage_2.play()
+                    case 4:
+                        self.damage_2.play()
+                    case 3:
+                        self.damage_1.play()
+                    case 3:
                         self.damage_2.play()
                     case 1:
-                        self.damage_1.play()
-                    case 0:
                         self.damage_0.play()
 
     # revisar.....
@@ -190,13 +194,13 @@ class Personaje_Principal (Objeto):
         for item in range(len(lista_item)):
             if self.lados["main"].colliderect(lista_item[item].rectangulo):
                 lista_item[item].sonido_colision.play()
-                if self.salud == 3:
+                if self.salud == 6:
                     self.all_collected = pygame.mixer.Sound(sound_1)
                     self.all_collected.set_volume(0.4)
                     self.all_collected.play()
                 else:
                     self.salud += 1 
-                    self.daño_recibido -= 88
+                    self.daño_recibido -= 44
                     self.all_collected = pygame.mixer.Sound(sound_2)
                     self.all_collected.set_volume(0.4)
                     self.all_collected.play()
