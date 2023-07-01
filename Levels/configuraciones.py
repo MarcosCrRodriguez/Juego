@@ -282,3 +282,27 @@ bird_vuela = [pygame.image.load("Recursos\\Black_Bird\\0.png"),
 bird_vuela_izquierda = girar_imagenes(bird_vuela, True, False)
 
 #------------------------------------------------------------#
+
+smile_camina_izquierda = [pygame.image.load("Recursos\Smile_Camina\\1.png"),
+                        pygame.image.load("Recursos\Smile_Camina\\2.png"),
+                        pygame.image.load("Recursos\Smile_Camina\\3.png"),
+                        pygame.image.load("Recursos\Smile_Camina\\4.png")
+                        ]
+
+smile_camina = [pygame.image.load("Recursos\Smile_Camina\\6.png"),
+                pygame.image.load("Recursos\Smile_Camina\\7.png"),
+                pygame.image.load("Recursos\Smile_Camina\\8.png"),
+                pygame.image.load("Recursos\Smile_Camina\\9.png")
+                ]
+
+purple_smile_camina_izquierda = [pygame.image.load("Recursos\Final_Boss\Smile_Purple\\1.png"),
+                                pygame.image.load("Recursos\Final_Boss\Smile_Purple\\2.png"),
+                                pygame.image.load("Recursos\Final_Boss\Smile_Purple\\3.png"),
+                                pygame.image.load("Recursos\Final_Boss\Smile_Purple\\4.png")
+                                ]
+
+purple_smile_camina = [pygame.image.load("Recursos\Final_Boss\Smile_Purple\\6.png"),
+                        pygame.image.load("Recursos\Final_Boss\Smile_Purple\\7.png"),
+                        pygame.image.load("Recursos\Final_Boss\Smile_Purple\\8.png"),
+                        pygame.image.load("Recursos\Final_Boss\Smile_Purple\\9.png")
+                        ]

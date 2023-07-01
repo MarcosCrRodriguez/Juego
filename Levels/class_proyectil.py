@@ -38,7 +38,6 @@ class Proyectil (Objeto):
             self.lados_proyectil[lado].x += velocidad
     
     def lanzar_meteoro(self, velocidad)->None:
-
         for lado in self.lados_proyectil:
             self.lados_proyectil[lado].y += velocidad
 
@@ -72,6 +71,15 @@ class Proyectil (Objeto):
                 lista_enemigo.remove(enemigo)
 
         return len(lista_enemigo)
+    
+    def eliminar_smile(self, pantalla, jugador, lista_smile, lista_proyectiles):
+        for smile in lista_smile:
+            if self.lados_proyectil["main"].colliderect(smile.lados_enemigo["main"]):
+                self.sonido_colision.play()
+                jugador.mi_score += 300
+                smile.animar_enemigo(pantalla, "burst")
+                self.remove_objeto(lista_proyectiles)
+                lista_smile.remove(smile)
 
     def colision_proyectil_pj(self, pantalla, lados_piso, lista_plataformas, jugador, lista_proyectiles, posicion_inicial, meteoro):
         for lado in lista_plataformas:

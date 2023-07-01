@@ -166,6 +166,37 @@ class Enemigo (Objeto):
         elif self.lados_enemigo["right"].colliderect(plataforma_derecha.lados_plataforma[segunda_clave]):
             self.comportamiento = "e_izquierda"
 
+    def colision_piso_costado(self, lados_piso, primer_clave:str, segunda_clave:str)->None:
+        if self.lados_enemigo["left"].colliderect(lados_piso[primer_clave]):
+            self.comportamiento = "e_derecha"
+        elif self.lados_enemigo["right"].colliderect(lados_piso[segunda_clave]):
+            self.comportamiento = "e_izquierda"
+
     def remove_objeto(self, lista_objeto):
         for objeto in lista_objeto:
                 lista_objeto.remove(objeto)
+
+    def caida_pantalla(self, velocidad)->None:
+        for lado in self.lados_enemigo:
+            self.lados_enemigo[lado].y += velocidad
+
+    def colision_superficie(self, plataformas, piso, colisiono)->bool:
+        for paltaforma in plataformas:
+            if self.lados_enemigo["bottom"].colliderect(paltaforma.lados_plataforma["top"]):
+                colisiono = True
+
+        if self.lados_enemigo["bottom"].colliderect(piso["top"]):
+            colisiono = True
+
+        return colisiono
+
+    def comportamiento_smile(self, velocidad, plataformas):
+        for lado in self.lados_enemigo:
+            self.lados_enemigo[lado].x += velocidad
+    
+    def colision_plataformas(self, plataformas):
+        for plataforma in plataformas:
+            if self.lados_enemigo["left"].colliderect(plataforma.lados_plataforma["right"]):
+                self.comportamiento = "e_derecha"
+            elif self.lados_enemigo["right"].colliderect(plataforma.lados_plataforma["left"]):
+                self.comportamiento = "e_izquierda"

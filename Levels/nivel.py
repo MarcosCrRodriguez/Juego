@@ -2,6 +2,7 @@
 
 import pygame
 import time
+import random
 from pygame.locals import *
 from Levels.configuraciones import *
 from Levels.class_per_principal import *
@@ -24,6 +25,7 @@ class Nivel:
         self.segundo_enemigo = segundo_enemigo
 
         self.nivel_completado = nivel_completado
+        self.is_final_lvl = final_lvl
         
         self.tres_enemigos = False
         if len(lista_enemigos) == 3:
@@ -56,6 +58,31 @@ class Nivel:
         self.diccionario_animaciones_proyectil["proyectil_derecha"] = proyectil_personaje
         self.diccionario_animaciones_proyectil["proyectil_izquierda"] = proyectil_personaje_izquierda
 
+        #SMILE
+        if self.is_final_lvl == False:
+            self.tamaño_smile = (70, 70)
+            self.diccionario_animaciones_smile = {}
+            self.diccionario_animaciones_smile["enemigo_izquierda"] = smile_camina_izquierda
+            self.diccionario_animaciones_smile["enemigo_derecha"] = smile_camina
+            self.diccionario_animaciones_smile["burst"] = enemy_burst
+        else:
+            self.tamaño_smile = (70, 70)
+            self.diccionario_animaciones_smile = {}
+            self.diccionario_animaciones_smile["enemigo_izquierda"] = purple_smile_camina_izquierda
+            self.diccionario_animaciones_smile["enemigo_derecha"] = purple_smile_camina
+            self.diccionario_animaciones_smile["burst"] = enemy_burst
+
+        self.lista_primer_timer = []
+        self.largo_lista_primer_timer = self.lista_primer_timer
+        self.lista_segundo_timer = []
+        self.largo_lista_segundo_timer = self.lista_segundo_timer
+        self.lista_tercer_timer = []
+        self.largo_lista_tercer_timer = self.lista_tercer_timer
+        self.bandera_85 = False
+        self.bandera_70 = False
+        self.bandera_55 = False
+        self.colisiono = False
+
         self.lados_piso = lados_piso
 
         self.mi_imagen = mi_imagen
@@ -75,7 +102,6 @@ class Nivel:
         self.lista_next_lvl = []
 
         self.hay_corazones = corazones
-        self.is_final_lvl = final_lvl
 
         posicion_inicial_corazon = pos_inicial_corazon
         tamaño_corazon = (50, 50)
@@ -102,13 +128,13 @@ class Nivel:
             self.barra_vida = pygame.image.load("Recursos\\barra_vida.png")
             self.barra_vida = pygame.transform.scale(self.barra_vida,(330, 25))
 
-            self.sonido_spawn = pygame.mixer.Sound("Recursos\Final_Boss\spawn.wav")
-            self.sonido_spawn.set_volume(0.4)
-            self.sonido_spawn.play()
             self.sonido_metari = pygame.mixer.Sound("Recursos\Final_Boss\metari.wav")
             self.sonido_metari.set_volume(0.4)
             self.finalboss_dies = pygame.mixer.Sound("Recursos\\Final_Boss\\final_boss_die.wav")
             self.finalboss_dies.set_volume(0.5)
+            self.sonido_spawn = pygame.mixer.Sound("Recursos\Final_Boss\spawn.wav")
+            self.sonido_spawn.set_volume(0.4)
+            self.sonido_spawn.play()
             
             self.lista_meteoros = self.crear_lista_meteoros(25, 15)
 
@@ -140,10 +166,10 @@ class Nivel:
         self.leer_inputs()
         self.actualizar_pantalla()       
 
-        if self.time_left > 75.5 and self.time_left < 75.6:
-            print("75")
-        elif self.time_left > 60.5 and self.time_left < 60.6:
-            print("60")
+        if self.is_final_lvl == False:
+            self.smiles_firsts_lvls()
+        else:
+            self.smiles_final_lvl()
 
         for proyectil in self.lista_proyectiles:
             proyectil.lanzar_proyectil(proyectil.velocidad)
@@ -154,8 +180,14 @@ class Nivel:
 
             if self.is_final_lvl  == False:              
                 self.largo_lista_enemigos = proyectil.colision_proyectil(self.plataformas_colision, self.lista_enemigos, self.lista_proyectiles, self._slave, self.jugador)    
+                
             else:
                 proyectil.colision_proyectil_final_boss(self._slave, self.plataformas_colision, self.lista_proyectiles, self.primer_enemigo)
+
+            self.largo_lista_primer_timer = proyectil.eliminar_smile(self._slave, self.jugador, self.lista_primer_timer, self.lista_proyectiles)
+            self.largo_lista_segundo_timer = proyectil.eliminar_smile(self._slave, self.jugador, self.lista_segundo_timer, self.lista_proyectiles)
+            self.largo_lista_tercer_timer = proyectil.eliminar_smile(self._slave, self.jugador, self.lista_tercer_timer, self.lista_proyectiles)
+
 
         # if self.hostil:
         #     if len(self.lista_proyectiles_enemigo) < 1:
@@ -180,6 +212,9 @@ class Nivel:
         #     pass
 
         con_vida = self.jugador.colision_enemigo(self._slave, self.lista_enemigos, self.posicion_inicial_pj)
+        con_vida = self.jugador.colision_enemigo(self._slave, self.lista_primer_timer, self.posicion_inicial_pj)
+        con_vida = self.jugador.colision_enemigo(self._slave, self.lista_segundo_timer, self.posicion_inicial_pj)
+        con_vida = self.jugador.colision_enemigo(self._slave, self.lista_tercer_timer, self.posicion_inicial_pj)
         self.jugador.verificar_colision_item(self.lista_items, "Recursos\\Score_Item\\All_Grabed\\yare.ogg")
         if self.hay_corazones:
             self.jugador.verificar_colision_vida(self.lista_corazones, "Recursos\\Corazon\\Sound\\vpcn120.ogg", "Recursos\\Corazon\\Sound\\vpcn118.ogg") 
@@ -305,6 +340,16 @@ class Nivel:
         self.jugador.update(self._slave, self.lados_piso, self.plataformas, self.lista_enemigos)
         for enemigo in self.lista_enemigos:
             enemigo.update(self._slave)
+
+        if len(self.lista_primer_timer) != 0:
+            for smile in self.lista_primer_timer:
+                smile.update(self._slave)
+        if len(self.lista_segundo_timer) != 0:
+            for smile in self.lista_segundo_timer:
+                smile.update(self._slave)
+        if len(self.lista_tercer_timer) != 0:
+            for smile in self.lista_tercer_timer:
+                smile.update(self._slave)
         
         if self.is_final_lvl:
             self._slave.blit(self.floor, (0, 995))
@@ -354,6 +399,15 @@ class Nivel:
                 if self.esta_atacando:
                     for meteoro in self.lista_meteoros:
                         pygame.draw.rect(self._slave, "Gray", meteoro.lados_proyectil[lado], 2)
+                if len(self.lista_primer_timer) != 0:
+                    for smile in self.lista_primer_timer:
+                        pygame.draw.rect(self._slave, "Red", smile.lados_enemigo[lado], 2)
+                if len(self.lista_segundo_timer) != 0:
+                    for smile in self.lista_segundo_timer:
+                        pygame.draw.rect(self._slave, "Red", smile.lados_enemigo[lado], 2)
+                if len(self.lista_tercer_timer) != 0:
+                    for smile in self.lista_tercer_timer:
+                        pygame.draw.rect(self._slave, "Red", smile.lados_enemigo[lado], 2)
 
             for item in self.lista_items:
                 pygame.draw.rect(self._slave, "Blue", item.rectangulo, 2)
@@ -368,7 +422,7 @@ class Nivel:
     def obtener_next_lvl(self)->None:
         #NEXT_LVL
         if self.is_final_lvl:
-            tamaño_next_lvl = (110, 180)
+            tamaño_next_lvl = (110, )
             diccionario_animaciones_next_lvl = {} 
             diccionario_animaciones_next_lvl["next_lvl"] = final_lvl
         else:
@@ -415,3 +469,83 @@ class Nivel:
             print("Algo salio mal al generar el json")
 
         return carga
+
+    def crear_smiles(self):
+        x = random.randrange(0, 1800, 60)
+        y = random.randrange(-100, 0, 60)
+        posicion_inicial_smile = (x, y)
+
+        smile = Enemigo(self.tamaño_smile, self.diccionario_animaciones_smile, posicion_inicial_smile, 4)
+        self.lista_primer_timer.append(smile)
+
+    def smiles_firsts_lvls(self):
+        if self.time_left > 85.4 and self.time_left < 85.6:
+            self.bandera_85 = True
+            self.crear_smiles()
+            print("85")
+        elif self.time_left > 70.4 and self.time_left < 70.6:
+            self.bandera_70 = True
+            self.crear_smiles()
+            print("70")
+        elif self.time_left > 55.4 and self.time_left < 55.6:
+            self.bandera_55 = True
+            self.crear_smiles()
+            print("55")
+
+        if self.bandera_85:
+            for smile in self.lista_primer_timer:
+                colisiono_primera = smile.colision_superficie(self.plataformas_colision, self.lados_piso, self.colisiono)
+                if colisiono_primera == False:
+                    smile.caida_pantalla(9)
+                smile.colision_plataformas(self.plataformas_colision)
+                self.largo_lista_primer_timer = len(self.lista_primer_timer)
+        if self.bandera_70:
+            for smile in self.lista_segundo_timer:
+                colisiono_segunda = smile.colision_superficie(self.plataformas_colision, self.lados_piso, self.colisiono)
+                if colisiono_segunda == False:
+                    smile.caida_pantalla(9)
+                smile.colision_plataformas(self.plataformas_colision)
+                self.largo_lista_segundo_timer = len(self.lista_segundo_timer)
+        if self.bandera_55:
+            for smile in self.lista_tercer_timer:
+                colisiono_tercera = smile.colision_superficie(self.plataformas_colision, self.lados_piso, self.colisiono)
+                if colisiono_tercera == False:
+                    smile.caida_pantalla(9)
+                smile.colision_plataformas(self.plataformas_colision)
+                self.largo_lista_tercer_timer = len(self.lista_tercer_timer)
+
+    def smiles_final_lvl(self):
+        if self.time_left > 285.4 and self.time_left < 285.6:
+            self.bandera_85 = True
+            self.crear_smiles()
+            print("85")
+        elif self.time_left > 245.4 and self.time_left < 245.6:
+            self.bandera_70 = True
+            self.crear_smiles()
+            print("70")
+        elif self.time_left > 205.4 and self.time_left < 205.6:
+            self.bandera_55 = True
+            self.crear_smiles()
+            print("55")
+
+        if self.bandera_85:
+            for smile in self.lista_primer_timer:
+                colisiono_primera = smile.colision_superficie(self.lista_plataforma_final, self.lados_piso, self.colisiono)
+                if colisiono_primera == False:
+                    smile.caida_pantalla(9)
+                smile.colision_plataformas(self.lista_plataforma_final)
+                self.largo_lista_primer_timer = len(self.lista_primer_timer)
+        if self.bandera_70:
+            for smile in self.lista_segundo_timer:
+                colisiono_segunda = smile.colision_superficie(self.lista_plataforma_final, self.lados_piso, self.colisiono)
+                if colisiono_segunda == False:
+                    smile.caida_pantalla(9)
+                smile.colision_plataformas(self.lista_plataforma_final)
+                self.largo_lista_segundo_timer = len(self.lista_segundo_timer)
+        if self.bandera_55:
+            for smile in self.lista_tercer_timer:
+                colisiono_tercera = smile.colision_superficie(self.lista_plataforma_final, self.lados_piso, self.colisiono)
+                if colisiono_tercera == False:
+                    smile.caida_pantalla(9)
+                smile.colision_plataformas(self.lista_plataforma_final)
+                self.largo_lista_tercer_timer = len(self.lista_tercer_timer)
