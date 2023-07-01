@@ -19,6 +19,8 @@ class Nivel:
                  timer, corazones, segundo_piso, final_lvl, lista_plataforma_final, posicion_inicial_pj, que_nivel, nivel_completado) -> None:
         self.ruta_json = "archivo_score.json"
 
+        retorno = generar_nivel_completado("archivo_nivel_completado.json", "Incompleto")
+
         self._slave = pantalla
         self.jugador = personaje_principal
         self.primer_enemigo = primer_enemigo
@@ -210,10 +212,10 @@ class Nivel:
         # else:
         #     pass
 
-        con_vida = self.jugador.colision_enemigo(self._slave, self.lista_enemigos, self.posicion_inicial_pj)
-        con_vida = self.jugador.colision_enemigo(self._slave, self.lista_primer_timer, self.posicion_inicial_pj)
-        con_vida = self.jugador.colision_enemigo(self._slave, self.lista_segundo_timer, self.posicion_inicial_pj)
-        con_vida = self.jugador.colision_enemigo(self._slave, self.lista_tercer_timer, self.posicion_inicial_pj)
+        self.jugador.colision_enemigo(self._slave, self.lista_enemigos, self.posicion_inicial_pj)
+        self.jugador.colision_enemigo(self._slave, self.lista_primer_timer, self.posicion_inicial_pj)
+        self.jugador.colision_enemigo(self._slave, self.lista_segundo_timer, self.posicion_inicial_pj)
+        self.jugador.colision_enemigo(self._slave, self.lista_tercer_timer, self.posicion_inicial_pj)
         self.jugador.verificar_colision_item(self.lista_items, "Recursos\\Score_Item\\All_Grabed\\yare.ogg")
         if self.hay_corazones:
             self.jugador.verificar_colision_vida(self.lista_corazones, "Recursos\\Corazon\\Sound\\vpcn120.ogg", "Recursos\\Corazon\\Sound\\vpcn118.ogg") 

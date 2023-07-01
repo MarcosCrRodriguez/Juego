@@ -138,9 +138,7 @@ class Personaje_Principal (Objeto):
                 if self.lados["bottom"].colliderect(plataforma.lados_plataforma["top"]):
                     self.que_hace = direccion
 
-    def colision_enemigo(self, pantalla, lista_enemigos, posicion_inicial)->bool:
-        con_vida = True
-
+    def colision_enemigo(self, pantalla, lista_enemigos, posicion_inicial)->None:
         for enemigo in lista_enemigos:
             if self.lados["main"].colliderect(enemigo.lados_enemigo["main"]):
                 self.animar(pantalla, "recibo_daño")
@@ -157,10 +155,6 @@ class Personaje_Principal (Objeto):
                         self.damage_1.play()
                     case 0:
                         self.damage_0.play()
-                if self.salud < 0:
-                    con_vida = False
-
-        return con_vida    
 
     # revisar.....
     def enemigo_dispara(self, segundo_piso, enemigo)->bool:
