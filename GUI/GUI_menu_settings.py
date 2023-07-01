@@ -6,6 +6,7 @@ from GUI.GUI_label import *
 from GUI.GUI_form import *
 from GUI.GUI_button_image import *
 from GUI.GUI_contenedor_niveles import *
+from GUI.GUI_menu_controls import *
 from Levels.manejador_niveles import Manejador_Niveles
 from Levels.nivel import *
 from Levels.archivo_json import *
@@ -14,19 +15,8 @@ class Form_Settings(Form):
     def __init__(self, screen, x, y, w, h, color_background, color_border, active, path_imagen, niveles_dict, margen_x, margen_y, espacio, volumen):
         super().__init__(screen, x, y, w, h, color_background, color_border, active)
 
-        self.manejador_niveles = Manejador_Niveles(self._master)
-        self.nivel_completado = "Incompleto"
-
         self.volumen = volumen
         self.flag_play = True
-
-        retorno = generar_nivel_completado("archivo_nivel_completado.json", self.nivel_completado)
-        if retorno != -1:
-            print("\nSe cargaron correctamente los datos")
-        else:
-            print("Algo salio mal al generar el json")
-
-        self.nivel_acutal = "N/A"
 
         aux_imagen = pygame.image.load(path_imagen)
         aux_imagen = pygame.transform.scale(aux_imagen,(w,h))
@@ -41,11 +31,8 @@ class Form_Settings(Form):
 
         label_nivel = Label(self._slave, x=margen_x-20, y=20, w=w/2 -margen_x-10, h=50, text="Settings", 
                         font="Verdana", font_size=30, font_color="White", path_image="GUI\\bar.png")
-        # label_dificultad = Label(self._slave, x=margen_x +10 +w/2-margen_x-10, y=20, w=w/2 -margen_x-10, h=50, text="Dificultad", 
-        #                 font="Verdana", font_size=30, font_color="White", path_image="GUI\\bar.png")
         
         self.lista_widgets.append(label_nivel)
-        # self.lista_widgets.append(label_dificultad)
 
         pos_inicial_y = margen_y
 
@@ -66,12 +53,15 @@ class Form_Settings(Form):
                                      path_image="GUI\home.png")
         self.btn_play = Button(self._slave, x, y, 100, 100, 100, 50, "Red", "Blue", self.btn_play_click, "Nombre", 
                                "Pause", font="Comic Sans", font_size=15, font_color="White")
+        self.control_play = Button(self._slave, x, y, 100, 280, 120, 60, "Gray", "Black", self.btn_controls_click, "Nombre", 
+                               "Controls", font="Comic Sans", font_size=20, font_color="Black")
         self.label_volume = Label(self._slave, 650, 190, 100, 50, "20%", font="Comic Sans", font_size=15, 
                                   font_color="White", path_image="GUI\Table.png")
         self.slider_volumen = Slider(self._slave, x, y, 100, 200, 500, 15, self.volumen, "Blue", "White")
 
         self.lista_widgets.append(self._btn_home)
         self.lista_widgets.append(self.btn_play)
+        self.lista_widgets.append(self.control_play)
         self.lista_widgets.append(self.label_volume)
         self.lista_widgets.append(self.slider_volumen)
  
@@ -100,6 +90,14 @@ class Form_Settings(Form):
             self.btn_play.set_text("Pause")
 
         self.flag_play = not self.flag_play
+    
+    def btn_controls_click(self, texto):
+        settings_dict = []
+        
+        form_controls = Form_Controls(self._master, 450, 100, 1000, 600, (220,0,220), "White", True, "GUI\\background_settings.png",
+                                       settings_dict, 100, 100, 10)
+
+        self.show_dialog(form_controls)
 
     def update_volumen(self, lista_eventos):
         self.volumen = self.slider_volumen.value

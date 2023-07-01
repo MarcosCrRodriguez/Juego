@@ -15,7 +15,7 @@ RELOJ = pygame.time.Clock()
 PANTALLA = pygame.display.set_mode((TAMAÑO_PANTALLA))
 
 pygame.display.set_caption("Fight_Club")
-
+    
 icono = pygame.image.load("Recursos\\icon.png")
 pygame.display.set_icon(icono)
 
