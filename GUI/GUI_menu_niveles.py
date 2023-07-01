@@ -100,6 +100,8 @@ class Form_Menu_Niveles(Form):
 
         if self.nivel_completado == "Incompleto":
             self.nivel_completado = False
+        elif self.nivel_completado == "Fallido":
+            self.nivel_completado = False
         elif self.nivel_completado == "Completado":
             self.nivel_completado = True
 

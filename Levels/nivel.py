@@ -251,7 +251,7 @@ class Nivel:
         self._slave.blit(self.fondo_score, (12,110))
         self._slave.blit(texto, (22,120)) 
 
-        if self.time_left == 0 or self.jugador.salud == 0 or self.game_over == True:
+        if self.game_over == True:
             if self.finish == False:
                 self.nivel_completado = "Completado"
                 lista_datos = leer_json("archivo_score.json")
@@ -260,6 +260,20 @@ class Nivel:
                 retorno = generar_nivel_completado("archivo_nivel_completado.json", self.nivel_completado)
                 if retorno != -1:
                     print("\nSe cargaron correctamente los datos")
+                else:
+                    print("\n¡ERROR al cargar el archivo!")
+
+        if self.time_left == 0 or self.jugador.salud == 0:
+            if self.finish == False:
+                self.nivel_completado = "Fallido"
+                lista_datos = leer_json("archivo_score.json")
+                nombre = leer_dato_json("archivo_nombre.json")
+                self.finish = self.trabajando_base_datos(lista_datos, nombre)
+                retorno = generar_nivel_completado("archivo_nivel_completado.json", self.nivel_completado)
+                if retorno != -1:
+                    print("\nSe cargaron correctamente los datos")
+                else:
+                    print("\n¡ERROR al cargar el archivo!")
 
         self.dibujar_rectangulos()
 
