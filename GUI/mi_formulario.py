@@ -46,7 +46,6 @@ class Form_Prueba(Form):
         self.mail = font_controls.render("Mail: ", True, "Gray")
         self.user_for_existing = font_controls.render("User: ", True, "Gray")
 
- 
         #Agrego controles a lista
         self.lista_widgets.append(self.txtbox_usuario)
         self.lista_widgets.append(self.txtbox_edad)

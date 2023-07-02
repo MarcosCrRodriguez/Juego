@@ -288,17 +288,17 @@ class Nivel:
             self.jugador.direccion_derecha = True
             self.jugador.salto_derecha = True
             # mi_personaje.esta_quieto = False
-        elif keys[pygame.K_LEFT]:
+        if keys[pygame.K_LEFT]:
             self.jugador.que_hace = "izquierda"
             self.jugador.colision_plataforma(self.plataformas_colision, "left", "right", "izquierda")
             self.jugador.direccion_derecha = False
             self.jugador.salto_derecha = False
             # mi_personaje.esta_quieto = False
-        elif keys[pygame.K_UP]:
+        if keys[pygame.K_UP]:
             self.jugador.que_hace = "salta"
             # self.jugador.colision_plataforma(self.plataformas_colision, "top", "bottom", "salta")
             # mi_personaje.esta_quieto = False
-        elif keys[pygame.K_q]:
+        if keys[pygame.K_q]:
             if len(self.lista_proyectiles) < 1:
                 self.jugador.que_hace = "pj_proyectil"
                 if self.jugador.direccion_derecha:
@@ -307,9 +307,8 @@ class Nivel:
                     self.velocidad_proyectil = -18
                 proyectil = Proyectil(self.tamaño_proyectil, self.diccionario_animaciones_proyectil, self.jugador.lados["main"].center, self.velocidad_proyectil, "proyectil_derecha")
                 self.lista_proyectiles.append(proyectil)
-        else:
-            self.jugador.que_hace = "quieto"
-            # mi_personaje.esta_quieto = True
+        if not (keys[pygame.K_RIGHT] or keys[pygame.K_LEFT] or keys[pygame.K_UP] or keys[pygame.K_q]):
+            self.jugador.que_hace = "quieto"    
 
     def actualizar_pantalla(self)->None:
         self._slave.blit(self.fondo, (0,0))
