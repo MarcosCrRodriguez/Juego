@@ -259,9 +259,9 @@ class Nivel:
                 self.finish = self.trabajando_base_datos(lista_datos, nombre)
                 retorno = generar_nivel_completado("archivo_nivel_completado.json", self.nivel_completado)
                 if retorno != -1:
-                    print("/nSe cargaron correctamente los datos")
+                    print("\nSe cargaron correctamente los datos")
                 else:
-                    print("/n¡ERROR al cargar el archivo!")
+                    print("\n¡ERROR al cargar el archivo!")
 
         if self.time_left == 0 or self.jugador.salud == 0:
             if self.finish == False:
@@ -271,9 +271,9 @@ class Nivel:
                 self.finish = self.trabajando_base_datos(lista_datos, nombre)
                 retorno = generar_nivel_completado("archivo_nivel_completado.json", self.nivel_completado)
                 if retorno != -1:
-                    print("/nSe cargaron correctamente los datos")
+                    print("\nSe cargaron correctamente los datos")
                 else:
-                    print("/n¡ERROR al cargar el archivo!")
+                    print("\n¡ERROR al cargar el archivo!")
 
         self.dibujar_rectangulos()
 
@@ -473,7 +473,7 @@ class Nivel:
             lista_datos.append({"Nombre": nombre , "Score": self.jugador.mi_score})
             retorno = generar_json(self.ruta_json, lista_datos)
         if retorno != -1:
-            print("/nSe cargaron correctamente los datos")
+            print("\nSe cargaron correctamente los datos")
             carga = True
         else:
             print("Algo salio mal al generar el json")

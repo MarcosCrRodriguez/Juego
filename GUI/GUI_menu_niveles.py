@@ -18,7 +18,7 @@ class Form_Menu_Niveles(Form):
 
         retorno = generar_nivel_completado("archivo_nivel_completado.json", self.nivel_completado)
         if retorno != -1:
-            print("/nSe cargaron correctamente los datos")
+            print("\nSe cargaron correctamente los datos")
         else:
             print("Algo salio mal al generar el json")
 
