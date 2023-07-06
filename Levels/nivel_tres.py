@@ -43,7 +43,7 @@ class Nivel_Tres(Nivel):
         fondo_score = pygame.transform.scale(fondo_score,(203, 70))
 
         #MUSICA
-        pygame.mixer.music.load("Sound_track\[Music] Metal Gear Rising Revengeance - Vs. Jetstream Sam.mp3")
+        pygame.mixer.music.load("Sound_track/[Music] Metal Gear Rising Revengeance - Vs. Jetstream Sam.mp3")
         pygame.mixer.music.play(-1)
         pygame.mixer.music.set_volume(0.1)
 
@@ -125,11 +125,11 @@ class Nivel_Tres(Nivel):
         rectangulo_arriba = Plataforma(tamaño_rectangulo_t, posicion_inicial_rt, "Recursos/arriba.png")
         primer_plataforma = Plataforma(tamaño_plataforma_1, posicion_inicial_plataforma_1, "Recursos/floor.png")
         segunda_plataforma = Plataforma(tamaño_plataforma_2, posicion_inicial_plataforma_2, "Recursos/floor.png")
-        primer_piso = Plataforma(tamaño_primer_piso, posicion_inicial_primer_piso, "Recursos\corrupto_pf_1.png")
-        segundo_piso = Plataforma(tamaño_segundo_piso, posicion_inicial_segundo_piso, "Recursos\corrupto_pf_1.png")
-        tercer_piso = Plataforma(tamaño_plataforma_3, posicion_inicial_plataforma_3, "Recursos\corrupto_pf_1.png")
-        cuarto_piso = Plataforma(tamaño_plataforma_4, posicion_inicial_plataforma_4, "Recursos\corrupto_pf_1.png")
-        plataforma_vida = Plataforma(tamaño_plataforma_vida, posicion_inicial_plataforma_vida, "Recursos\corrupto_pf_2.png")
+        primer_piso = Plataforma(tamaño_primer_piso, posicion_inicial_primer_piso, "Recursos/corrupto_pf_1.png")
+        segundo_piso = Plataforma(tamaño_segundo_piso, posicion_inicial_segundo_piso, "Recursos/corrupto_pf_1.png")
+        tercer_piso = Plataforma(tamaño_plataforma_3, posicion_inicial_plataforma_3, "Recursos/corrupto_pf_1.png")
+        cuarto_piso = Plataforma(tamaño_plataforma_4, posicion_inicial_plataforma_4, "Recursos/corrupto_pf_1.png")
+        plataforma_vida = Plataforma(tamaño_plataforma_vida, posicion_inicial_plataforma_vida, "Recursos/corrupto_pf_2.png")
 
         #FUENTE_COINS
         font_coins = pygame.font.SysFont("Arial", 30)

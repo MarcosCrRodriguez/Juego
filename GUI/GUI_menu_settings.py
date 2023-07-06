@@ -42,7 +42,7 @@ class Form_Settings(Form):
                 cadena = ""
                 cadena = f"{s}"
                 jugador = Label(self._slave, pos_inicial_x, pos_inicial_y, w/2-margen_x, 100, cadena,
-                                "Verdana", 30, "White","GUI\Table.png")
+                                "Verdana", 30, "White","GUI/Table.png")
                 self.lista_widgets.append(jugador)
                 pos_inicial_x += w/2 - margen_x
             pos_inicial_y += 100 + espacio
@@ -50,13 +50,13 @@ class Form_Settings(Form):
         self._btn_home = Button_Image(screen=self._slave, x=w-70, y=h-70, master_x=x, master_y=y, w=50, h=50,
                                      color_background=(255,0,0), color_border=(255,0,255), onclick=self.btn_home_click,
                                      onclick_param="", text="", font="Verdana", font_size=15, font_color=(0,255,0), 
-                                     path_image="GUI\home.png")
+                                     path_image="GUI/home.png")
         self.btn_play = Button(self._slave, x, y, 100, 100, 100, 50, "Red", "Blue", self.btn_play_click, "Nombre", 
                                "Pause", font="Comic Sans", font_size=15, font_color="White")
         self.control_play = Button(self._slave, x, y, 100, 280, 120, 60, "Gray", "Black", self.btn_controls_click, "Nombre", 
                                "Controls", font="Comic Sans", font_size=20, font_color="Black")
         self.label_volume = Label(self._slave, 650, 190, 100, 50, "20%", font="Comic Sans", font_size=15, 
-                                  font_color="White", path_image="GUI\Table.png")
+                                  font_color="White", path_image="GUI/Table.png")
         self.slider_volumen = Slider(self._slave, x, y, 100, 200, 500, 15, self.volumen, "Blue", "White")
 
         self.lista_widgets.append(self._btn_home)

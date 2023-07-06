@@ -34,11 +34,11 @@ class Enemigo (Objeto):
 
         self.sonido_teleeport = pygame.mixer.Sound("Recursos/Final_Boss/teleporter.wav")
         self.sonido_teleeport.set_volume(0.4)
-        self.sonido_shine = pygame.mixer.Sound("Recursos\Final_Boss\shinde.wav")
+        self.sonido_shine = pygame.mixer.Sound("Recursos/Final_Boss/shinde.wav")
         self.sonido_shine.set_volume(0.4)
-        self.sonido_metari = pygame.mixer.Sound("Recursos\Final_Boss\metari.wav")
+        self.sonido_metari = pygame.mixer.Sound("Recursos/Final_Boss/metari.wav")
         self.sonido_metari.set_volume(0.4)
-        self.sonido_kurae = pygame.mixer.Sound("Recursos\Final_Boss\kurae.wav")
+        self.sonido_kurae = pygame.mixer.Sound("Recursos/Final_Boss/kurae.wav")
         self.sonido_kurae.set_volume(0.4)
 
         self.vida_finalboss = 330

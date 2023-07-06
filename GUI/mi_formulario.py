@@ -33,9 +33,9 @@ class Form_Prueba(Form):
         self.txtbox_ingreso_usuario = TextBox(self._slave, x, y, 150, 460, 230, 50, "Grey", "White", "Red", "Green", 2, font="Comic Sans", font_size=20, font_color="Black")
         self.registrar_play = Button(self._slave, x, y, 425, 120, 160, 50, "Grey", "Blue", self.btn_registrar_click, "Nombre", "Registrar", font="Comic Sans", font_size=20, font_color="Black")
         self.ingresar_play = Button(self._slave, x, y, 425, 460, 160, 50, "Grey", "Blue", self.btn_ingresar_click, "Nombre", "Ingresar", font="Comic Sans", font_size=20, font_color="Black")
-        self.settings = Button_Image(self._slave, x, y, 735, 45, 240, 75, "GUI\settings_image.png", self.btn_settings, "Any")
-        self.btn_tabla = Button_Image(self._slave, x, y, 845, 130, 130, 60, "GUI\score_image.png", self.btn_tabla_click, "Any") 
-        self.btn_niveles = Button_Image(self._slave, x, y, 685, 452, 300, 130, "GUI\start_image.png", self.btn_niveles_click, "Any")
+        self.settings = Button_Image(self._slave, x, y, 735, 45, 240, 75, "GUI/settings_image.png", self.btn_settings, "Any")
+        self.btn_tabla = Button_Image(self._slave, x, y, 845, 130, 130, 60, "GUI/score_image.png", self.btn_tabla_click, "Any") 
+        self.btn_niveles = Button_Image(self._slave, x, y, 685, 452, 300, 130, "GUI/start_image.png", self.btn_niveles_click, "Any")
         #---------------------------------------------------------------------------#
 
         font_controls = pygame.font.SysFont("Comic Sans", 30)
@@ -59,7 +59,7 @@ class Form_Prueba(Form):
 
         # self.texto = "Nombre"
 
-        pygame.mixer.music.load("GUI\Metal Gear Rising REVENGEANCE MainMenu.mp3")
+        pygame.mixer.music.load("GUI/Metal Gear Rising REVENGEANCE MainMenu.mp3")
         pygame.mixer.music.set_volume(self.volumen)
         pygame.mixer.music.play(-1)
 
@@ -91,7 +91,7 @@ class Form_Prueba(Form):
         nombre = self.txtbox_usuario.get_text()
         retorno = generar_dato_json("archivo_nombre.json", nombre)
         if retorno != -1:
-            print("\nSe cargaron correctamente los datos")
+            print("/nSe cargaron correctamente los datos")
         else:
             print("Algo salio mal al generar el json")
 

@@ -26,7 +26,7 @@ class Form_Menu_Pause(Form):
         #-------------------------------CONTROLES-----------------------------------#
         self.btn_renaudar = Button_Image(self._slave, x, y, 245, 95, 85, 58, "GUI/back_menu.png", self.btn_pause_click, "Any") 
         self.btn_play = Button(self._slave, x, y, 100, 100, 100, 50, "Gray", "Black", self.btn_play_click, "Nombre", "Pause", font="Comic Sans", font_size=15, font_color="Black")
-        self.label_volume = Label(self._slave, 650, 190, 100, 50, "20%", font="Comic Sans", font_size=15, font_color="White", path_image="GUI\Table.png")
+        self.label_volume = Label(self._slave, 650, 190, 100, 50, "20%", font="Comic Sans", font_size=15, font_color="White", path_image="GUI/Table.png")
         self.slider_volumen = Slider(self._slave, x, y, 100, 200, 500, 15, self.volumen, "Blue", "White")
         #---------------------------------------------------------------------------#
 
@@ -36,7 +36,7 @@ class Form_Menu_Pause(Form):
         self.lista_widgets.append(self.label_volume)
         self.lista_widgets.append(self.slider_volumen)
 
-        pygame.mixer.music.load("GUI\Metal Gear Rising REVENGEANCE MainMenu.mp3")
+        pygame.mixer.music.load("GUI/Metal Gear Rising REVENGEANCE MainMenu.mp3")
 
         pygame.mixer.music.set_volume(self.volumen)
         pygame.mixer.music.play(-1)

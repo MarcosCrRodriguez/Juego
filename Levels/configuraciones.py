@@ -149,44 +149,44 @@ crabtank_camina = [pygame.image.load("Recursos/Crabtank_Camina/14.png"),
 
 crabtank_camina_derecha = girar_imagenes(crabtank_camina, True, False) 
 
-crabtank_proyectil = [pygame.image.load("Recursos\Crabtank_Ataca/48.png"),
-                      pygame.image.load("Recursos\Crabtank_Ataca/49.png"),
-                      pygame.image.load("Recursos\Crabtank_Ataca/50.png"),
-                      pygame.image.load("Recursos\Crabtank_Ataca/51.png"),
-                      pygame.image.load("Recursos\Crabtank_Ataca/52.png"),
-                      pygame.image.load("Recursos\Crabtank_Ataca/53.png"),
-                      pygame.image.load("Recursos\Crabtank_Ataca/54.png"),
-                      pygame.image.load("Recursos\Crabtank_Ataca/55.png"),
-                      pygame.image.load("Recursos\Crabtank_Ataca/56.png"),
-                      pygame.image.load("Recursos\Crabtank_Ataca/57.png"),
-                      pygame.image.load("Recursos\Crabtank_Ataca/58.png"),
-                      pygame.image.load("Recursos\Crabtank_Ataca/59.png")
+crabtank_proyectil = [pygame.image.load("Recursos/Crabtank_Ataca/48.png"),
+                      pygame.image.load("Recursos/Crabtank_Ataca/49.png"),
+                      pygame.image.load("Recursos/Crabtank_Ataca/50.png"),
+                      pygame.image.load("Recursos/Crabtank_Ataca/51.png"),
+                      pygame.image.load("Recursos/Crabtank_Ataca/52.png"),
+                      pygame.image.load("Recursos/Crabtank_Ataca/53.png"),
+                      pygame.image.load("Recursos/Crabtank_Ataca/54.png"),
+                      pygame.image.load("Recursos/Crabtank_Ataca/55.png"),
+                      pygame.image.load("Recursos/Crabtank_Ataca/56.png"),
+                      pygame.image.load("Recursos/Crabtank_Ataca/57.png"),
+                      pygame.image.load("Recursos/Crabtank_Ataca/58.png"),
+                      pygame.image.load("Recursos/Crabtank_Ataca/59.png")
                       ]
 
 crabtank_proyectil_izquierda = girar_imagenes(crabtank_proyectil, True, False) 
 
-crabtank_destroyed = [pygame.image.load("Recursos\Crabyank_Destroy/163.png"),
-                      pygame.image.load("Recursos\Crabyank_Destroy/163.png"),
-                      pygame.image.load("Recursos\Crabyank_Destroy/164.png"),
-                      pygame.image.load("Recursos\Crabyank_Destroy/164.png"),
-                      pygame.image.load("Recursos\Crabyank_Destroy/165.png"),
-                      pygame.image.load("Recursos\Crabyank_Destroy/165.png"),
-                      pygame.image.load("Recursos\Crabyank_Destroy/166.png"),
-                      pygame.image.load("Recursos\Crabyank_Destroy/166.png"),
-                      pygame.image.load("Recursos\Crabyank_Destroy/167.png"),
-                      pygame.image.load("Recursos\Crabyank_Destroy/167.png"),
-                      pygame.image.load("Recursos\Crabyank_Destroy/168.png"),
-                      pygame.image.load("Recursos\Crabyank_Destroy/168.png"),
-                      pygame.image.load("Recursos\Crabyank_Destroy/169.png"),
-                      pygame.image.load("Recursos\Crabyank_Destroy/169.png"),
-                      pygame.image.load("Recursos\Crabyank_Destroy/170.png"),
-                      pygame.image.load("Recursos\Crabyank_Destroy/170.png"),
-                      pygame.image.load("Recursos\Crabyank_Destroy/171.png"),
-                      pygame.image.load("Recursos\Crabyank_Destroy/171.png"),
-                      pygame.image.load("Recursos\Crabyank_Destroy/172.png"),
-                      pygame.image.load("Recursos\Crabyank_Destroy/172.png"),
-                      pygame.image.load("Recursos\Crabyank_Destroy/173.png"),
-                      pygame.image.load("Recursos\Crabyank_Destroy/173.png")
+crabtank_destroyed = [pygame.image.load("Recursos/Crabyank_Destroy/163.png"),
+                      pygame.image.load("Recursos/Crabyank_Destroy/163.png"),
+                      pygame.image.load("Recursos/Crabyank_Destroy/164.png"),
+                      pygame.image.load("Recursos/Crabyank_Destroy/164.png"),
+                      pygame.image.load("Recursos/Crabyank_Destroy/165.png"),
+                      pygame.image.load("Recursos/Crabyank_Destroy/165.png"),
+                      pygame.image.load("Recursos/Crabyank_Destroy/166.png"),
+                      pygame.image.load("Recursos/Crabyank_Destroy/166.png"),
+                      pygame.image.load("Recursos/Crabyank_Destroy/167.png"),
+                      pygame.image.load("Recursos/Crabyank_Destroy/167.png"),
+                      pygame.image.load("Recursos/Crabyank_Destroy/168.png"),
+                      pygame.image.load("Recursos/Crabyank_Destroy/168.png"),
+                      pygame.image.load("Recursos/Crabyank_Destroy/169.png"),
+                      pygame.image.load("Recursos/Crabyank_Destroy/169.png"),
+                      pygame.image.load("Recursos/Crabyank_Destroy/170.png"),
+                      pygame.image.load("Recursos/Crabyank_Destroy/170.png"),
+                      pygame.image.load("Recursos/Crabyank_Destroy/171.png"),
+                      pygame.image.load("Recursos/Crabyank_Destroy/171.png"),
+                      pygame.image.load("Recursos/Crabyank_Destroy/172.png"),
+                      pygame.image.load("Recursos/Crabyank_Destroy/172.png"),
+                      pygame.image.load("Recursos/Crabyank_Destroy/173.png"),
+                      pygame.image.load("Recursos/Crabyank_Destroy/173.png")
                       ]
 
 crabtank_destroyed_izquierda = girar_imagenes(crabtank_destroyed, True, False) 
@@ -283,26 +283,26 @@ bird_vuela_izquierda = girar_imagenes(bird_vuela, True, False)
 
 #------------------------------------------------------------#
 
-smile_camina_izquierda = [pygame.image.load("Recursos\Smile_Camina/1.png"),
-                        pygame.image.load("Recursos\Smile_Camina/2.png"),
-                        pygame.image.load("Recursos\Smile_Camina/3.png"),
-                        pygame.image.load("Recursos\Smile_Camina/4.png")
+smile_camina_izquierda = [pygame.image.load("Recursos/Smile_Camina/1.png"),
+                        pygame.image.load("Recursos/Smile_Camina/2.png"),
+                        pygame.image.load("Recursos/Smile_Camina/3.png"),
+                        pygame.image.load("Recursos/Smile_Camina/4.png")
                         ]
 
-smile_camina = [pygame.image.load("Recursos\Smile_Camina/6.png"),
-                pygame.image.load("Recursos\Smile_Camina/7.png"),
-                pygame.image.load("Recursos\Smile_Camina/8.png"),
-                pygame.image.load("Recursos\Smile_Camina/9.png")
+smile_camina = [pygame.image.load("Recursos/Smile_Camina/6.png"),
+                pygame.image.load("Recursos/Smile_Camina/7.png"),
+                pygame.image.load("Recursos/Smile_Camina/8.png"),
+                pygame.image.load("Recursos/Smile_Camina/9.png")
                 ]
 
-purple_smile_camina_izquierda = [pygame.image.load("Recursos\Final_Boss\Smile_Purple/1.png"),
-                                pygame.image.load("Recursos\Final_Boss\Smile_Purple/2.png"),
-                                pygame.image.load("Recursos\Final_Boss\Smile_Purple/3.png"),
-                                pygame.image.load("Recursos\Final_Boss\Smile_Purple/4.png")
+purple_smile_camina_izquierda = [pygame.image.load("Recursos/Final_Boss/Smile_Purple/1.png"),
+                                pygame.image.load("Recursos/Final_Boss/Smile_Purple/2.png"),
+                                pygame.image.load("Recursos/Final_Boss/Smile_Purple/3.png"),
+                                pygame.image.load("Recursos/Final_Boss/Smile_Purple/4.png")
                                 ]
 
-purple_smile_camina = [pygame.image.load("Recursos\Final_Boss\Smile_Purple/6.png"),
-                        pygame.image.load("Recursos\Final_Boss\Smile_Purple/7.png"),
-                        pygame.image.load("Recursos\Final_Boss\Smile_Purple/8.png"),
-                        pygame.image.load("Recursos\Final_Boss\Smile_Purple/9.png")
+purple_smile_camina = [pygame.image.load("Recursos/Final_Boss/Smile_Purple/6.png"),
+                        pygame.image.load("Recursos/Final_Boss/Smile_Purple/7.png"),
+                        pygame.image.load("Recursos/Final_Boss/Smile_Purple/8.png"),
+                        pygame.image.load("Recursos/Final_Boss/Smile_Purple/9.png")
                         ]

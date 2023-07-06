@@ -41,11 +41,11 @@ class Personaje_Principal (Objeto):
         self.salud = 6
         self.daño_recibido = 0
 
-        self.damage_2 = pygame.mixer.Sound("Recursos/Daño_recibido\Sonido/vpcn005.ogg")
+        self.damage_2 = pygame.mixer.Sound("Recursos/Daño_recibido/Sonido/vpcn005.ogg")
         self.damage_2.set_volume(0.4)
-        self.damage_1 = pygame.mixer.Sound("Recursos/Daño_recibido\Sonido/vpcn030.ogg")
+        self.damage_1 = pygame.mixer.Sound("Recursos/Daño_recibido/Sonido/vpcn030.ogg")
         self.damage_1.set_volume(0.4)
-        self.damage_0 = pygame.mixer.Sound("Recursos/Daño_recibido\Sonido/vpcn031.ogg")
+        self.damage_0 = pygame.mixer.Sound("Recursos/Daño_recibido/Sonido/vpcn031.ogg")
         self.damage_0.set_volume(0.4)
 
     def reescalar_animaciones(self)->None:

@@ -130,11 +130,11 @@ class Nivel:
             self.barra_vida = pygame.image.load("Recursos/barra_vida.png")
             self.barra_vida = pygame.transform.scale(self.barra_vida,(330, 25))
 
-            self.sonido_metari = pygame.mixer.Sound("Recursos\Final_Boss\metari.wav")
+            self.sonido_metari = pygame.mixer.Sound("Recursos/Final_Boss/metari.wav")
             self.sonido_metari.set_volume(0.4)
             self.finalboss_dies = pygame.mixer.Sound("Recursos/Final_Boss/final_boss_die.wav")
             self.finalboss_dies.set_volume(0.5)
-            self.sonido_spawn = pygame.mixer.Sound("Recursos\Final_Boss\spawn.wav")
+            self.sonido_spawn = pygame.mixer.Sound("Recursos/Final_Boss/spawn.wav")
             self.sonido_spawn.set_volume(0.4)
             self.sonido_spawn.play()
             
@@ -259,9 +259,9 @@ class Nivel:
                 self.finish = self.trabajando_base_datos(lista_datos, nombre)
                 retorno = generar_nivel_completado("archivo_nivel_completado.json", self.nivel_completado)
                 if retorno != -1:
-                    print("\nSe cargaron correctamente los datos")
+                    print("/nSe cargaron correctamente los datos")
                 else:
-                    print("\n¡ERROR al cargar el archivo!")
+                    print("/n¡ERROR al cargar el archivo!")
 
         if self.time_left == 0 or self.jugador.salud == 0:
             if self.finish == False:
@@ -271,9 +271,9 @@ class Nivel:
                 self.finish = self.trabajando_base_datos(lista_datos, nombre)
                 retorno = generar_nivel_completado("archivo_nivel_completado.json", self.nivel_completado)
                 if retorno != -1:
-                    print("\nSe cargaron correctamente los datos")
+                    print("/nSe cargaron correctamente los datos")
                 else:
-                    print("\n¡ERROR al cargar el archivo!")
+                    print("/n¡ERROR al cargar el archivo!")
 
         self.dibujar_rectangulos()
 
@@ -473,7 +473,7 @@ class Nivel:
             lista_datos.append({"Nombre": nombre , "Score": self.jugador.mi_score})
             retorno = generar_json(self.ruta_json, lista_datos)
         if retorno != -1:
-            print("\nSe cargaron correctamente los datos")
+            print("/nSe cargaron correctamente los datos")
             carga = True
         else:
             print("Algo salio mal al generar el json")

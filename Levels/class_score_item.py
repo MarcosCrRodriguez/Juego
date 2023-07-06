@@ -20,7 +20,7 @@ class Score_Item (Objeto):
         self.rectangulo.x = posicion_inicial[0]
         self.rectangulo.y = posicion_inicial[1]
         #SONIDO
-        self.sonido_colision = pygame.mixer.Sound("Sound_track\coin_sound.wav")
+        self.sonido_colision = pygame.mixer.Sound("Sound_track/coin_sound.wav")
         self.sonido_colision.set_volume(0.6)
 
     def reescalar_animaciones(self)->None:

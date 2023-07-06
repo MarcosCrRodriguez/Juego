@@ -18,7 +18,7 @@ class Form_Menu_Niveles(Form):
 
         retorno = generar_nivel_completado("archivo_nivel_completado.json", self.nivel_completado)
         if retorno != -1:
-            print("\nSe cargaron correctamente los datos")
+            print("/nSe cargaron correctamente los datos")
         else:
             print("Algo salio mal al generar el json")
 
@@ -49,14 +49,14 @@ class Form_Menu_Niveles(Form):
                 cadena = ""
                 cadena = f"{s}"
                 jugador = Label(self._slave, pos_inicial_x, pos_inicial_y, w/2-margen_x, 100, cadena,
-                                "Verdana", 30, "White","GUI\Table.png")
+                                "Verdana", 30, "White","GUI/Table.png")
                 self.lista_widgets.append(jugador)
                 pos_inicial_x += w/2 - margen_x
             pos_inicial_y += 100 + espacio
 
         self._btn_home = Button_Image(screen=self._slave, x=w-70, y=h-70, master_x=x, master_y=y, w=50, h=50,
                                      color_background=(255,0,0), color_border=(255,0,255), onclick=self.btn_home_click,
-                                     onclick_param="", text="", font="Verdana", font_size=15, font_color=(0,255,0), path_image="GUI\home.png")
+                                     onclick_param="", text="", font="Verdana", font_size=15, font_color=(0,255,0), path_image="GUI/home.png")
         self._btn_level_1 = Button_Image(screen=self._slave, x=272, y=108, master_x=x, master_y=y, w=70, h=70,
                                          color_background=(255,0,0), color_border=(0,0,255), onclick=self.entrar_nivel,
                                          onclick_param="nivel_uno", text="", font="Verdana", font_size=15, font_color=(0,255,0), path_image="GUI/1st_lvl.png")
