@@ -60,7 +60,7 @@ class Personaje_Principal (Objeto):
             self.contador_pasos = 0
 
         pantalla.blit(animacion[self.contador_pasos], self.lados["main"]) 
-        self.contador_pasos += 1  
+        self.contador_pasos += 1
 
     def mover(self, velocidad)->None:
         for lado in self.lados:

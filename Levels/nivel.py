@@ -297,7 +297,7 @@ class Nivel:
         elif keys[pygame.K_UP]:
             self.jugador.que_hace = "salta"
             # self.jugador.colision_plataforma(self.plataformas_colision, "top", "bottom", "salta")
-            # mi_personaje.esta_quieto = False
+            # mi_personaje.esta_quieto = False   
         elif keys[pygame.K_q]:
             if len(self.lista_proyectiles) < 1:
                 self.jugador.que_hace = "pj_proyectil"
@@ -308,7 +308,7 @@ class Nivel:
                 proyectil = Proyectil(self.tamaño_proyectil, self.diccionario_animaciones_proyectil, self.jugador.lados["main"].center, self.velocidad_proyectil, "proyectil_derecha")
                 self.lista_proyectiles.append(proyectil)
         else:
-            self.jugador.que_hace = "quieto"    
+            self.jugador.que_hace = "quieto" 
 
     def actualizar_pantalla(self)->None:
         self._slave.blit(self.fondo, (0,0))
