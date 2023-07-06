@@ -32,7 +32,7 @@ class Enemigo (Objeto):
 
         self.velocidad_proyectil = 12
 
-        self.sonido_teleeport = pygame.mixer.Sound("Recursos\\Final_Boss\\teleporter.wav")
+        self.sonido_teleeport = pygame.mixer.Sound("Recursos/Final_Boss/teleporter.wav")
         self.sonido_teleeport.set_volume(0.4)
         self.sonido_shine = pygame.mixer.Sound("Recursos\Final_Boss\shinde.wav")
         self.sonido_shine.set_volume(0.4)

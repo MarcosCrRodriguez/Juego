@@ -41,11 +41,11 @@ class Personaje_Principal (Objeto):
         self.salud = 6
         self.daño_recibido = 0
 
-        self.damage_2 = pygame.mixer.Sound("Recursos\\Daño_recibido\Sonido\\vpcn005.ogg")
+        self.damage_2 = pygame.mixer.Sound("Recursos/Daño_recibido\Sonido/vpcn005.ogg")
         self.damage_2.set_volume(0.4)
-        self.damage_1 = pygame.mixer.Sound("Recursos\\Daño_recibido\Sonido\\vpcn030.ogg")
+        self.damage_1 = pygame.mixer.Sound("Recursos/Daño_recibido\Sonido/vpcn030.ogg")
         self.damage_1.set_volume(0.4)
-        self.damage_0 = pygame.mixer.Sound("Recursos\\Daño_recibido\Sonido\\vpcn031.ogg")
+        self.damage_0 = pygame.mixer.Sound("Recursos/Daño_recibido\Sonido/vpcn031.ogg")
         self.damage_0.set_volume(0.4)
 
     def reescalar_animaciones(self)->None:
@@ -107,7 +107,7 @@ class Personaje_Principal (Objeto):
                 if not self.esta_saltando:
                     self.esta_saltando = True
                     self.desplazamiento_y = self.potencia_salto
-                    self.salta_vol = pygame.mixer.Sound("Recursos\\Salta\\Sound\\vpcn100.ogg")
+                    self.salta_vol = pygame.mixer.Sound("Recursos/Salta/Sound/vpcn100.ogg")
                     self.salta_vol.set_volume(0.2)
                     self.salta_vol.play()
             case "quieto":
@@ -122,7 +122,7 @@ class Personaje_Principal (Objeto):
                         self.animar(pantalla, "animacion_proyectil_pj")
                     else:
                         self.animar(pantalla, "animacion_proyectil_pj_izquierda")
-                    self.salta_vol = pygame.mixer.Sound("Recursos\\Proyectil_Animacion_PJ\\Sound\\vpcn101.ogg")
+                    self.salta_vol = pygame.mixer.Sound("Recursos/Proyectil_Animacion_PJ/Sound/vpcn101.ogg")
                     self.salta_vol.set_volume(0.2)
                     self.salta_vol.play()
             case "recibe_daño":

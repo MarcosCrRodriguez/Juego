@@ -30,7 +30,7 @@ class Form_Settings(Form):
         self._margen_y = margen_y
 
         label_nivel = Label(self._slave, x=margen_x-20, y=20, w=w/2 -margen_x-10, h=50, text="Settings", 
-                        font="Verdana", font_size=30, font_color="White", path_image="GUI\\bar.png")
+                        font="Verdana", font_size=30, font_color="White", path_image="GUI/bar.png")
         
         self.lista_widgets.append(label_nivel)
 
@@ -94,7 +94,7 @@ class Form_Settings(Form):
     def btn_controls_click(self, texto):
         settings_dict = []
         
-        form_controls = Form_Controls(self._master, 450, 100, 1000, 600, (220,0,220), "White", True, "GUI\\background_settings.png",
+        form_controls = Form_Controls(self._master, 450, 100, 1000, 600, (220,0,220), "White", True, "GUI/background_settings.png",
                                        settings_dict, 100, 100, 10)
 
         self.show_dialog(form_controls)

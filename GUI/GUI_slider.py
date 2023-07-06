@@ -5,7 +5,7 @@ class Slider(Widget):
     def __init__(self,screen, master_x, master_y, x,y,w,h, value,color_background,  color_circulo):
         super().__init__(screen, x,y,w,h,color_background)
 
-        self.bar = pygame.image.load("GUI\\bar_slider.png")
+        self.bar = pygame.image.load("GUI/bar_slider.png")
         self.bar = pygame.transform.scale(self.bar,(w,h)) 
 
         self.value = value

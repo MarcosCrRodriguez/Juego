@@ -34,9 +34,9 @@ class Form_Menu_Niveles(Form):
         self._margen_y = margen_y
 
         label_nivel = Label(self._slave, x=margen_x +10, y=20, w=w/2 -margen_x-10, h=50, text="Nivel", 
-                        font="Verdana", font_size=30, font_color="White", path_image="GUI\\bar.png")
+                        font="Verdana", font_size=30, font_color="White", path_image="GUI/bar.png")
         label_dificultad = Label(self._slave, x=margen_x +10 +w/2-margen_x-10, y=20, w=w/2 -margen_x-10, h=50, text="Dificultad", 
-                        font="Verdana", font_size=30, font_color="White", path_image="GUI\\bar.png")
+                        font="Verdana", font_size=30, font_color="White", path_image="GUI/bar.png")
         
         self.lista_widgets.append(label_nivel)
         self.lista_widgets.append(label_dificultad)
@@ -59,13 +59,13 @@ class Form_Menu_Niveles(Form):
                                      onclick_param="", text="", font="Verdana", font_size=15, font_color=(0,255,0), path_image="GUI\home.png")
         self._btn_level_1 = Button_Image(screen=self._slave, x=272, y=108, master_x=x, master_y=y, w=70, h=70,
                                          color_background=(255,0,0), color_border=(0,0,255), onclick=self.entrar_nivel,
-                                         onclick_param="nivel_uno", text="", font="Verdana", font_size=15, font_color=(0,255,0), path_image="GUI\\1st_lvl.png")
+                                         onclick_param="nivel_uno", text="", font="Verdana", font_size=15, font_color=(0,255,0), path_image="GUI/1st_lvl.png")
         self._btn_level_2 = Button_Image(screen=self._slave, x=275, y=218, master_x=x, master_y=y, w=70, h=70,
                                          color_background=(255,0,0), color_border=(0,0,255), onclick=self.entrar_nivel,
-                                         onclick_param="nivel_dos", text="", font="Verdana", font_size=15, font_color=(0,255,0), path_image="GUI\\2nd_lvl.png")
+                                         onclick_param="nivel_dos", text="", font="Verdana", font_size=15, font_color=(0,255,0), path_image="GUI/2nd_lvl.png")
         self._btn_level_3 = Button_Image(screen=self._slave, x=275, y=328, master_x=x, master_y=y, w=70, h=70,
                                          color_background=(255,0,0), color_border=(0,0,255), onclick=self.entrar_nivel,
-                                         onclick_param="nivel_tres", text="", font="Verdana", font_size=15, font_color=(0,255,0), path_image="GUI\\3rd_lvl.png")
+                                         onclick_param="nivel_tres", text="", font="Verdana", font_size=15, font_color=(0,255,0), path_image="GUI/3rd_lvl.png")
 
         self.lista_widgets.append(self._btn_home)
         self.lista_widgets.append(self._btn_level_1)

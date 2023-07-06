@@ -24,7 +24,7 @@ class Proyectil (Objeto):
         self.rectangulo.y = posicion_actual[1]
         self.lados_proyectil = obtener_rectangulos(self.rectangulo)
         #SONIDO
-        self.sonido_colision = pygame.mixer.Sound("Recursos\\Proyerctil_pj\\Colision_proyectil\\Sound Effect.wav")
+        self.sonido_colision = pygame.mixer.Sound("Recursos/Proyerctil_pj/Colision_proyectil/Sound Effect.wav")
         self.sonido_colision.set_volume(0.4)
 
         self.velocidad = velocidad

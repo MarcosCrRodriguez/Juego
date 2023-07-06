@@ -20,30 +20,30 @@ class Nivel_Dos(Nivel):
         self.nivel_dos_completado = "Incompleto"
 
         #VIDA
-        mi_imagen = pygame.image.load("Recursos\\face_pj.png")
+        mi_imagen = pygame.image.load("Recursos/face_pj.png")
         mi_imagen = pygame.transform.scale(mi_imagen,(76,76))
-        icono_pj = pygame.image.load("Recursos\\icono_pj.png")
+        icono_pj = pygame.image.load("Recursos/icono_pj.png")
         icono_pj = pygame.transform.scale(icono_pj,(90,90))
-        fondo_vida = pygame.image.load("Recursos\\vida.png")
+        fondo_vida = pygame.image.load("Recursos/vida.png")
         fondo_vida = pygame.transform.scale(fondo_vida,(275, 75))
 
         #FONDO
-        fondo = pygame.image.load("Recursos\\fondo_2.jpg")
+        fondo = pygame.image.load("Recursos/fondo_2.jpg")
         fondo = pygame.transform.scale(fondo,(W,H))
 
         #IMAGEN_TIMER
         pygame.font.init()
         font_timer = pygame.font.SysFont("Arial", 30)
 
-        fondo_timer = pygame.image.load("Recursos\\em_castelvania.png")
+        fondo_timer = pygame.image.load("Recursos/em_castelvania.png")
         fondo_timer = pygame.transform.scale(fondo_timer,(250, 97))
 
         #IMAGEN_SCORE
-        fondo_score = pygame.image.load("Recursos\\fondo_score.png")
+        fondo_score = pygame.image.load("Recursos/fondo_score.png")
         fondo_score = pygame.transform.scale(fondo_score,(203, 70))
 
         #MUSICA
-        pygame.mixer.music.load("Sound_track\\[Music] Metal Gear Rising Revengeance - The Mastermind.mp3")
+        pygame.mixer.music.load("Sound_track/[Music] Metal Gear Rising Revengeance - The Mastermind.mp3")
         pygame.mixer.music.play(-1)
         pygame.mixer.music.set_volume(0.1)
 
@@ -127,22 +127,22 @@ class Nivel_Dos(Nivel):
         posicion_inicial_rt = (0,-8)
         tamaño_rectangulo_t = (W,6)
 
-        rectangulo_derecha = Plataforma(tamaño_rectangulo_r, posicion_inicial_rr, "Recursos\\costado.png")
-        rectangulo_izquierda = Plataforma(tamaño_rectangulo_l, posicion_inicial_rl, "Recursos\\costado.png")
-        rectangulo_arriba = Plataforma(tamaño_rectangulo_t, posicion_inicial_rt, "Recursos\\arriba.png")
-        primer_piso = Plataforma(tamaño_plataforma_1, posicion_inicial_plataforma_1, "Recursos\\primer_piso.png")
-        segundo_piso = Plataforma(tamaño_plataforma_2, posicion_inicial_plataforma_2, "Recursos\\primer_piso.png")
-        tercer_piso = Plataforma(tamaño_primer_piso, posicion_inicial_primer_piso, "Recursos\\primer_piso.png")
-        cuarto_piso = Plataforma(tamaño_segundo_piso, posicion_inicial_segundo_piso, "Recursos\\primer_piso.png")
-        quinto_piso = Plataforma(tamaño_plataforma_5, posicion_inicial_plataforma_5, "Recursos\\primer_piso.png")
+        rectangulo_derecha = Plataforma(tamaño_rectangulo_r, posicion_inicial_rr, "Recursos/costado.png")
+        rectangulo_izquierda = Plataforma(tamaño_rectangulo_l, posicion_inicial_rl, "Recursos/costado.png")
+        rectangulo_arriba = Plataforma(tamaño_rectangulo_t, posicion_inicial_rt, "Recursos/arriba.png")
+        primer_piso = Plataforma(tamaño_plataforma_1, posicion_inicial_plataforma_1, "Recursos/primer_piso.png")
+        segundo_piso = Plataforma(tamaño_plataforma_2, posicion_inicial_plataforma_2, "Recursos/primer_piso.png")
+        tercer_piso = Plataforma(tamaño_primer_piso, posicion_inicial_primer_piso, "Recursos/primer_piso.png")
+        cuarto_piso = Plataforma(tamaño_segundo_piso, posicion_inicial_segundo_piso, "Recursos/primer_piso.png")
+        quinto_piso = Plataforma(tamaño_plataforma_5, posicion_inicial_plataforma_5, "Recursos/primer_piso.png")
 
         posicion_inicial_invisible_1 = (1400,340)
         tamaño_invisible_1 = (170,25)
         posicion_inicial_invisible_2 = (1640,250)
         tamaño_invisible_2 = (260,25)
 
-        invisible_1 = Plataforma(tamaño_invisible_1, posicion_inicial_invisible_1, "Recursos\\primer_piso.png")
-        invisible_2 = Plataforma(tamaño_invisible_2, posicion_inicial_invisible_2, "Recursos\\primer_piso.png")
+        invisible_1 = Plataforma(tamaño_invisible_1, posicion_inicial_invisible_1, "Recursos/primer_piso.png")
+        invisible_2 = Plataforma(tamaño_invisible_2, posicion_inicial_invisible_2, "Recursos/primer_piso.png")
 
         # self.lista_last_plataforms = []
         # self.lista_last_plataforms.append(invisible_1)

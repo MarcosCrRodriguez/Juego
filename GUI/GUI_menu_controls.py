@@ -17,15 +17,15 @@ class Form_Controls(Form):
         aux_imagen = pygame.image.load(path_imagen)
         aux_imagen = pygame.transform.scale(aux_imagen,(w,h))
 
-        self.q_buttom = pygame.image.load("GUI\\16.png")
+        self.q_buttom = pygame.image.load("GUI/16.png")
         self.q_buttom = pygame.transform.scale(self.q_buttom,(35,35))
-        self.top_arrow = pygame.image.load("GUI\\42.png")
+        self.top_arrow = pygame.image.load("GUI/42.png")
         self.top_arrow = pygame.transform.scale(self.top_arrow,(35,35))
-        self.left_arrow = pygame.image.load("GUI\\45.png")
+        self.left_arrow = pygame.image.load("GUI/45.png")
         self.left_arrow = pygame.transform.scale(self.left_arrow,(35,35))
-        self.right_arrow = pygame.image.load("GUI\\43.png")
+        self.right_arrow = pygame.image.load("GUI/43.png")
         self.right_arrow = pygame.transform.scale(self.right_arrow,(35,35))
-        self.F12 = pygame.image.load("GUI\\F12.png")
+        self.F12 = pygame.image.load("GUI/F12.png")
         self.F12 = pygame.transform.scale(self.F12,(65,43))
 
         font_controls = pygame.font.SysFont("Comic Sans", 34)
@@ -42,7 +42,7 @@ class Form_Controls(Form):
         self._margen_y = margen_y
 
         label_nivel = Label(self._slave, x=margen_x-20, y=20, w=w/2 -margen_x-10, h=50, text="Controls", 
-                        font="Verdana", font_size=30, font_color="White", path_image="GUI\\bar.png")
+                        font="Verdana", font_size=30, font_color="White", path_image="GUI/bar.png")
         
         self.lista_widgets.append(label_nivel)
 

@@ -23,7 +23,7 @@ class Form_Prueba(Form):
         
         pygame.mixer.init()
 
-        self.window = pygame.image.load("GUI\\window_galaxy.png")
+        self.window = pygame.image.load("GUI/window_galaxy.png")
         self.window = pygame.transform.scale(self.window,(w,h))     
 
         #-------------------------------CONTROLES-----------------------------------#
@@ -101,7 +101,7 @@ class Form_Prueba(Form):
     def btn_tabla_click(self, texto):
         score_dict = leer_json("archivo_score.json")
         
-        form_puntaje = Form_Menu_Score(self._master, 450, 100, 1000, 600, (220,0,220), "White", True, "GUI\\board_menu.jpg",
+        form_puntaje = Form_Menu_Score(self._master, 450, 100, 1000, 600, (220,0,220), "White", True, "GUI/board_menu.jpg",
                                        score_dict, 100, 100, 10)
         
         self.show_dialog(form_puntaje)
@@ -112,7 +112,7 @@ class Form_Prueba(Form):
                         {"Nivel":"", "Dificultad":"Hard"}
                         ]
         
-        form_niveles = Form_Menu_Niveles(self._master, 450, 100, 1000, 600, (220,0,220), "White", True, "GUI\\background_levels.png",
+        form_niveles = Form_Menu_Niveles(self._master, 450, 100, 1000, 600, (220,0,220), "White", True, "GUI/background_levels.png",
                                        niveles_dict, 100, 100, 10)
 
         self.show_dialog(form_niveles)
@@ -120,7 +120,7 @@ class Form_Prueba(Form):
     def btn_settings(self, texto):
         settings_dict = []
         
-        form_settings = Form_Settings(self._master, 450, 100, 1000, 600, (220,0,220), "White", True, "GUI\\background_settings.png",
+        form_settings = Form_Settings(self._master, 450, 100, 1000, 600, (220,0,220), "White", True, "GUI/background_settings.png",
                                        settings_dict, 100, 100, 10, self.volumen)
         
         self.show_dialog(form_settings)

@@ -125,14 +125,14 @@ class Nivel:
         self.go_on = False
 
         if self.is_final_lvl:
-            self.borde_vida_finalboss = pygame.image.load("Recursos\\borde_vida_finalboss.png")
+            self.borde_vida_finalboss = pygame.image.load("Recursos/borde_vida_finalboss.png")
             self.borde_vida_finalboss = pygame.transform.scale(self.borde_vida_finalboss,(541, 80))
-            self.barra_vida = pygame.image.load("Recursos\\barra_vida.png")
+            self.barra_vida = pygame.image.load("Recursos/barra_vida.png")
             self.barra_vida = pygame.transform.scale(self.barra_vida,(330, 25))
 
             self.sonido_metari = pygame.mixer.Sound("Recursos\Final_Boss\metari.wav")
             self.sonido_metari.set_volume(0.4)
-            self.finalboss_dies = pygame.mixer.Sound("Recursos\\Final_Boss\\final_boss_die.wav")
+            self.finalboss_dies = pygame.mixer.Sound("Recursos/Final_Boss/final_boss_die.wav")
             self.finalboss_dies.set_volume(0.5)
             self.sonido_spawn = pygame.mixer.Sound("Recursos\Final_Boss\spawn.wav")
             self.sonido_spawn.set_volume(0.4)
@@ -144,11 +144,11 @@ class Nivel:
         self.start_time = time.time()
         self.duration = timer
 
-        self.floor = pygame.image.load("Recursos\\floor.png")
+        self.floor = pygame.image.load("Recursos/floor.png")
         self.floor = pygame.transform.scale(self.floor,(1900,30))
 
-        self.path_sonido_1 = "Recursos\\Finish_lvl\\vpcn506.ogg"
-        self.path_sonido_2 = "Recursos\\Finish_lvl\\vpcn605.ogg"
+        self.path_sonido_1 = "Recursos/Finish_lvl/vpcn506.ogg"
+        self.path_sonido_2 = "Recursos/Finish_lvl/vpcn605.ogg"
 
         self.finish = False
         self.game_over = False
@@ -216,9 +216,9 @@ class Nivel:
         self.jugador.colision_enemigo(self._slave, self.lista_primer_timer, self.posicion_inicial_pj)
         self.jugador.colision_enemigo(self._slave, self.lista_segundo_timer, self.posicion_inicial_pj)
         self.jugador.colision_enemigo(self._slave, self.lista_tercer_timer, self.posicion_inicial_pj)
-        self.jugador.verificar_colision_item(self.lista_items, "Recursos\\Score_Item\\All_Grabed\\yare.ogg")
+        self.jugador.verificar_colision_item(self.lista_items, "Recursos/Score_Item/All_Grabed/yare.ogg")
         if self.hay_corazones:
-            self.jugador.verificar_colision_vida(self.lista_corazones, "Recursos\\Corazon\\Sound\\vpcn120.ogg", "Recursos\\Corazon\\Sound\\vpcn118.ogg") 
+            self.jugador.verificar_colision_vida(self.lista_corazones, "Recursos/Corazon/Sound/vpcn120.ogg", "Recursos/Corazon/Sound/vpcn118.ogg") 
 
         if self.is_final_lvl  == False:
             self.primer_enemigo.colision_plataforma(self.plataformas[1], self.plataformas[4], "right", "left")

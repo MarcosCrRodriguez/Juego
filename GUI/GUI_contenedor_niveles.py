@@ -51,7 +51,7 @@ class Form_Contenedor_Niveles(Form):
     # def btn_settings(self, texto):
     #     settings_dict = []
         
-    #     form_settings = Form_Settings(self._master, 450, 100, 1000, 600, (220,0,220), "White", True, "GUI\\background_settings.png",
+    #     form_settings = Form_Settings(self._master, 450, 100, 1000, 600, (220,0,220), "White", True, "GUI/background_settings.png",
     #                                    settings_dict, 100, 100, 10, self.volumen)
         
     #     self.show_dialog(form_settings)
