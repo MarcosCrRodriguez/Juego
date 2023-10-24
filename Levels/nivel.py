@@ -83,6 +83,9 @@ class Nivel:
         self.bandera_85 = False
         self.bandera_70 = False
         self.bandera_55 = False
+        self.bandera_45 = True
+        self.bandera_35 = True
+        self.bandera_25 = True
         self.colisiono = False
 
         self.lados_piso = lados_piso
@@ -166,7 +169,8 @@ class Nivel:
         seconds = int(self.time_left % 60)
 
         self.leer_inputs()
-        self.actualizar_pantalla()       
+        self.actualizar_pantalla()  
+        self.dibujar_rectangulos()
 
         if self.is_final_lvl == False:
             self.smiles_firsts_lvls()
@@ -189,28 +193,6 @@ class Nivel:
             self.largo_lista_primer_timer = proyectil.eliminar_smile(self._slave, self.jugador, self.lista_primer_timer, self.lista_proyectiles)
             self.largo_lista_segundo_timer = proyectil.eliminar_smile(self._slave, self.jugador, self.lista_segundo_timer, self.lista_proyectiles)
             self.largo_lista_tercer_timer = proyectil.eliminar_smile(self._slave, self.jugador, self.lista_tercer_timer, self.lista_proyectiles)
-
-        # if self.hostil:
-        #     if len(self.lista_proyectiles_enemigo) < 1:
-
-        #         proyectil_enemigo = Proyectil(self.tamaño_proyectil, self.diccionario_animaciones_proyectil, self.segundo_enemigo.lados_enemigo["main"].center, self.velocidad_proyectil_e, "proyectil_derecha")
-        #         self.lista_proyectiles_enemigo.append(proyectil_enemigo) 
-        #     if self.segundo_enemigo.direccion_derecha:
-        #         self.velocidad_proyectil_e = 13
-        #     else:
-        #         self.velocidad_proyectil_e = -13
-            
-        #     if self.largo_lista_enemigos != 0:
-        #         for proyectil_enemigo in self.lista_proyectiles_enemigo:
-        #             proyectil_enemigo.lanzar_proyectil(proyectil_enemigo.velocidad)
-        #             if self.velocidad_proyectil_e > 0:
-        #                 proyectil_enemigo.animar_proyectil(self._slave, "proyectil_derecha")
-        #             else:
-        #                 proyectil_enemigo.animar_proyectil(self._slave, "proyectil_izquierda")
-
-        #             proyectil_enemigo.colision_proyectil_pj(self._slave, self.plataformas_colision, self.jugador, self.lista_proyectiles_enemigo, (70, 740))
-        # else:
-        #     pass
 
         self.jugador.colision_enemigo(self._slave, self.lista_enemigos, self.posicion_inicial_pj)
         self.jugador.colision_enemigo(self._slave, self.lista_primer_timer, self.posicion_inicial_pj)
@@ -275,13 +257,11 @@ class Nivel:
                 else:
                     print("\n¡ERROR al cargar el archivo!")
 
-        self.dibujar_rectangulos()
-
         return self.finish 
     
     def leer_inputs(self):
         keys = pygame.key.get_pressed()
-
+        
         if keys[pygame.K_RIGHT]:
             self.jugador.que_hace = "derecha"
             self.jugador.colision_plataforma(self.plataformas_colision, "right", "left", "derecha")
@@ -492,15 +472,15 @@ class Nivel:
         if self.time_left > 85.4 and self.time_left < 85.6:
             self.bandera_85 = True
             self.crear_smiles()
-            print("85")
+            #print("85")
         elif self.time_left > 70.4 and self.time_left < 70.6:
             self.bandera_70 = True
             self.crear_smiles()
-            print("70")
+            #print("70")
         elif self.time_left > 55.4 and self.time_left < 55.6:
             self.bandera_55 = True
             self.crear_smiles()
-            print("55")
+            #print("55")
 
         if self.bandera_85:
             for smile in self.lista_primer_timer:
@@ -522,21 +502,33 @@ class Nivel:
                 if colisiono_tercera == False:
                     smile.caida_pantalla(9)
                 smile.colision_plataformas(self.plataformas_colision)
-                self.largo_lista_tercer_timer = len(self.lista_tercer_timer)
+                self.largo_lista_tercer_timer = len(self.lista_tercer_timer)                
 
     def smiles_final_lvl(self):
         if self.time_left > 285.5 and self.time_left < 285.6:
             self.bandera_85 = True
             self.crear_smiles()
-            print("85")
-        elif self.time_left > 245.5 and self.time_left < 245.6:
+            #print("285")
+        elif self.time_left > 265.5 and self.time_left < 245.6:
             self.bandera_70 = True
             self.crear_smiles()
-            print("70")
-        elif self.time_left > 205.5 and self.time_left < 205.6:
+            #print("265")
+        elif self.time_left > 245.5 and self.time_left < 205.6:
             self.bandera_55 = True
             self.crear_smiles()
-            print("55")
+            #print("245")
+        elif self.time_left > 225.5 and self.time_left < 245.6:
+            self.bandera_45 = True
+            self.crear_smiles()
+            #print("225")
+        elif self.time_left > 205.5 and self.time_left < 205.6:
+            self.bandera_35 = True
+            self.crear_smiles()
+            #print("205")
+        elif self.time_left > 165.5 and self.time_left < 205.6:
+            self.bandera_25 = True
+            self.crear_smiles()
+            #print("165")
 
         if self.bandera_85:
             for smile in self.lista_primer_timer:
@@ -558,4 +550,25 @@ class Nivel:
                 if colisiono_tercera == False:
                     smile.caida_pantalla(9)
                 smile.colision_plataformas(self.lista_plataforma_final)
+                self.largo_lista_tercer_timer = len(self.lista_tercer_timer)
+        if self.bandera_45:
+            for smile in self.lista_primer_timer:
+                colisiono_primera = smile.colision_superficie(self.plataformas_colision, self.lados_piso, self.colisiono)
+                if colisiono_primera == False:
+                    smile.caida_pantalla(9)
+                smile.colision_plataformas(self.plataformas_colision)
+                self.largo_lista_primer_timer = len(self.lista_primer_timer)
+        if self.bandera_35:
+            for smile in self.lista_segundo_timer:
+                colisiono_segunda = smile.colision_superficie(self.plataformas_colision, self.lados_piso, self.colisiono)
+                if colisiono_segunda == False:
+                    smile.caida_pantalla(9)
+                smile.colision_plataformas(self.plataformas_colision)
+                self.largo_lista_segundo_timer = len(self.lista_segundo_timer)
+        if self.bandera_25:
+            for smile in self.lista_tercer_timer:
+                colisiono_tercera = smile.colision_superficie(self.plataformas_colision, self.lados_piso, self.colisiono)
+                if colisiono_tercera == False:
+                    smile.caida_pantalla(9)
+                smile.colision_plataformas(self.plataformas_colision)
                 self.largo_lista_tercer_timer = len(self.lista_tercer_timer)

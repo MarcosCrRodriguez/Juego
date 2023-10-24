@@ -66,7 +66,7 @@ class Form_Settings(Form):
         self.lista_widgets.append(self.slider_volumen)
  
     def update(self, lista_eventos):
-        if self.verificar_dialog_result():                  
+        if self.verificar_dialog_result():   
             for widget in self.lista_widgets:
                 widget.update(lista_eventos)
             self.update_volumen(lista_eventos)

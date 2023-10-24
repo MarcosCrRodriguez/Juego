@@ -94,10 +94,18 @@ class Proyectil (Objeto):
         if self.lados_proyectil["main"].colliderect(jugador.lados["main"]):
             jugador.animar(pantalla, "recibo_daño")
             jugador.salud -= 1
-            jugador.daño_recibido += 88
+            jugador.daño_recibido += 44
             match jugador.salud:
-                case 2:
+                case 6:
                     jugador.damage_2.play()
+                case 5:
+                    jugador.damage_2.play()
+                case 4:
+                    jugador.damage_2.play()
+                case 3:
+                    jugador.damage_1.play()
+                case 2:
+                    jugador.damage_1.play()
                 case 1:
                     jugador.damage_1.play()
                 case 0:

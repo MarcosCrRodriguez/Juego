@@ -155,8 +155,8 @@ class Personaje_Principal (Objeto):
                         self.damage_2.play()
                     case 3:
                         self.damage_1.play()
-                    case 3:
-                        self.damage_2.play()
+                    case 2:
+                        self.damage_1.play()
                     case 1:
                         self.damage_0.play()
 

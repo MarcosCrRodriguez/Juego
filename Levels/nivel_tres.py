@@ -112,6 +112,8 @@ class Nivel_Tres(Nivel):
         tamaño_plataforma_4 = (175,115) 
         posicion_inicial_plataforma_vida = (850, 460)
         tamaño_plataforma_vida = (200, 125)
+        posicion_inicial_plataforma_techo = (850, 130)
+        tamaño_plataforma_techo = (200, 25)
 
         posicion_inicial_rr = (W,0)
         tamaño_rectangulo_r = (6,H)
@@ -130,6 +132,7 @@ class Nivel_Tres(Nivel):
         tercer_piso = Plataforma(tamaño_plataforma_3, posicion_inicial_plataforma_3, "Recursos/corrupto_pf_1.png")
         cuarto_piso = Plataforma(tamaño_plataforma_4, posicion_inicial_plataforma_4, "Recursos/corrupto_pf_1.png")
         plataforma_vida = Plataforma(tamaño_plataforma_vida, posicion_inicial_plataforma_vida, "Recursos/corrupto_pf_2.png")
+        plataforma_techo = Plataforma(tamaño_plataforma_techo, posicion_inicial_plataforma_techo, "Recursos/floor.png")
 
         #FUENTE_COINS
         font_coins = pygame.font.SysFont("Arial", 30)
@@ -151,12 +154,12 @@ class Nivel_Tres(Nivel):
         tercer_moneda = Score_Item(tamaño_moneda_3, diccionario_animaciones_score_item, posicion_inicial_moneda_3, "moneda")
         cuarta_moneda = Score_Item(tamaño_moneda_4, diccionario_animaciones_score_item, posicion_inicial_moneda_4, "moneda")
         
-        lista_plataformas = [plataforma_vida, tercer_piso, segundo_piso, rectangulo_arriba, cuarto_piso, primer_plataforma, primer_piso, rectangulo_derecha, rectangulo_izquierda, segunda_plataforma]
-        lista_colision_plataformas = [plataforma_vida, segunda_plataforma, primer_piso, segundo_piso, primer_plataforma, rectangulo_derecha, rectangulo_izquierda, rectangulo_arriba, tercer_piso, cuarto_piso]
+        lista_plataformas = [plataforma_vida, tercer_piso, segundo_piso, rectangulo_arriba, cuarto_piso, primer_plataforma, primer_piso, rectangulo_derecha, rectangulo_izquierda, segunda_plataforma, plataforma_techo]
+        lista_colision_plataformas = [plataforma_vida, segunda_plataforma, primer_piso, segundo_piso, primer_plataforma, rectangulo_derecha, rectangulo_izquierda, rectangulo_arriba, tercer_piso, cuarto_piso, plataforma_techo]
         lista_monedas = [primer_moneda, segunda_moneda, tercer_moneda, cuarta_moneda]
         lista_enemigos = [final_boss, bird]
 
-        lista_plataforma_final = [plataforma_vida, tercer_piso, segundo_piso, cuarto_piso, primer_piso, rectangulo_derecha, rectangulo_izquierda]
+        lista_plataforma_final = [plataforma_vida, tercer_piso, segundo_piso, cuarto_piso, primer_piso, rectangulo_derecha, rectangulo_izquierda, plataforma_techo]
 
         #CORAZON
         corazones = True 
